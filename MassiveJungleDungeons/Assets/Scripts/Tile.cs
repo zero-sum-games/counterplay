@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //==============================================================================
+
 public class Tile : MonoBehaviour
 {
     //==========================================================================
+
     public enum TileState
     {
         DEFAULT     = 0,
@@ -14,7 +16,7 @@ public class Tile : MonoBehaviour
         CURRENT     = 3
     }
 
-    // indicates the state of a tile
+    // indicates the state of a tile using the enum defined above ^^
     public TileState state = TileState.DEFAULT;
 
     // true if a tile can be traversed on by a unit
@@ -31,35 +33,33 @@ public class Tile : MonoBehaviour
     public int distance = 0;
 
     //==========================================================================
-    void Start()
+
+    // check all four neighbors and add to adjacency list if appropriate
+    public void FindNeighbors()
     {
-        
+        Reset();
+
+        CheckTile(Vector3.forward);
+        CheckTile(Vector3.back);
+        CheckTile(Vector3.right);
+        CheckTile(Vector3.left);
     }
 
-    void Update()
+    // reset all bfs variables, adjacency list, and tile state
+    public void Reset()
     {
-        switch(state)
-        {
-            default:
-            case TileState.DEFAULT:
-                GetComponent<Renderer>().material.color = Color.white;
-                break;
-            case TileState.SELECTED:
-                GetComponent<Renderer>().material.color = Color.red;
-                break;
-            case TileState.TARGETED:
-                GetComponent<Renderer>().material.color = Color.green;
-                break;
-            case TileState.CURRENT:
-                GetComponent<Renderer>().material.color = Color.magenta;
-                break;
-        }
+        state = TileState.DEFAULT;
+
+        adjacencyList.Clear();
+        visited = false;
+        parent = null;
+        distance = 0;
     }
 
     //==========================================================================
 
-    // Adds neighbor tile to current tile's adjacency list if there is nothing on top and it is walkable
-    public void CheckTile(Vector3 direction)
+    // adds neighbor tile to current tile's adjacency list if there is nothing on top and it is walkable
+    private void CheckTile(Vector3 direction)
     {
         var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
@@ -76,25 +76,28 @@ public class Tile : MonoBehaviour
         }
     }
 
-    // Check all four neighbors and add to adjacency list if appropriate
-    public void FindNeighbors()
+    //==========================================================================
+
+    private void Update()
     {
-        Reset();
+        switch (state)
+        {
+            default:
+            case TileState.DEFAULT:
+                GetComponent<Renderer>().material.color = Color.white;
+                break;
 
-        CheckTile(Vector3.forward);
-        CheckTile(Vector3.back);
-        CheckTile(Vector3.right);
-        CheckTile(Vector3.left);
-    }
+            case TileState.SELECTED:
+                GetComponent<Renderer>().material.color = Color.red;
+                break;
 
-    // Reset all bfs variables, adjacency list, and tile state
-    public void Reset()
-    {
-        state = TileState.DEFAULT;
+            case TileState.TARGETED:
+                GetComponent<Renderer>().material.color = Color.green;
+                break;
 
-        adjacencyList.Clear();
-        visited = false;
-        parent = null;
-        distance = 0;
+            case TileState.CURRENT:
+                GetComponent<Renderer>().material.color = Color.magenta;
+                break;
+        }
     }
 }

@@ -4,9 +4,12 @@ using UnityEngine;
 using UnityEditor;
 
 //==============================================================================
+
 public class EditorMenu
 {
     //==========================================================================
+
+    // Assign default blank tile material to all tiles in the current scene
     [MenuItem("Tools/Assign Tile Material")]
     public static void AssignTileMaterial()
     {
@@ -19,6 +22,8 @@ public class EditorMenu
     }
 
     //==========================================================================
+
+    // Assign the tile script to all tiles in the current scene
     [MenuItem("Tools/Assign Tile Script")]
     public static void AssignTileScript()
     {

@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //==============================================================================
+
 public class UnitMove : MonoBehaviour
 {
     //==========================================================================
+
     public enum MoveState
     {
-        IDLE = 0,
-        MOVING = 1
+        IDLE    = 0,
+        MOVING  = 1
     }
 
     protected MoveState state = MoveState.IDLE;
 
     //==========================================================================
+
     List<Tile> selectableTiles = new List<Tile>();
     GameObject[] tiles;
 
@@ -30,6 +33,8 @@ public class UnitMove : MonoBehaviour
     private float halfUnitHeight;
 
     //==========================================================================
+
+    // initialize tile array and halfUnitHeight
     protected void Init()
     {
         tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -37,22 +42,8 @@ public class UnitMove : MonoBehaviour
         halfUnitHeight = GetComponent<Collider>().bounds.extents.y;
     }
 
-    //==========================================================================
-
-    // Update adjacency lists of all current map tiles
-    public void ComputeAdjacencyLists()
-    {
-        // **NOTE: For dynamically added / deleted tiles, make sure to reset tiles list object here**
-
-        foreach (GameObject tile in tiles)
-        {
-            Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors();
-        }
-    }
-
-    // Find all tiles within movable range (implements breadth-first search (bfs) algorithm)
-    public void FindSelectableTiles()
+    // find all tiles within movable range (implements breadth-first search (bfs) algorithm)
+    protected void FindSelectableTiles()
     {
         ComputeAdjacencyLists();
 
@@ -69,7 +60,7 @@ public class UnitMove : MonoBehaviour
 
             // add the tile to selectable tiles list (and change tile state only if it's not the current tile)
             selectableTiles.Add(t);
-            if(t != currentTile)
+            if (t != currentTile)
                 t.state = Tile.TileState.SELECTED;
 
             // if tile is still within range of unit
@@ -91,48 +82,8 @@ public class UnitMove : MonoBehaviour
         }
     }
 
-    // Get tile that is currently under this gameObject
-    public Tile GetCurrentTile()
-    {
-        var tile = GetTargetTile(gameObject);
-        tile.state = Tile.TileState.CURRENT;
-
-        return tile;
-    }
-
-    // Get tile that is current under target gameObject
-    public Tile GetTargetTile(GameObject target)
-    {
-        Tile tile = null;
-
-        RaycastHit hit;
-        if (Physics.Raycast(target.transform.position, Vector3.down, out hit, 1))
-            tile = hit.collider.GetComponent<Tile>();
-
-        return tile;
-    }
-
-    // Move to the given tile
-    public void MoveToTile(Tile tile)
-    {
-        // clear any existing path
-        path.Clear();
-
-        // update tile and move states
-        tile.state = Tile.TileState.TARGETED;
-        state = MoveState.MOVING;
-
-        // add specific sequence of tiles to path
-        Tile next = tile;
-        while (next != null)
-        {
-            path.Push(next);
-            next = next.parent;
-        }
-    }
-
-    // Move from tile to next tile in path
-    public void Move()
+    // move from tile to next tile in path
+    protected void Move()
     {
         if (path.Count > 0)
         {
@@ -165,8 +116,62 @@ public class UnitMove : MonoBehaviour
         }
     }
 
-    // Deselect all currently selected tiles
-    protected void RemoveSelectableTiles()
+    // move to the given tile
+    protected void MoveToTile(Tile tile)
+    {
+        // clear any existing path
+        path.Clear();
+
+        // update tile and move states
+        tile.state = Tile.TileState.TARGETED;
+        state = MoveState.MOVING;
+
+        // add specific sequence of tiles to path
+        Tile next = tile;
+        while (next != null)
+        {
+            path.Push(next);
+            next = next.parent;
+        }
+    }
+
+    //==========================================================================
+
+    // update adjacency lists of all current map tiles
+    private void ComputeAdjacencyLists()
+    {
+        // **NOTE: For dynamically added / deleted tiles, make sure to reset tiles list object here**
+
+        foreach (GameObject tile in tiles)
+        {
+            Tile t = tile.GetComponent<Tile>();
+            t.FindNeighbors();
+        }
+    }
+
+    // get tile that is currently under this gameObject
+    private Tile GetCurrentTile()
+    {
+        var tile = GetTargetTile(gameObject);
+        tile.state = Tile.TileState.CURRENT;
+
+        return tile;
+    }
+
+    // get tile that is current under target gameObject
+    private Tile GetTargetTile(GameObject target)
+    {
+        Tile tile = null;
+
+        RaycastHit hit;
+        if (Physics.Raycast(target.transform.position, Vector3.down, out hit, 1))
+            tile = hit.collider.GetComponent<Tile>();
+
+        return tile;
+    }
+
+    // deselect all currently selected tiles
+    private void RemoveSelectableTiles()
     {
         if (currentTile != null)
         {
@@ -180,13 +185,15 @@ public class UnitMove : MonoBehaviour
         selectableTiles.Clear();
     }
 
-    void SetHeading(Vector3 target)
+    // set heading based off of target vector and current position
+    private void SetHeading(Vector3 target)
     {
         heading = target - transform.position;
         heading.Normalize();
     }
 
-    void SetHorizontalVelocity()
+    // set velocity with speed and updated heading vector
+    private void SetHorizontalVelocity()
     {
         velocity = heading * speed;
     }
