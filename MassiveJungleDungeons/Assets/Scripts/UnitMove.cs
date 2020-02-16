@@ -67,9 +67,10 @@ public class UnitMove : MonoBehaviour
             // get next tile in queue
             Tile t = process.Dequeue();
 
-            // add the tile to selectable tiles list (and change tile state)
+            // add the tile to selectable tiles list (and change tile state only if it's not the current tile)
             selectableTiles.Add(t);
-            t.state = Tile.TileState.SELECTED;
+            if(t != currentTile)
+                t.state = Tile.TileState.SELECTED;
 
             // if tile is still within range of unit
             if (t.distance < range)
