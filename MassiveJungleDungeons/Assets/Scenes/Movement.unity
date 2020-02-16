@@ -7629,7 +7629,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 5
-  speed: 2
+  speed: 2.6
 --- !u!1 &818235085
 GameObject:
   m_ObjectHideFlags: 0
