@@ -40,6 +40,11 @@ public class PlayerMove : UnitMove
         {
             default:
             case MoveState.IDLE:
+                if (Input.GetKeyDown(KeyCode.Space))
+                    state = MoveState.SELECTING;
+                break;
+
+            case MoveState.SELECTING:
                 FindSelectableTiles();
                 CheckMouse();
                 break;

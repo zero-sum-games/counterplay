@@ -19,8 +19,17 @@ public class Tile : MonoBehaviour
     // indicates the state of a tile using the enum defined above ^^
     public TileState state = TileState.DEFAULT;
 
-    // true if a tile can be traversed on by a unit
-    public bool isWalkable = true;
+    public enum TileType
+    {
+        GRASS       = 0,
+        WATER       = 1,
+        FOREST      = 2,
+        MOUNTAIN    = 3
+    }
+
+    public TileType type = TileType.GRASS;
+
+    Material material;
 
     //==========================================================================
 
@@ -67,7 +76,7 @@ public class Tile : MonoBehaviour
         foreach (Collider item in colliders)
         {
             Tile tile = item.GetComponent<Tile>();
-            if (tile != null && tile.isWalkable)
+            if (tile != null && tile.type == TileType.GRASS)
             {
                 RaycastHit hit;
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
@@ -78,25 +87,51 @@ public class Tile : MonoBehaviour
 
     //==========================================================================
 
+    private void Start()
+    {
+        switch(type)
+        {
+            default:
+            case TileType.GRASS:
+                material = Resources.Load<Material>("Tiles/Grass");
+                break;
+
+            case TileType.WATER:
+                material = Resources.Load<Material>("Tiles/Water");
+                break;
+
+            case TileType.FOREST:
+                material = Resources.Load<Material>("Tiles/Forest");
+                break;
+
+            case TileType.MOUNTAIN:
+                material = Resources.Load<Material>("Tiles/Mountain");
+                break;
+        }
+
+        GetComponent<Renderer>().material = material;
+    }
+
     private void Update()
     {
+        var renderer = GetComponent<Renderer>();
         switch (state)
         {
             default:
             case TileState.DEFAULT:
-                GetComponent<Renderer>().material.color = Color.white;
+                renderer.material = material;
                 break;
 
             case TileState.SELECTED:
-                GetComponent<Renderer>().material.color = Color.red;
+                renderer.material.color = Color.red;
                 break;
 
             case TileState.TARGETED:
-                GetComponent<Renderer>().material.color = Color.green;
+                renderer.material.color = Color.green;
                 break;
 
             case TileState.CURRENT:
-                GetComponent<Renderer>().material.color = Color.magenta;
+                renderer.material.color = Color.magenta;
                 break;
         }
     }

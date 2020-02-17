@@ -7,6 +7,10 @@ public class PlayerState : UnitState
 {
     //==========================================================================
 
+    PlayerMove playerMove;
+
+    //==========================================================================
+
     private void CheckKeyboard()
     {
         var nextState = (int) elementalState;
@@ -21,13 +25,20 @@ public class PlayerState : UnitState
             nextState = 0;
 
         elementalState = (ElementalState) nextState;
+
+        playerMove.SetRange((int) elementalState);
     }
 
     //==========================================================================
 
+    private void Start()
+    {
+        playerMove = GetComponent<PlayerMove>();
+    }
+
     private void Update()
     {
         CheckKeyboard();
-        SetColor();
+        SetStateParameters();
     }
 }

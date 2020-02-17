@@ -10,8 +10,9 @@ public class UnitMove : MonoBehaviour
 
     public enum MoveState
     {
-        IDLE    = 0,
-        MOVING  = 1
+        IDLE        = 0,
+        SELECTING   = 1,
+        MOVING      = 2
     }
 
     protected MoveState state = MoveState.IDLE;
@@ -31,6 +32,31 @@ public class UnitMove : MonoBehaviour
     Vector3 heading = new Vector3();
 
     private float halfUnitHeight;
+
+    //==========================================================================
+
+    
+    public void SetRange(int elementalState)
+    {
+        switch (elementalState)
+        {
+            // FIRE
+            default:
+            case 0:
+                range = 4;
+                break;
+
+            // WATER
+            case 1:
+                range = 3;
+                break;
+
+            // GRASS
+            case 2:
+                range = 5;
+                break;
+        }
+    }
 
     //==========================================================================
 
