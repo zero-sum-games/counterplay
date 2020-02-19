@@ -85,6 +85,7 @@ public class UnitMove : MonoBehaviour
             Tile t = process.Dequeue();
 
             // add the tile to selectable tiles list (and change tile state only if it's not the current tile)
+            // we should rename the SELECTED state to SELECTABLE
             selectableTiles.Add(t);
             if (t != currentTile)
                 t.state = Tile.TileState.SELECTED;

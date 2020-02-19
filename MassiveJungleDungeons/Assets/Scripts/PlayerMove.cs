@@ -38,17 +38,20 @@ public class PlayerMove : UnitMove
     {
         switch (state)
         {
+            // View movement range
             default:
             case MoveState.IDLE:
                 if (Input.GetKeyDown(KeyCode.Space))
                     state = MoveState.SELECTING;
                 break;
-
+            
+            // Hovering over selectable tile within range
             case MoveState.SELECTING:
                 FindSelectableTiles();
                 CheckMouse();
                 break;
 
+            // Choosing destination tile
             case MoveState.MOVING:
                 Move();
                 break;

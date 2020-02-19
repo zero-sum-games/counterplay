@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\Users\Dane Byrd\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Dane Byrd\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_MassiveJungleDungeons.-1262643832.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Dane Byrd\Desktop\Unity Projects\Repos\Unity3D\massive-jungle-dungeons\MassiveJungleDungeons" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Scripts" t="Include">
+          <e p="EditorMenu.cs" t="Include" />
+          <e p="PlayerMove.cs" t="Include" />
+          <e p="PlayerState.cs" t="Include" />
+          <e p="Tile.cs" t="Include" />
+          <e p="UnitMove.cs" t="Include" />
+          <e p="UnitState.cs" t="Include" />
+        </e>
+      </e>
+      <e p="MassiveJungleDungeons.sln" t="IncludeFlat" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
