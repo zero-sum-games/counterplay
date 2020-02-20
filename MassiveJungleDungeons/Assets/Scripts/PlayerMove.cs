@@ -17,7 +17,7 @@ public class PlayerMove : UnitMove
             RaycastHit hit;
             if(Physics.Raycast(ray, out hit))
             {
-                if(hit.collider.tag == "Tile")
+                if(hit.collider.CompareTag("Tile"))
                 {
                     Tile t = hit.collider.GetComponent<Tile>();
                     if(t.state == Tile.TileState.SELECTED)
@@ -36,7 +36,7 @@ public class PlayerMove : UnitMove
 
     private void Update()
     {
-        switch (state)
+        switch (state) // Movement states not Unit states
         {
             // View movement range
             default:
@@ -45,7 +45,7 @@ public class PlayerMove : UnitMove
                     state = MoveState.SELECTING;
                 break;
             
-            // Hovering over selectable tile within range
+            // Choosing what selectable tile to go to
             case MoveState.SELECTING:
                 FindSelectableTiles();
                 CheckMouse();

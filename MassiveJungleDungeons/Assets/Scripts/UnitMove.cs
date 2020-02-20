@@ -32,10 +32,18 @@ public class UnitMove : MonoBehaviour
     Vector3 heading = new Vector3();
 
     private float halfUnitHeight;
-
     //==========================================================================
 
+    // booleans for if the player state allows terrain to be walkable
+    /*public bool moveToGrass = true;
+    public bool moveToWater = false;
+    public bool moveToForest = false;
+    public bool moveToMountain = false;*/
     
+    //==========================================================================
+
+    // Each state's parameters
+    // Now also determines which tiles are walkable for each state
     public void SetRange(int elementalState)
     {
         switch (elementalState)
@@ -43,17 +51,29 @@ public class UnitMove : MonoBehaviour
             // FIRE
             default:
             case 0:
-                range = 4;
+                range = 2;
+                /*moveToGrass = true;
+                moveToForest = true;
+                moveToWater = false;
+                moveToMountain = true;*/
                 break;
 
             // WATER
             case 1:
                 range = 3;
+                /*moveToGrass = true;
+                moveToForest = true;
+                moveToWater = true;
+                moveToMountain = false;*/
                 break;
 
             // GRASS
             case 2:
-                range = 5;
+                range = 4;
+                /*moveToGrass = true;
+                moveToForest = true;
+                moveToWater = true;
+                moveToMountain = false;*/
                 break;
         }
     }
@@ -172,7 +192,7 @@ public class UnitMove : MonoBehaviour
         foreach (GameObject tile in tiles)
         {
             Tile t = tile.GetComponent<Tile>();
-            t.FindNeighbors();
+            t.FindNeighbors(this);
         }
     }
 

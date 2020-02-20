@@ -15,10 +15,10 @@ public class UnitState : MonoBehaviour
     }
 
     public ElementalState elementalState = ElementalState.FIRE;
-
+    
     //==========================================================================
 
-    // set the color of the game object according to current elemental state
+    // set the COLOR of the game object according to current elemental state
     protected void SetStateParameters()
     {
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f
@@ -29,7 +29,6 @@ public class UnitState : MonoBehaviour
             default:
             case ElementalState.FIRE:
                 color = new Color32(242, 94, 61, 1);
-
                 break;
 
             case ElementalState.WATER:

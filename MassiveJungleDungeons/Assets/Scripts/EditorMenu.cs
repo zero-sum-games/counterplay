@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.UI;
 
 //==============================================================================
 
@@ -51,7 +52,7 @@ public class EditorMenu
     {
         GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
         
-        // For all objects tagged tile that lack a Tile component, add one
+        // Check if object has a Tile component, if not add one
         foreach (GameObject t in tiles)
             if (t.TryGetComponent(typeof(Tile), out Component component) == false)
             {
@@ -61,9 +62,9 @@ public class EditorMenu
     
     //==========================================================================
 
-    // Assign both the tile material and/or tile script if tile is missing one/both
-    [MenuItem("Tools/Assign Tile State")]
-    public static void AssignTileState()
+    // Runs AssignTileScript and AssignTileMaterial without creating duplicates
+    [MenuItem("Tools/Assign Tile Type")]
+    public static void AssignTileType()
     {
         AssignTileScript();
         AssignTileMaterial();
