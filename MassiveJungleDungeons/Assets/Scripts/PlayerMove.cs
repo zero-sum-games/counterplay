@@ -13,12 +13,12 @@ public class PlayerMove : UnitMove
     {
         if (!Input.GetMouseButtonUp(0)) return;
             if (Camera.main == null) return;
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            if (!Physics.Raycast(ray, out var hit)) return;
+            if (!Physics.Raycast(ray, out RaycastHit hit)) return;
             
                 if (!hit.collider.CompareTag("Tile")) return;
-                    var t = hit.collider.GetComponent<Tile>();
+                    Tile t = hit.collider.GetComponent<Tile>();
                     
                     if(t.state == Tile.TileState.Selected)
                         MoveToTile(t);

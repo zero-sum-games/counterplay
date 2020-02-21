@@ -146,7 +146,7 @@ public class UnitMove : MonoBehaviour
                 SetHeading(target);
                 SetHorizontalVelocity();
 
-                var transform1 = transform;
+                Transform transform1 = transform;
                 transform1.forward = _heading;
                 transform1.position += _velocity * Time.deltaTime;
             }
@@ -200,7 +200,7 @@ public class UnitMove : MonoBehaviour
     // get tile that is currently under this gameObject
     private Tile GetCurrentTile()
     {
-        var tile = GetTargetTile(gameObject);
+        Tile tile = GetTargetTile(gameObject);
         tile.state = Tile.TileState.Current;
 
         return tile;
@@ -211,7 +211,7 @@ public class UnitMove : MonoBehaviour
     {
         Tile tile = null;
 
-        if (Physics.Raycast(target.transform.position, Vector3.down, out var hit, 1))
+        if (Physics.Raycast(target.transform.position, Vector3.down, out RaycastHit hit, 1))
             tile = hit.collider.GetComponent<Tile>();
 
         return tile;

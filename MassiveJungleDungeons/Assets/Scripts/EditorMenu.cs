@@ -14,9 +14,9 @@ public static class EditorMenu
     // [MenuItem("Tools/Assign Tile Material")]
     private static void AssignTileMaterial()
     {
-        var tiles = GameObject.FindGameObjectsWithTag("Tile");
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
 
-        foreach(var t in tiles)
+        foreach(GameObject t in tiles)
         {
             Material material;
 
@@ -50,11 +50,12 @@ public static class EditorMenu
     // [MenuItem("Tools/Assign Tile Script")]
     private static void AssignTileScript()
     {
-        var tiles = GameObject.FindGameObjectsWithTag("Tile");
+        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
         
         // Check if object has a Tile component, if not add one
+        // Prevents duplicate tile components
         foreach (GameObject t in tiles)
-            if (t.TryGetComponent(typeof(Tile), out var component) == false)
+            if (t.TryGetComponent(typeof(Tile), out Component component) == false)
             {
                 t.AddComponent<Tile>();
             }
@@ -62,7 +63,7 @@ public static class EditorMenu
     
     //==========================================================================
 
-    // Runs AssignTileScript and AssignTileMaterial without creating duplicates
+    // Runs AssignTileScript and AssignTileMaterial
     [MenuItem("Tools/Assign Tile Type")]
     private static void AssignTileType()
     {

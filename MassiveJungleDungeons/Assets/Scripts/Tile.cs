@@ -71,17 +71,17 @@ public class Tile : MonoBehaviour
     //     see https://answers.unity.com/questions/1298691/best-way-to-reference-player-class-instance.html
     
         // same booleans as lines 37-41 in UnitMove.cs [only here for testing]
-        public bool moveToGrassland = true;
-        public bool moveToLake = false;
-        public bool moveToForest = true;
-        public bool moveToMountain = false;
+            public bool moveToGrassland = true;
+            public bool moveToLake = false;
+            public bool moveToForest = true;
+            public bool moveToMountain = false;
     
     //==========================================================================
     
     // adds neighbor tile to current tile's adjacency list if there is nothing on top and it is walkable
     private void CheckTile(Vector3 direction, UnitMove unitMove)
     {
-        var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
+        Vector3 halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
         Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
         foreach (Collider item in colliders)
@@ -96,7 +96,7 @@ public class Tile : MonoBehaviour
             // Set Grassland as walkable
             if (moveToGrassland)
             {
-                if (tile != null && tile.type == TileType.Grassland /*|| tile.type == TileType.FOREST*/)
+                if (tile != null && tile.type == TileType.Grassland)
                 {
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
