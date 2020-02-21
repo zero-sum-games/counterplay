@@ -8,35 +8,35 @@ public class UnitMove : MonoBehaviour
 {
     //==========================================================================
 
-    public enum MoveState
+    protected enum MoveState
     {
-        IDLE        = 0,
-        SELECTING   = 1,
-        MOVING      = 2
+        Idle        = 0,
+        Selecting   = 1,
+        Moving      = 2
     }
 
-    protected MoveState state = MoveState.IDLE;
+    protected MoveState State = MoveState.Idle;
 
     //==========================================================================
 
     List<Tile> selectableTiles = new List<Tile>();
-    GameObject[] tiles;
+    GameObject[] _tiles;
 
     Stack<Tile> path = new Stack<Tile>();
-    Tile currentTile;
+    Tile _currentTile;
 
     public int range = 5;
     public float speed = 2.0f;
 
-    Vector3 velocity = new Vector3();
-    Vector3 heading = new Vector3();
+    Vector3 _velocity = new Vector3();
+    Vector3 _heading = new Vector3();
 
-    private float halfUnitHeight;
+    private float _halfUnitHeight;
     //==========================================================================
 
     // booleans for if the player state allows terrain to be walkable
-    /*public bool moveToGrass = true;
-    public bool moveToWater = false;
+    /*public bool moveToGrassland = true;
+    public bool moveToLake = false;
     public bool moveToForest = false;
     public bool moveToMountain = false;*/
     
@@ -48,31 +48,31 @@ public class UnitMove : MonoBehaviour
     {
         switch (elementalState)
         {
-            // FIRE
+            // Fire
             default:
             case 0:
                 range = 2;
-                /*moveToGrass = true;
+                /*moveToGrassland = true;
                 moveToForest = true;
-                moveToWater = false;
+                moveToLake = false;
                 moveToMountain = true;*/
                 break;
 
-            // WATER
+            // Water
             case 1:
                 range = 3;
-                /*moveToGrass = true;
+                /*moveToGrassland = true;
                 moveToForest = true;
-                moveToWater = true;
+                moveToLake = true;
                 moveToMountain = false;*/
                 break;
 
-            // GRASS
+            // Grass
             case 2:
                 range = 4;
-                /*moveToGrass = true;
+                /*moveToGrassland = true;
                 moveToForest = true;
-                moveToWater = true;
+                moveToLake = true;
                 moveToMountain = false;*/
                 break;
         }
@@ -83,9 +83,9 @@ public class UnitMove : MonoBehaviour
     // initialize tile array and halfUnitHeight
     protected void Init()
     {
-        tiles = GameObject.FindGameObjectsWithTag("Tile");
+        _tiles = GameObject.FindGameObjectsWithTag("Tile");
 
-        halfUnitHeight = GetComponent<Collider>().bounds.extents.y;
+        _halfUnitHeight = GetComponent<Collider>().bounds.extents.y;
     }
 
     // find all tiles within movable range (implements breadth-first search (bfs) algorithm)
@@ -95,9 +95,9 @@ public class UnitMove : MonoBehaviour
 
         Queue<Tile> process = new Queue<Tile>();
 
-        currentTile = GetCurrentTile();
-        currentTile.visited = true;
-        process.Enqueue(currentTile);
+        _currentTile = GetCurrentTile();
+        _currentTile.visited = true;
+        process.Enqueue(_currentTile);
 
         while (process.Count > 0)
         {
@@ -107,13 +107,13 @@ public class UnitMove : MonoBehaviour
             // add the tile to selectable tiles list (and change tile state only if it's not the current tile)
             // we should rename the SELECTED state to SELECTABLE
             selectableTiles.Add(t);
-            if (t != currentTile)
-                t.state = Tile.TileState.SELECTED;
+            if (t != _currentTile)
+                t.state = Tile.TileState.Selected;
 
             // if tile is still within range of unit
             if (t.distance < range)
             {
-                // then for every unvisited title in the current tile's adjacency list, add it to the queue
+                // then for every unvisited tile in the current tile's adjacency list, add it to the queue
                 foreach (Tile tile in t.adjacencyList)
                 {
                     if (!tile.visited)
@@ -139,15 +139,16 @@ public class UnitMove : MonoBehaviour
 
             // calculate unit's position on top of target tile
             Vector3 target = t.transform.position;
-            target.y += halfUnitHeight + t.GetComponent<Collider>().bounds.extents.y;
+            target.y += _halfUnitHeight + t.GetComponent<Collider>().bounds.extents.y;
 
             if (Vector3.Distance(transform.position, target) >= 0.05f)
             {
                 SetHeading(target);
                 SetHorizontalVelocity();
 
-                transform.forward = heading;
-                transform.position += velocity * Time.deltaTime;
+                var transform1 = transform;
+                transform1.forward = _heading;
+                transform1.position += _velocity * Time.deltaTime;
             }
             else
             {
@@ -159,7 +160,7 @@ public class UnitMove : MonoBehaviour
         else
         {
             RemoveSelectableTiles();
-            state = MoveState.IDLE;
+            State = MoveState.Idle;
         }
     }
 
@@ -170,9 +171,9 @@ public class UnitMove : MonoBehaviour
         path.Clear();
 
         // update tile and move states
-        tile.state = Tile.TileState.TARGETED;
-        state = MoveState.MOVING;
-
+        tile.state = Tile.TileState.Targeted;
+        State = MoveState.Moving;
+        
         // add specific sequence of tiles to path
         Tile next = tile;
         while (next != null)
@@ -189,7 +190,7 @@ public class UnitMove : MonoBehaviour
     {
         // **NOTE: For dynamically added / deleted tiles, make sure to reset tiles list object here**
 
-        foreach (GameObject tile in tiles)
+        foreach (GameObject tile in _tiles)
         {
             Tile t = tile.GetComponent<Tile>();
             t.FindNeighbors(this);
@@ -200,18 +201,17 @@ public class UnitMove : MonoBehaviour
     private Tile GetCurrentTile()
     {
         var tile = GetTargetTile(gameObject);
-        tile.state = Tile.TileState.CURRENT;
+        tile.state = Tile.TileState.Current;
 
         return tile;
     }
 
     // get tile that is current under target gameObject
-    private Tile GetTargetTile(GameObject target)
+    private static Tile GetTargetTile(GameObject target)
     {
         Tile tile = null;
 
-        RaycastHit hit;
-        if (Physics.Raycast(target.transform.position, Vector3.down, out hit, 1))
+        if (Physics.Raycast(target.transform.position, Vector3.down, out var hit, 1))
             tile = hit.collider.GetComponent<Tile>();
 
         return tile;
@@ -220,10 +220,10 @@ public class UnitMove : MonoBehaviour
     // deselect all currently selected tiles
     private void RemoveSelectableTiles()
     {
-        if (currentTile != null)
+        if (_currentTile != null)
         {
-            currentTile.state = Tile.TileState.DEFAULT;
-            currentTile = null;
+            _currentTile.state = Tile.TileState.Default;
+            _currentTile = null;
         }
 
         foreach (Tile tile in selectableTiles)
@@ -235,13 +235,13 @@ public class UnitMove : MonoBehaviour
     // set heading based off of target vector and current position
     private void SetHeading(Vector3 target)
     {
-        heading = target - transform.position;
-        heading.Normalize();
+        _heading = target - transform.position;
+        _heading.Normalize();
     }
 
     // set velocity with speed and updated heading vector
     private void SetHorizontalVelocity()
     {
-        velocity = heading * speed;
+        _velocity = _heading * speed;
     }
 }

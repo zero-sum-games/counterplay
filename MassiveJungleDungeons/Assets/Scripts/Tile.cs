@@ -11,26 +11,26 @@ public class Tile : MonoBehaviour
 
     public enum TileState
     {
-        DEFAULT     = 0,
-        SELECTED    = 1,
-        TARGETED    = 2,
-        CURRENT     = 3
+        Default     = 0,
+        Selected    = 1,
+        Targeted    = 2,
+        Current     = 3
     }
 
     // indicates the state of a tile using the enum defined above ^^
-    public TileState state = TileState.DEFAULT;
+    public TileState state = TileState.Default;
 
     public enum TileType
     {
-        GRASS       = 0,
-        WATER       = 1,
-        FOREST      = 2,
-        MOUNTAIN    = 3
+        Grassland   = 0,
+        Lake       = 1,
+        Forest      = 2,
+        Mountain    = 3
     }
 
-    public TileType type = TileType.GRASS;
+    public TileType type = TileType.Grassland;
 
-    Material material;
+    Material _material;
 
     //==========================================================================
 
@@ -41,6 +41,7 @@ public class Tile : MonoBehaviour
     public bool visited = false;
     public Tile parent = null;
     public int distance = 0;
+    private Renderer _selectableRangeColor;
 
     //==========================================================================
 
@@ -58,7 +59,7 @@ public class Tile : MonoBehaviour
     // reset all bfs variables, adjacency list, and tile state
     public void Reset()
     {
-        state = TileState.DEFAULT;
+        state = TileState.Default;
 
         adjacencyList.Clear();
         visited = false;
@@ -70,10 +71,10 @@ public class Tile : MonoBehaviour
     //     see https://answers.unity.com/questions/1298691/best-way-to-reference-player-class-instance.html
     
         // same booleans as lines 37-41 in UnitMove.cs [only here for testing]
-        /*public bool moveToGrass = true;
-        public bool moveToWater = false;
+        public bool moveToGrassland = true;
+        public bool moveToLake = false;
         public bool moveToForest = true;
-        public bool moveToMountain = false;*/
+        public bool moveToMountain = false;
     
     //==========================================================================
     
@@ -88,24 +89,26 @@ public class Tile : MonoBehaviour
             Tile tile = item.GetComponent<Tile>();
             
             // I was thinking we use if statements with these booleans
-            // then every state has set parameters of which bools are true
+            // then every state's parameters set each bool as true/false
+            // therefore every elementalState is just changing which tiles
+            // get included in the adjacency list
             
-            // SET GRASS AS WALKABLE
-            //if (moveToGrass)
-            //{
-                if (tile != null && tile.type == TileType.GRASS /*|| tile.type == TileType.FOREST*/)
+            // Set Grassland as walkable
+            if (moveToGrassland)
+            {
+                if (tile != null && tile.type == TileType.Grassland /*|| tile.type == TileType.FOREST*/)
                 {
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
                         adjacencyList.Add(tile);
                 }
-            //}
+            }
 
-            /*
-            // SET FOREST AS WALKABLE
+            
+            // Set Forest as walkable
             if (moveToForest)
             {
-                if (tile != null && tile.type == TileType.FOREST)
+                if (tile != null && tile.type == TileType.Forest)
                 {
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
@@ -113,10 +116,10 @@ public class Tile : MonoBehaviour
                 }
             }
 
-            // SET WATER AS WALKABLE
-            if (moveToWater)
+            // Set Lake as walkable
+            if (moveToLake)
             {
-                if (tile != null && tile.type == TileType.WATER)
+                if (tile != null && tile.type == TileType.Lake)
                 {
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
@@ -124,17 +127,17 @@ public class Tile : MonoBehaviour
                 }
             }
 
-            // SET MOUNTAIN AS WALKABLE
+            // Set Mountain as walkable
             if (moveToMountain)
             {
-                if (tile != null && tile.type == TileType.MOUNTAIN)
+                if (tile != null && tile.type == TileType.Mountain)
                 {
                     RaycastHit hit;
                     if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
                         adjacencyList.Add(tile);
                 }
             }
-            */
+            
         }
         
     }
@@ -143,50 +146,50 @@ public class Tile : MonoBehaviour
 
     private void Start()
     {
+        _selectableRangeColor = GetComponent<Renderer>();
         switch(type)
         {
             default:
-            case TileType.GRASS:
-                material = Resources.Load<Material>("Tiles/Grass");
+            case TileType.Grassland:
+                _material = Resources.Load<Material>("Tiles/Grassland");
                 break;
 
-            case TileType.WATER:
-                material = Resources.Load<Material>("Tiles/Water");
+            case TileType.Lake:
+                _material = Resources.Load<Material>("Tiles/Lake");
                 break;
 
-            case TileType.FOREST:
-                material = Resources.Load<Material>("Tiles/Forest");
+            case TileType.Forest:
+                _material = Resources.Load<Material>("Tiles/Forest");
                 break;
 
-            case TileType.MOUNTAIN:
-                material = Resources.Load<Material>("Tiles/Mountain");
+            case TileType.Mountain:
+                _material = Resources.Load<Material>("Tiles/Mountain");
                 break;
         }
 
-        GetComponent<Renderer>().material = material;
+        GetComponent<Renderer>().material = _material;
     }
 
     private void Update()
     {
         //changes selectable tiles' color to show if they are walkable/target/current
-        var selectableRangeColor = GetComponent<Renderer>();
         switch (state)
         {
             default:
-            case TileState.DEFAULT:
-                selectableRangeColor.material = material;
+            case TileState.Default:
+                _selectableRangeColor.material = _material;
                 break;
 
-            case TileState.SELECTED:
-                selectableRangeColor.material.color = Color.red;
+            case TileState.Selected:
+                _selectableRangeColor.material.color = Color.red;
                 break;
 
-            case TileState.TARGETED:
-                selectableRangeColor.material.color = Color.green;
+            case TileState.Targeted:
+                _selectableRangeColor.material.color = Color.green;
                 break;
 
-            case TileState.CURRENT:
-                selectableRangeColor.material.color = Color.magenta;
+            case TileState.Current:
+                _selectableRangeColor.material.color = Color.magenta;
                 break;
         }
     }
@@ -199,22 +202,22 @@ public class Tile : MonoBehaviour
         switch (type)
         {
             default:
-            case Tile.TileType.GRASS:
-                material = Resources.Load<Material>("Tiles/Grass");
+            case Tile.TileType.Grassland:
+                _material = Resources.Load<Material>("Tiles/Grassland");
                 break;
 
-            case Tile.TileType.WATER:
-                material = Resources.Load<Material>("Tiles/Water");
+            case Tile.TileType.Lake:
+                _material = Resources.Load<Material>("Tiles/Lake");
                 break;
 
-            case Tile.TileType.FOREST:
-                material = Resources.Load<Material>("Tiles/Forest");
+            case Tile.TileType.Forest:
+                _material = Resources.Load<Material>("Tiles/Forest");
                 break;
 
-            case Tile.TileType.MOUNTAIN:
-                material = Resources.Load<Material>("Tiles/Mountain");
+            case Tile.TileType.Mountain:
+                _material = Resources.Load<Material>("Tiles/Mountain");
                 break;
         }
-        GetComponent<Renderer>().material = material;
+        GetComponent<Renderer>().material = _material;
     }
 }

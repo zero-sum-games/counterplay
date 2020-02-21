@@ -9,12 +9,12 @@ public class UnitState : MonoBehaviour
 
     public enum ElementalState
     {
-        FIRE    = 0,
-        WATER   = 1,
-        GRASS   = 2
+        Fire    = 0,
+        Water   = 1,
+        Grass   = 2
     }
 
-    public ElementalState elementalState = ElementalState.FIRE;
+    public ElementalState elementalState = ElementalState.Fire;
     
     //==========================================================================
 
@@ -27,15 +27,15 @@ public class UnitState : MonoBehaviour
         switch (elementalState)
         {
             default:
-            case ElementalState.FIRE:
+            case ElementalState.Fire:
                 color = new Color32(242, 94, 61, 1);
                 break;
 
-            case ElementalState.WATER:
+            case ElementalState.Water:
                 color = new Color32(77, 125, 247, 1);
                 break;
 
-            case ElementalState.GRASS:
+            case ElementalState.Grass:
                 color = new Color32(54, 224, 91, 1);
                 break;
         }

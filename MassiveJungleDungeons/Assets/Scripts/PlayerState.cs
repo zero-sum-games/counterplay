@@ -7,7 +7,7 @@ public class PlayerState : UnitState
 {
     //==========================================================================
 
-    PlayerMove playerMove;
+    PlayerMove _playerMove;
 
     //==========================================================================
 
@@ -26,14 +26,14 @@ public class PlayerState : UnitState
 
         elementalState = (ElementalState) nextState;
 
-        playerMove.SetRange((int) elementalState);
+        _playerMove.SetRange((int) elementalState);
     }
 
     //==========================================================================
 
     private void Start()
     {
-        playerMove = GetComponent<PlayerMove>();
+        _playerMove = GetComponent<PlayerMove>();
     }
 
     private void Update()

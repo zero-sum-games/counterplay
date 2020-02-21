@@ -6,17 +6,17 @@ using UnityEngine.UI;
 
 //==============================================================================
 
-public class EditorMenu
+public static class EditorMenu
 {
     //==========================================================================
 
     // Assign default blank tile material to all tiles in the current scene
     // [MenuItem("Tools/Assign Tile Material")]
-    public static void AssignTileMaterial()
+    private static void AssignTileMaterial()
     {
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+        var tiles = GameObject.FindGameObjectsWithTag("Tile");
 
-        foreach(GameObject t in tiles)
+        foreach(var t in tiles)
         {
             Material material;
 
@@ -24,19 +24,19 @@ public class EditorMenu
             switch(tile.type)
             {
                 default:
-                case Tile.TileType.GRASS:
-                    material = Resources.Load<Material>("Tiles/Grass");
+                case Tile.TileType.Grassland:
+                    material = Resources.Load<Material>("Tiles/Grassland");
                     break;
 
-                case Tile.TileType.WATER:
-                    material = Resources.Load<Material>("Tiles/Water");
+                case Tile.TileType.Lake:
+                    material = Resources.Load<Material>("Tiles/Lake");
                     break;
 
-                case Tile.TileType.FOREST:
+                case Tile.TileType.Forest:
                     material = Resources.Load<Material>("Tiles/Forest");
                     break;
 
-                case Tile.TileType.MOUNTAIN:
+                case Tile.TileType.Mountain:
                     material = Resources.Load<Material>("Tiles/Mountain");
                     break;
             }
@@ -48,13 +48,13 @@ public class EditorMenu
 
     // Assign the tile script to all tiles in the current scene
     // [MenuItem("Tools/Assign Tile Script")]
-    public static void AssignTileScript()
+    private static void AssignTileScript()
     {
-        GameObject[] tiles = GameObject.FindGameObjectsWithTag("Tile");
+        var tiles = GameObject.FindGameObjectsWithTag("Tile");
         
         // Check if object has a Tile component, if not add one
         foreach (GameObject t in tiles)
-            if (t.TryGetComponent(typeof(Tile), out Component component) == false)
+            if (t.TryGetComponent(typeof(Tile), out var component) == false)
             {
                 t.AddComponent<Tile>();
             }
@@ -64,7 +64,7 @@ public class EditorMenu
 
     // Runs AssignTileScript and AssignTileMaterial without creating duplicates
     [MenuItem("Tools/Assign Tile Type")]
-    public static void AssignTileType()
+    private static void AssignTileType()
     {
         AssignTileScript();
         AssignTileMaterial();
