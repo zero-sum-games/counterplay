@@ -7,7 +7,7 @@ public class PlayerState : UnitState
 {
     //==========================================================================
 
-    PlayerMove _playerMove;
+    private PlayerMove _playerMove;
 
     //==========================================================================
 
