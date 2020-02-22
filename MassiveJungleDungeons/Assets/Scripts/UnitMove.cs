@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 //==============================================================================
@@ -7,7 +9,7 @@ using UnityEngine;
 public class UnitMove : MonoBehaviour
 {
     //==========================================================================
-
+    
     protected enum MoveState
     {
         Idle        = 0,
@@ -19,62 +21,42 @@ public class UnitMove : MonoBehaviour
 
     //==========================================================================
 
-    List<Tile> selectableTiles = new List<Tile>();
-    GameObject[] _tiles;
+    private readonly List<Tile> _selectableTiles = new List<Tile>();
+    private GameObject[] _tiles;
 
-    Stack<Tile> path = new Stack<Tile>();
-    Tile _currentTile;
+    private readonly Stack<Tile> _path = new Stack<Tile>();
+    private Tile _currentTile;
 
     public int range = 5;
     public float speed = 2.0f;
 
-    Vector3 _velocity = new Vector3();
-    Vector3 _heading = new Vector3();
+    private Vector3 _velocity;
+    private Vector3 _heading;
 
     private float _halfUnitHeight;
     //==========================================================================
 
-    // booleans for if the player state allows terrain to be walkable
-    /*public bool moveToGrassland = true;
-    public bool moveToLake = false;
-    public bool moveToForest = false;
-    public bool moveToMountain = false;*/
-    
-    //==========================================================================
-
     // Each state's parameters
-    // Now also determines which tiles are walkable for each state
     public void SetRange(int elementalState)
     {
         switch (elementalState)
         {
-            // Fire
+            // Grass
             default:
             case 0:
-                range = 2;
-                /*moveToGrassland = true;
-                moveToForest = true;
-                moveToLake = false;
-                moveToMountain = true;*/
+                range = 3;
                 break;
-
+            
             // Water
             case 1:
-                range = 3;
-                /*moveToGrassland = true;
-                moveToForest = true;
-                moveToLake = true;
-                moveToMountain = false;*/
+                range = 2;
                 break;
 
-            // Grass
+            // Fire
             case 2:
-                range = 4;
-                /*moveToGrassland = true;
-                moveToForest = true;
-                moveToLake = true;
-                moveToMountain = false;*/
+                range = 2;
                 break;
+            
         }
     }
 
@@ -93,7 +75,7 @@ public class UnitMove : MonoBehaviour
     {
         ComputeAdjacencyLists();
 
-        Queue<Tile> process = new Queue<Tile>();
+        var process = new Queue<Tile>();
 
         _currentTile = GetCurrentTile();
         _currentTile.visited = true;
@@ -102,29 +84,24 @@ public class UnitMove : MonoBehaviour
         while (process.Count > 0)
         {
             // get next tile in queue
-            Tile t = process.Dequeue();
+            var t = process.Dequeue();
 
             // add the tile to selectable tiles list (and change tile state only if it's not the current tile)
             // we should rename the SELECTED state to SELECTABLE
-            selectableTiles.Add(t);
+            _selectableTiles.Add(t);
             if (t != _currentTile)
                 t.state = Tile.TileState.Selected;
 
             // if tile is still within range of unit
-            if (t.distance < range)
+            if (t.distance >= range) continue;
+            // then for every unvisited tile in the current tile's adjacency list, add it to the queue
+            foreach (var tile in t.adjacencyList.Where(tile => !tile.visited))
             {
-                // then for every unvisited tile in the current tile's adjacency list, add it to the queue
-                foreach (Tile tile in t.adjacencyList)
-                {
-                    if (!tile.visited)
-                    {
-                        tile.parent = t;
-                        tile.visited = true;
-                        tile.distance = t.distance + 1;
+                tile.parent = t;
+                tile.visited = true;
+                tile.distance = t.distance + 1;
 
-                        process.Enqueue(tile);
-                    }
-                }
+                process.Enqueue(tile);
             }
         }
     }
@@ -132,13 +109,13 @@ public class UnitMove : MonoBehaviour
     // move from tile to next tile in path
     protected void Move()
     {
-        if (path.Count > 0)
+        if (_path.Count > 0)
         {
             // get next tile from path
-            Tile t = path.Peek();
+            var t = _path.Peek();
 
             // calculate unit's position on top of target tile
-            Vector3 target = t.transform.position;
+            var target = t.transform.position;
             target.y += _halfUnitHeight + t.GetComponent<Collider>().bounds.extents.y;
 
             if (Vector3.Distance(transform.position, target) >= 0.05f)
@@ -146,7 +123,7 @@ public class UnitMove : MonoBehaviour
                 SetHeading(target);
                 SetHorizontalVelocity();
 
-                Transform transform1 = transform;
+                var transform1 = transform;
                 transform1.forward = _heading;
                 transform1.position += _velocity * Time.deltaTime;
             }
@@ -154,7 +131,7 @@ public class UnitMove : MonoBehaviour
             {
                 // the tile has been reached
                 transform.position = target;
-                path.Pop();
+                _path.Pop();
             }
         }
         else
@@ -168,17 +145,17 @@ public class UnitMove : MonoBehaviour
     protected void MoveToTile(Tile tile)
     {
         // clear any existing path
-        path.Clear();
+        _path.Clear();
 
         // update tile and move states
         tile.state = Tile.TileState.Targeted;
         State = MoveState.Moving;
         
         // add specific sequence of tiles to path
-        Tile next = tile;
+        var next = tile;
         while (next != null)
         {
-            path.Push(next);
+            _path.Push(next);
             next = next.parent;
         }
     }
@@ -190,9 +167,9 @@ public class UnitMove : MonoBehaviour
     {
         // **NOTE: For dynamically added / deleted tiles, make sure to reset tiles list object here**
 
-        foreach (GameObject tile in _tiles)
+        foreach (var tile in _tiles)
         {
-            Tile t = tile.GetComponent<Tile>();
+            var t = tile.GetComponent<Tile>();
             t.FindNeighbors(this);
         }
     }
@@ -200,7 +177,7 @@ public class UnitMove : MonoBehaviour
     // get tile that is currently under this gameObject
     private Tile GetCurrentTile()
     {
-        Tile tile = GetTargetTile(gameObject);
+        var tile = GetTargetTile(gameObject);
         tile.state = Tile.TileState.Current;
 
         return tile;
@@ -211,14 +188,14 @@ public class UnitMove : MonoBehaviour
     {
         Tile tile = null;
 
-        if (Physics.Raycast(target.transform.position, Vector3.down, out RaycastHit hit, 1))
+        if (Physics.Raycast(target.transform.position, Vector3.down, out var hit, 1))
             tile = hit.collider.GetComponent<Tile>();
 
         return tile;
     }
 
     // deselect all currently selected tiles
-    private void RemoveSelectableTiles()
+    protected void RemoveSelectableTiles()
     {
         if (_currentTile != null)
         {
@@ -226,10 +203,10 @@ public class UnitMove : MonoBehaviour
             _currentTile = null;
         }
 
-        foreach (Tile tile in selectableTiles)
+        foreach (var tile in _selectableTiles)
             tile.Reset();
 
-        selectableTiles.Clear();
+        _selectableTiles.Clear();
     }
 
     // set heading based off of target vector and current position

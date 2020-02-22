@@ -7743,8 +7743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 5
   speed: 2.6
-  moveToGrass: 1
-  moveToWater: 0
+  moveToGrassland: 0
+  moveToLake: 0
   moveToForest: 0
   moveToMountain: 0
 --- !u!114 &799441092
@@ -9381,7 +9381,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 7
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

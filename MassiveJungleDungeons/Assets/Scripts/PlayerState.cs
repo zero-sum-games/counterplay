@@ -13,7 +13,7 @@ public class PlayerState : UnitState
 
     private void CheckKeyboard()
     {
-        int nextState = (int) elementalState;
+        var nextState = (int) elementalState;
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             nextState -= 1;
         else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
