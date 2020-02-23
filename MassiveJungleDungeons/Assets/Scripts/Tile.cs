@@ -142,6 +142,8 @@ public class Tile : MonoBehaviour
         
     }
 
+    
+
     //==========================================================================
 
     private void Start()
@@ -219,5 +221,83 @@ public class Tile : MonoBehaviour
                 break;
         }
         GetComponent<Renderer>().material = _material;
+    }
+
+
+    //==========================================================================
+    //==========================================================================
+    //  COMBAT ADJACENY COMPUTING
+
+    public void FindTarget(UnitCombat unit)
+    {
+        Reset();
+
+        CheckAttackTile(Vector3.forward, unit);
+        CheckAttackTile(Vector3.back, unit);
+        CheckAttackTile(Vector3.right, unit);
+        CheckAttackTile(Vector3.left, unit);
+    }
+
+
+    private void CheckAttackTile(Vector3 direction, UnitCombat unitCombat)
+    {
+        Vector3 halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
+        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+
+        foreach (Collider item in colliders)
+        {
+            Tile tile = item.GetComponent<Tile>();
+            RaycastHit hit;
+            if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                adjacencyList.Add(tile);
+            /*
+
+            // Set Grassland as walkable
+            if (moveToGrassland)
+            {
+                if (tile != null && tile.type == TileType.Grassland)
+                {
+                    RaycastHit hit;
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                        adjacencyList.Add(tile);
+                }
+            }
+
+
+            // Set Forest as walkable
+            if (moveToForest)
+            {
+                if (tile != null && tile.type == TileType.Forest)
+                {
+                    RaycastHit hit;
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                        adjacencyList.Add(tile);
+                }
+            }
+
+            // Set Lake as walkable
+            if (moveToLake)
+            {
+                if (tile != null && tile.type == TileType.Lake)
+                {
+                    RaycastHit hit;
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                        adjacencyList.Add(tile);
+                }
+            }
+
+            // Set Mountain as walkable
+            if (moveToMountain)
+            {
+                if (tile != null && tile.type == TileType.Mountain)
+                {
+                    RaycastHit hit;
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                        adjacencyList.Add(tile);
+                }
+            } */
+
+        }
+
     }
 }
