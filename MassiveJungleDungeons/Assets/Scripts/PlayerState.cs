@@ -8,6 +8,7 @@ public class PlayerState : UnitState
     //==========================================================================
 
     private PlayerMove _playerMove;
+    private PlayerCombat _playerCombat;
 
     //==========================================================================
 
@@ -27,6 +28,7 @@ public class PlayerState : UnitState
         elementalState = (ElementalState) nextState;
 
         _playerMove.SetRange((int) elementalState);
+        _playerCombat.SetAttack((int)elementalState);
     }
 
     //==========================================================================
@@ -34,6 +36,7 @@ public class PlayerState : UnitState
     private void Start()
     {
         _playerMove = GetComponent<PlayerMove>();
+        _playerCombat = GetComponent<PlayerCombat>();
     }
 
     private void Update()

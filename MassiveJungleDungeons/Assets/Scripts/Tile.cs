@@ -247,9 +247,12 @@ public class Tile : MonoBehaviour
         foreach (Collider item in colliders)
         {
             Tile tile = item.GetComponent<Tile>();
-            RaycastHit hit;
-            if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
-                adjacencyList.Add(tile);
+            if (tile != null)
+            {
+                RaycastHit hit;
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                    adjacencyList.Add(tile);
+            }
             /*
 
             // Set Grassland as walkable
@@ -300,4 +303,14 @@ public class Tile : MonoBehaviour
         }
 
     }
+
+    public void ResetTargetMarkers()
+    {
+        GameObject[] TargetMarks = GameObject.FindGameObjectsWithTag("TargetMark");
+        foreach(var Mark in TargetMarks)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 }
