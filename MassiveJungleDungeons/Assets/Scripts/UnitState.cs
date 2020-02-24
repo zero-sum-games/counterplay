@@ -22,7 +22,7 @@ public class UnitState : MonoBehaviour
         Water   = 1,
         Fire    = 2
     }
-
+    // Default Elemental State is Grass
     public ElementalState elementalState = ElementalState.Grass;
     
     //==========================================================================
