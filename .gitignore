@@ -19,7 +19,7 @@
 /MassiveJungleDungeons/[Aa]ssets/Plugins/Editor/JetBrains*
 
 # Visual Studio cache directory
-/MassiveJungleDungeons.vs/
+/MassiveJungleDungeons/.vs/
 
 # Gradle cache directory
 /MassiveJungleDungeons.gradle/
@@ -61,4 +61,3 @@ crashlytics-build.properties
 
 # USER-MADE FOLDERS
 /Predev/
-/.vs/
