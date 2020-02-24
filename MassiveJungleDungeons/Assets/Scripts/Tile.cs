@@ -23,14 +23,14 @@ public class Tile : MonoBehaviour
     public enum TileType
     {
         Grassland   = 0,
-        Lake       = 1,
+        Lake        = 1,
         Forest      = 2,
         Mountain    = 3
     }
 
     public TileType type = TileType.Grassland;
 
-    Material _material;
+    private Material _material;
 
     //==========================================================================
 
@@ -67,73 +67,57 @@ public class Tile : MonoBehaviour
         distance = 0;
     }
 
-    //  Need to create a singleton so we can reference the player instance in UnitMove.SetRange(int)
-    //     see https://answers.unity.com/questions/1298691/best-way-to-reference-player-class-instance.html
-    
-        // same booleans as lines 37-41 in UnitMove.cs [only here for testing]
-            public bool moveToGrassland = true;
-            public bool moveToLake = false;
-            public bool moveToForest = true;
-            public bool moveToMountain = false;
-    
     //==========================================================================
     
     // adds neighbor tile to current tile's adjacency list if there is nothing on top and it is walkable
     private void CheckTile(Vector3 direction, UnitMove unitMove)
     {
-        Vector3 halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
-        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
+        var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
+        var colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
-        foreach (Collider item in colliders)
+        foreach (var item in colliders)
         {
-            Tile tile = item.GetComponent<Tile>();
+            var tile = item.GetComponent<Tile>();
             
-            // I was thinking we use if statements with these booleans
-            // then every state's parameters set each bool as true/false
-            // therefore every elementalState is just changing which tiles
-            // get included in the adjacency list
+            var player = UnitState.Instance;
             
             // Set Grassland as walkable
-            if (moveToGrassland)
+            if (UnitState.Instance.moveToGrassland)
             {
                 if (tile != null && tile.type == TileType.Grassland)
                 {
-                    RaycastHit hit;
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                         adjacencyList.Add(tile);
                 }
             }
 
             
             // Set Forest as walkable
-            if (moveToForest)
+            if (UnitState.Instance.moveToForest)
             {
                 if (tile != null && tile.type == TileType.Forest)
                 {
-                    RaycastHit hit;
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                         adjacencyList.Add(tile);
                 }
             }
 
             // Set Lake as walkable
-            if (moveToLake)
+            if (UnitState.Instance.moveToLake)
             {
                 if (tile != null && tile.type == TileType.Lake)
                 {
-                    RaycastHit hit;
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                         adjacencyList.Add(tile);
                 }
             }
 
             // Set Mountain as walkable
-            if (moveToMountain)
+            if (UnitState.Instance.moveToMountain)
             {
                 if (tile != null && tile.type == TileType.Mountain)
                 {
-                    RaycastHit hit;
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
+                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                         adjacencyList.Add(tile);
                 }
             }
@@ -202,19 +186,19 @@ public class Tile : MonoBehaviour
         switch (type)
         {
             default:
-            case Tile.TileType.Grassland:
+            case TileType.Grassland:
                 _material = Resources.Load<Material>("Tiles/Grassland");
                 break;
 
-            case Tile.TileType.Lake:
+            case TileType.Lake:
                 _material = Resources.Load<Material>("Tiles/Lake");
                 break;
 
-            case Tile.TileType.Forest:
+            case TileType.Forest:
                 _material = Resources.Load<Material>("Tiles/Forest");
                 break;
 
-            case Tile.TileType.Mountain:
+            case TileType.Mountain:
                 _material = Resources.Load<Material>("Tiles/Mountain");
                 break;
         }

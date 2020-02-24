@@ -37,8 +37,9 @@ public class PlayerMove : UnitMove
     {
         switch (State) // Movement states not Unit states
         {
-            
-        // Idle
+//      =====================
+        // Resting Idle State
+//      =====================
         default:
         case MoveState.Idle:
 
@@ -59,8 +60,9 @@ public class PlayerMove : UnitMove
             }
             break;
                     
-
+//      =========================
         // Viewing Movement Range
+//      =========================        
         case MoveState.Selecting:
             
             //Display selectable tiles in range and check the mouse
@@ -95,8 +97,10 @@ public class PlayerMove : UnitMove
                     Debug.Log("Hiding Movement Range");
                 }
             break;
-
+        
+//      ===========================
         // Move to destination tile
+//      ===========================
         case MoveState.Moving:
             Move();
             Debug.Log("Moving to Target Tile");
