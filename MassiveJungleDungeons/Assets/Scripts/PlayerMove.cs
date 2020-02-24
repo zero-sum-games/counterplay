@@ -46,15 +46,12 @@ public class PlayerMove : UnitMove
             if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
             {
                 _buttonStartTime = Time.time;
-                Debug.Log("Viewing Movement Range");
-
                 State = MoveState.Selecting;
             }
             
             // otherwise if the key is pressed (not held) change MoveState to Selecting (no timer)
             else if (Input.GetKeyDown(KeyCode.Space))
             {
-                Debug.Log("Viewing Movement Range");
                 State = MoveState.Selecting;
             }
             break;
@@ -83,7 +80,6 @@ public class PlayerMove : UnitMove
                     {
                         RemoveSelectableTiles();
                         State = MoveState.Idle;
-                        Debug.Log("Hiding Movement Range");
                     }
                 }
                     
@@ -92,14 +88,12 @@ public class PlayerMove : UnitMove
                 {
                     RemoveSelectableTiles();
                     State = MoveState.Idle;
-                    Debug.Log("Hiding Movement Range");
                 }
             break;
 
         // Move to destination tile
         case MoveState.Moving:
             Move();
-            Debug.Log("Moving to Target Tile");
             break;
         }
     }

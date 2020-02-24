@@ -44,17 +44,17 @@ public class UnitMove : MonoBehaviour
             // Grass
             default:
             case 0:
-                range = 3;
+                range = 5;
                 break;
             
             // Water
             case 1:
-                range = 2;
+                range = 3;
                 break;
 
             // Fire
             case 2:
-                range = 2;
+                range = 4;
                 break;
             
         }

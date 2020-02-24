@@ -28,7 +28,7 @@ public class PlayerState : UnitState
         elementalState = (ElementalState) nextState;
 
         _playerMove.SetRange((int) elementalState);
-        _playerCombat.SetAttack((int)elementalState);
+        _playerCombat.SetAttack((int) elementalState);
     }
 
     //==========================================================================
