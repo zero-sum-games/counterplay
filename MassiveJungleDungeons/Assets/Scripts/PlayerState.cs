@@ -14,7 +14,7 @@ public class PlayerState : UnitState
 
     private void CheckKeyboard()
     {
-        var nextState = (int) elementalState;
+        var nextState = (int) _elementalState;
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             nextState -= 1;
         else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -25,10 +25,9 @@ public class PlayerState : UnitState
         else if (nextState > 2)
             nextState = 0;
 
-        elementalState = (ElementalState) nextState;
+        _elementalState = (ElementalState) nextState;
 
-        _playerMove.SetRange((int) elementalState);
-        _playerCombat.SetAttack((int) elementalState);
+        _playerMove.SetRange((int) _elementalState);
     }
 
     //==========================================================================

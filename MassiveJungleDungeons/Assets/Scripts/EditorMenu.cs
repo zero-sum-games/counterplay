@@ -64,12 +64,12 @@ public static class EditorMenu
     //==========================================================================
 
     // Runs AssignTileScript and AssignTileMaterial
-    [MenuItem("Tools/Assign Tile Type")]
-    private static void AssignTileType()
-    {
-        AssignTileScript();
-        AssignTileMaterial();
-    }
+    //[MenuItem ("Tools/Assign Tile Type")]
+    //private static void AssignTileType()
+    //{
+    //    AssignTileScript();
+    //    AssignTileMaterial();
+    //}
     
 
 }
