@@ -309,7 +309,7 @@ public class Tile : MonoBehaviour
         GameObject[] TargetMarks = GameObject.FindGameObjectsWithTag("TargetMark");
         foreach(var Mark in TargetMarks)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 
