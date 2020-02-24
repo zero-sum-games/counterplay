@@ -93,7 +93,9 @@ public class UnitMove : MonoBehaviour
                 t.state = Tile.TileState.Selected;
 
             // if tile is still within range of unit
-            if (t.distance >= range) continue;
+            if (t.distance >= range) 
+                continue;
+
             // then for every unvisited tile in the current tile's adjacency list, add it to the queue
             foreach (var tile in t.adjacencyList.Where(tile => !tile.visited))
             {

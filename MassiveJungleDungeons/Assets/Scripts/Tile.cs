@@ -68,7 +68,12 @@ public class Tile : MonoBehaviour
     }
 
     //==========================================================================
-    
+
+    public bool moveToGrassland = true;
+    public bool moveToLake = false;
+    public bool moveToForest = true;
+    public bool moveToMountain = false;
+
     // adds neighbor tile to current tile's adjacency list if there is nothing on top and it is walkable
     private void CheckTile(Vector3 direction, UnitMove unitMove)
     {
@@ -79,10 +84,8 @@ public class Tile : MonoBehaviour
         {
             var tile = item.GetComponent<Tile>();
             
-            var player = UnitState.Instance;
-            
             // Set Grassland as walkable
-            if (UnitState.Instance.moveToGrassland)
+            if (moveToGrassland)
             {
                 if (tile != null && tile.type == TileType.Grassland)
                 {
@@ -93,7 +96,7 @@ public class Tile : MonoBehaviour
 
             
             // Set Forest as walkable
-            if (UnitState.Instance.moveToForest)
+            if (moveToForest)
             {
                 if (tile != null && tile.type == TileType.Forest)
                 {
@@ -103,7 +106,7 @@ public class Tile : MonoBehaviour
             }
 
             // Set Lake as walkable
-            if (UnitState.Instance.moveToLake)
+            if (moveToLake)
             {
                 if (tile != null && tile.type == TileType.Lake)
                 {
@@ -113,7 +116,7 @@ public class Tile : MonoBehaviour
             }
 
             // Set Mountain as walkable
-            if (UnitState.Instance.moveToMountain)
+            if (moveToMountain)
             {
                 if (tile != null && tile.type == TileType.Mountain)
                 {
