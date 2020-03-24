@@ -15,6 +15,8 @@ public class UnitMove : MonoBehaviour
 
     protected MoveState State = MoveState.Idle;
 
+    protected int _teamID;
+
     private readonly List<Tile> _selectableTiles = new List<Tile>();
     private GameObject[] _tiles;
 
@@ -56,6 +58,8 @@ public class UnitMove : MonoBehaviour
     {
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
         _halfUnitHeight = GetComponent<Collider>().bounds.extents.y;
+
+        _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
     }
 
     protected void FindSelectableTiles()

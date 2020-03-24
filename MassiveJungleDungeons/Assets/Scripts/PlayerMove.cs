@@ -29,49 +29,52 @@ public class PlayerMove : UnitMove
 
     private void Update()
     {
-        switch (State)
+        if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
         {
-            default:
-            case MoveState.Idle:
+            switch (State)
+            {
+                default:
+                case MoveState.Idle:
 
-                if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
-                {
-                    _buttonStartTime = Time.time;
-                    State = MoveState.Selected;
-                }
-            
-                else if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    State = MoveState.Selected;
-                }
-                break;
-                           
-            case MoveState.Selected:
-            
-                FindSelectableTiles();
-                CheckMouse();
-    
-                if (!Input.GetKeyDown(KeyCode.Space) && Input.GetKeyUp(KeyCode.Space))
-                {
-                    _buttonTimePressed = Time.time - _buttonStartTime;
-                    
-                    if (_buttonTimePressed > 0.3)
+                    if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
+                    {
+                        _buttonStartTime = Time.time;
+                        State = MoveState.Selected;
+                    }
+
+                    else if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        State = MoveState.Selected;
+                    }
+                    break;
+
+                case MoveState.Selected:
+
+                    FindSelectableTiles();
+                    CheckMouse();
+
+                    if (!Input.GetKeyDown(KeyCode.Space) && Input.GetKeyUp(KeyCode.Space))
+                    {
+                        _buttonTimePressed = Time.time - _buttonStartTime;
+
+                        if (_buttonTimePressed > 0.3)
+                        {
+                            RemoveSelectableTiles();
+                            State = MoveState.Idle;
+                        }
+                    }
+
+                    else if (Input.GetKeyDown(KeyCode.Space))
                     {
                         RemoveSelectableTiles();
                         State = MoveState.Idle;
                     }
-                }
-                    
-                else if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    RemoveSelectableTiles();
-                    State = MoveState.Idle;
-                }
-                break;
-        
-            case MoveState.Moving:
-                Move();
-                break;
+                    break;
+
+                case MoveState.Moving:
+                    Move();
+                    break;
             }
+        }
     }
 }

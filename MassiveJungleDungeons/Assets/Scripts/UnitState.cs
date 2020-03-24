@@ -7,12 +7,6 @@ public class UnitState : MonoBehaviour
     
     public static UnitState Instance { get; private set; }
 
-    private void Awake()
-    {
-        Instance = this;
-        SetStateParameters();
-    }
-    
     public enum ElementalState
     {
         Grass   = 0,
@@ -21,13 +15,23 @@ public class UnitState : MonoBehaviour
     }
     
     protected ElementalState _elementalState = ElementalState.Grass;
+
+    protected int _teamID;
     
     // booleans for each type of terrain to be walkable
     public bool moveToGrassland = false;
     public bool moveToLake = false;
     public bool moveToForest = false;
     public bool moveToMountain = false;
-    
+
+    private void Awake()
+    {
+        Instance = this;
+        SetStateParameters();
+
+        _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
+    }
+
     protected void SetStateParameters()
     {
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f

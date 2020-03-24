@@ -36,6 +36,7 @@ public class PlayerState : UnitState
 
     private void Update()
     {
-        CheckKeyboard();
+        if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
+            CheckKeyboard();
     }
 }

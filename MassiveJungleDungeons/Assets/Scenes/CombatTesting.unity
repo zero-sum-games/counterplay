@@ -233,6 +233,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &9274010
 GameObject:
   m_ObjectHideFlags: 0
@@ -345,6 +349,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &18888259
 GameObject:
   m_ObjectHideFlags: 0
@@ -457,6 +465,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &50884401
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,6 +581,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &95177089
 GameObject:
   m_ObjectHideFlags: 0
@@ -681,6 +697,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &119227487
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +855,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &136449616
 GameObject:
   m_ObjectHideFlags: 0
@@ -947,6 +971,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &138427011
 GameObject:
   m_ObjectHideFlags: 0
@@ -1059,6 +1087,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &145232659
 GameObject:
   m_ObjectHideFlags: 0
@@ -1171,6 +1203,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &152660637
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1319,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &175454449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1395,6 +1435,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &178614550
 GameObject:
   m_ObjectHideFlags: 0
@@ -1507,6 +1551,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &184782171
 GameObject:
   m_ObjectHideFlags: 0
@@ -1619,6 +1667,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &197689412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1731,6 +1783,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &207253413
 GameObject:
   m_ObjectHideFlags: 0
@@ -1843,6 +1899,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &213057747
 GameObject:
   m_ObjectHideFlags: 0
@@ -1955,6 +2015,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &215129513
 GameObject:
   m_ObjectHideFlags: 0
@@ -2109,6 +2173,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &239046301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2221,6 +2289,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &246261540
 GameObject:
   m_ObjectHideFlags: 0
@@ -2333,6 +2405,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &256904444
 GameObject:
   m_ObjectHideFlags: 0
@@ -2445,6 +2521,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &258427064
 GameObject:
   m_ObjectHideFlags: 0
@@ -2557,6 +2637,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &259556370
 GameObject:
   m_ObjectHideFlags: 0
@@ -2669,6 +2753,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &260155732
 GameObject:
   m_ObjectHideFlags: 0
@@ -2781,6 +2869,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &261036497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2893,6 +2985,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &261094369
 GameObject:
   m_ObjectHideFlags: 0
@@ -3005,6 +3101,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &273124492
 GameObject:
   m_ObjectHideFlags: 0
@@ -3117,6 +3217,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &315807162
 GameObject:
   m_ObjectHideFlags: 0
@@ -3229,6 +3333,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &341137183
 GameObject:
   m_ObjectHideFlags: 0
@@ -3341,6 +3449,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &345711837
 GameObject:
   m_ObjectHideFlags: 0
@@ -3453,6 +3565,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &356309772
 GameObject:
   m_ObjectHideFlags: 0
@@ -3565,6 +3681,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &393561971
 GameObject:
   m_ObjectHideFlags: 0
@@ -3677,6 +3797,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &394215713
 GameObject:
   m_ObjectHideFlags: 0
@@ -3789,6 +3913,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &425180393
 GameObject:
   m_ObjectHideFlags: 0
@@ -3901,6 +4029,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &438160229
 GameObject:
   m_ObjectHideFlags: 0
@@ -4055,6 +4187,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &457549490
 GameObject:
   m_ObjectHideFlags: 0
@@ -4167,6 +4303,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &458349301
 GameObject:
   m_ObjectHideFlags: 0
@@ -4279,6 +4419,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &461438005
 GameObject:
   m_ObjectHideFlags: 0
@@ -4391,6 +4535,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &468849873
 GameObject:
   m_ObjectHideFlags: 0
@@ -4503,6 +4651,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &494595882
 GameObject:
   m_ObjectHideFlags: 0
@@ -4615,6 +4767,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &495563549
 GameObject:
   m_ObjectHideFlags: 0
@@ -4727,6 +4883,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &504081132
 GameObject:
   m_ObjectHideFlags: 0
@@ -4839,6 +4999,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &510020375
 GameObject:
   m_ObjectHideFlags: 0
@@ -4951,6 +5115,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &513557473
 GameObject:
   m_ObjectHideFlags: 0
@@ -5105,6 +5273,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &550597212
 GameObject:
   m_ObjectHideFlags: 0
@@ -5217,6 +5389,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &575758642
 GameObject:
   m_ObjectHideFlags: 0
@@ -5329,6 +5505,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &585815051
 GameObject:
   m_ObjectHideFlags: 0
@@ -5441,6 +5621,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &586838621
 GameObject:
   m_ObjectHideFlags: 0
@@ -5553,6 +5737,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &596141503
 GameObject:
   m_ObjectHideFlags: 0
@@ -5665,6 +5853,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &600890337
 GameObject:
   m_ObjectHideFlags: 0
@@ -5703,6 +5895,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!65 &600890339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5889,6 +6085,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &619292288
 GameObject:
   m_ObjectHideFlags: 0
@@ -6001,6 +6201,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &619832061
 GameObject:
   m_ObjectHideFlags: 0
@@ -6155,6 +6359,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &633029526
 GameObject:
   m_ObjectHideFlags: 0
@@ -6267,6 +6475,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &670656005
 GameObject:
   m_ObjectHideFlags: 0
@@ -6379,6 +6591,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &676457625
 GameObject:
   m_ObjectHideFlags: 0
@@ -6491,6 +6707,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &680176361
 GameObject:
   m_ObjectHideFlags: 0
@@ -6603,6 +6823,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &686554128
 GameObject:
   m_ObjectHideFlags: 0
@@ -6643,7 +6867,7 @@ Transform:
   - {fileID: 1255364006}
   - {fileID: 1801455942}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &687901103
 GameObject:
@@ -6849,6 +7073,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &699981783
 GameObject:
   m_ObjectHideFlags: 0
@@ -6961,6 +7189,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &708948488
 GameObject:
   m_ObjectHideFlags: 0
@@ -7073,6 +7305,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &729219515
 GameObject:
   m_ObjectHideFlags: 0
@@ -7185,6 +7421,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &767893315
 GameObject:
   m_ObjectHideFlags: 0
@@ -7297,6 +7537,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &770140116
 GameObject:
   m_ObjectHideFlags: 0
@@ -7409,6 +7653,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &774106637
 GameObject:
   m_ObjectHideFlags: 0
@@ -7521,6 +7769,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &786731910
 GameObject:
   m_ObjectHideFlags: 0
@@ -7633,6 +7885,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &799441086
 GameObject:
   m_ObjectHideFlags: 0
@@ -7648,7 +7904,7 @@ GameObject:
   - component: {fileID: 799441091}
   - component: {fileID: 799441092}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Unit 01
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7726,8 +7982,8 @@ Transform:
   m_LocalPosition: {x: -5.5, y: 1, z: -4.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1271644761}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &799441091
 MonoBehaviour:
@@ -7743,10 +7999,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 5
   speed: 2.6
-  moveToGrassland: 0
-  moveToLake: 0
-  moveToForest: 0
-  moveToMountain: 0
 --- !u!114 &799441092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7759,7 +8011,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87ec6b969bcfc34194367a91fd8c825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementalState: 0
+  moveToGrassland: 0
+  moveToLake: 0
+  moveToForest: 0
+  moveToMountain: 0
 --- !u!1 &818235085
 GameObject:
   m_ObjectHideFlags: 0
@@ -7872,6 +8127,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &823655669
 GameObject:
   m_ObjectHideFlags: 0
@@ -7984,6 +8243,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &824049687
 GameObject:
   m_ObjectHideFlags: 0
@@ -8096,6 +8359,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &825927682
 GameObject:
   m_ObjectHideFlags: 0
@@ -8208,6 +8475,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &827499303
 GameObject:
   m_ObjectHideFlags: 0
@@ -8320,6 +8591,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &877948463
 GameObject:
   m_ObjectHideFlags: 0
@@ -8432,6 +8707,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &896440702
 GameObject:
   m_ObjectHideFlags: 0
@@ -8544,6 +8823,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &912546937
 GameObject:
   m_ObjectHideFlags: 0
@@ -8656,6 +8939,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &926666869
 GameObject:
   m_ObjectHideFlags: 0
@@ -8768,6 +9055,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &934663520
 GameObject:
   m_ObjectHideFlags: 0
@@ -8880,6 +9171,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &938527824
 GameObject:
   m_ObjectHideFlags: 0
@@ -8992,6 +9287,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &946365006
 GameObject:
   m_ObjectHideFlags: 0
@@ -9104,6 +9403,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &959644597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9216,6 +9519,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &967004867
 GameObject:
   m_ObjectHideFlags: 0
@@ -9328,6 +9635,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &979249930
 GameObject:
   m_ObjectHideFlags: 0
@@ -9523,6 +9834,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1019418047
 GameObject:
   m_ObjectHideFlags: 0
@@ -9635,6 +9950,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1057871912
 GameObject:
   m_ObjectHideFlags: 0
@@ -9747,6 +10066,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1060549565
 GameObject:
   m_ObjectHideFlags: 0
@@ -9785,6 +10108,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!65 &1060549567
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9971,6 +10298,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1116606279
 GameObject:
   m_ObjectHideFlags: 0
@@ -10125,6 +10456,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1144903659
 GameObject:
   m_ObjectHideFlags: 0
@@ -10237,6 +10572,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1160114883
 GameObject:
   m_ObjectHideFlags: 0
@@ -10349,6 +10688,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1166008789
 GameObject:
   m_ObjectHideFlags: 0
@@ -10461,6 +10804,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1168712001
 GameObject:
   m_ObjectHideFlags: 0
@@ -10615,6 +10962,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1178862103
 GameObject:
   m_ObjectHideFlags: 0
@@ -10727,6 +11078,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1180974741
 GameObject:
   m_ObjectHideFlags: 0
@@ -10839,6 +11194,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1206762652
 GameObject:
   m_ObjectHideFlags: 0
@@ -10951,6 +11310,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1229678615
 GameObject:
   m_ObjectHideFlags: 0
@@ -11063,6 +11426,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1237525869
 GameObject:
   m_ObjectHideFlags: 0
@@ -11175,6 +11542,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1243653815
 GameObject:
   m_ObjectHideFlags: 0
@@ -11207,7 +11578,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1243653817
 MonoBehaviour:
@@ -11227,6 +11598,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!65 &1243653818
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11329,6 +11704,51 @@ Transform:
   m_Father: {fileID: 686554129}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1271644760
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1271644761}
+  - component: {fileID: 1271644762}
+  m_Layer: 0
+  m_Name: Player 01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1271644761
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271644760}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 799441090}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1271644762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1271644760}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dbbd56dbbf4b74b9a783873c021bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamID: 0
 --- !u!1 &1303409039
 GameObject:
   m_ObjectHideFlags: 0
@@ -11441,6 +11861,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1322233587
 GameObject:
   m_ObjectHideFlags: 0
@@ -11553,6 +11977,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1325668231
 GameObject:
   m_ObjectHideFlags: 0
@@ -11665,6 +12093,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1375242086
 GameObject:
   m_ObjectHideFlags: 0
@@ -11777,6 +12209,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1375576334
 GameObject:
   m_ObjectHideFlags: 0
@@ -11889,6 +12325,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1388160368
 GameObject:
   m_ObjectHideFlags: 0
@@ -12001,6 +12441,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1388985193
 GameObject:
   m_ObjectHideFlags: 0
@@ -12113,6 +12557,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1395080788
 GameObject:
   m_ObjectHideFlags: 0
@@ -12225,6 +12673,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1396446536
 GameObject:
   m_ObjectHideFlags: 0
@@ -12237,8 +12689,10 @@ GameObject:
   - component: {fileID: 1396446539}
   - component: {fileID: 1396446538}
   - component: {fileID: 1396446537}
+  - component: {fileID: 1396446542}
+  - component: {fileID: 1396446541}
   m_Layer: 0
-  m_Name: NPC
+  m_Name: Unit 01
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12312,13 +12766,43 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1396446536}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.5, y: 1, z: -4.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 2143104927}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396446541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396446536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87ec6b969bcfc34194367a91fd8c825, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveToGrassland: 0
+  moveToLake: 0
+  moveToForest: 0
+  moveToMountain: 0
+--- !u!114 &1396446542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396446536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9794143b2e7aeb74f97c5f43833ddef3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 5
+  speed: 2.6
 --- !u!1 &1415184789
 GameObject:
   m_ObjectHideFlags: 0
@@ -12473,6 +12957,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1426906359
 GameObject:
   m_ObjectHideFlags: 0
@@ -12585,6 +13073,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1472323929
 GameObject:
   m_ObjectHideFlags: 0
@@ -12697,6 +13189,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1473624598
 GameObject:
   m_ObjectHideFlags: 0
@@ -12809,6 +13305,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1523350130
 GameObject:
   m_ObjectHideFlags: 0
@@ -12921,6 +13421,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1531141764
 GameObject:
   m_ObjectHideFlags: 0
@@ -13033,6 +13537,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1536929607
 GameObject:
   m_ObjectHideFlags: 0
@@ -13145,6 +13653,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1541284400
 GameObject:
   m_ObjectHideFlags: 0
@@ -13257,6 +13769,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1546640431
 GameObject:
   m_ObjectHideFlags: 0
@@ -13369,6 +13885,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1548996687
 GameObject:
   m_ObjectHideFlags: 0
@@ -13481,6 +14001,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1626936251
 GameObject:
   m_ObjectHideFlags: 0
@@ -13593,6 +14117,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1628307813
 GameObject:
   m_ObjectHideFlags: 0
@@ -13705,6 +14233,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1635562742
 GameObject:
   m_ObjectHideFlags: 0
@@ -13817,6 +14349,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1640626048
 GameObject:
   m_ObjectHideFlags: 0
@@ -13971,6 +14507,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1680891204
 GameObject:
   m_ObjectHideFlags: 0
@@ -14083,6 +14623,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1687560971
 GameObject:
   m_ObjectHideFlags: 0
@@ -14195,6 +14739,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1689835889
 GameObject:
   m_ObjectHideFlags: 0
@@ -14307,6 +14855,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1697078635
 GameObject:
   m_ObjectHideFlags: 0
@@ -14419,6 +14971,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1713166224
 GameObject:
   m_ObjectHideFlags: 0
@@ -14531,6 +15087,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1729818835
 GameObject:
   m_ObjectHideFlags: 0
@@ -14643,6 +15203,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1738331299
 GameObject:
   m_ObjectHideFlags: 0
@@ -14755,6 +15319,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1739016937
 GameObject:
   m_ObjectHideFlags: 0
@@ -14867,6 +15435,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1749940949
 GameObject:
   m_ObjectHideFlags: 0
@@ -14979,6 +15551,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1758783680
 GameObject:
   m_ObjectHideFlags: 0
@@ -15091,6 +15667,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1765946799
 GameObject:
   m_ObjectHideFlags: 0
@@ -15203,6 +15783,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1801455941
 GameObject:
   m_ObjectHideFlags: 0
@@ -15357,6 +15941,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1819394291
 GameObject:
   m_ObjectHideFlags: 0
@@ -15469,6 +16057,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1833667770
 GameObject:
   m_ObjectHideFlags: 0
@@ -15507,6 +16099,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!65 &1833667772
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15693,6 +16289,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1841033212
 GameObject:
   m_ObjectHideFlags: 0
@@ -15805,6 +16405,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1866181707
 GameObject:
   m_ObjectHideFlags: 0
@@ -15917,6 +16521,56 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
+--- !u!1 &1866474602
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1866474604}
+  - component: {fileID: 1866474603}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1866474603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866474602}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7683639fdc2874ab2f69de3a237776, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teams:
+  - {fileID: 1271644760}
+  - {fileID: 2143104926}
+--- !u!4 &1866474604
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866474602}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1868643044
 GameObject:
   m_ObjectHideFlags: 0
@@ -16029,6 +16683,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1897645439
 GameObject:
   m_ObjectHideFlags: 0
@@ -16141,6 +16799,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1952226629
 GameObject:
   m_ObjectHideFlags: 0
@@ -16253,6 +16915,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1987836236
 GameObject:
   m_ObjectHideFlags: 0
@@ -16365,6 +17031,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &1999620651
 GameObject:
   m_ObjectHideFlags: 0
@@ -16477,6 +17147,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2007294473
 GameObject:
   m_ObjectHideFlags: 0
@@ -16589,6 +17263,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2008074926
 GameObject:
   m_ObjectHideFlags: 0
@@ -16743,6 +17421,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2061681441
 GameObject:
   m_ObjectHideFlags: 0
@@ -16855,6 +17537,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2084204446
 GameObject:
   m_ObjectHideFlags: 0
@@ -16967,6 +17653,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2088371458
 GameObject:
   m_ObjectHideFlags: 0
@@ -17079,6 +17769,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2090978776
 GameObject:
   m_ObjectHideFlags: 0
@@ -17191,6 +17885,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2118331845
 GameObject:
   m_ObjectHideFlags: 0
@@ -17303,6 +18001,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2121869206
 GameObject:
   m_ObjectHideFlags: 0
@@ -17415,6 +18117,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2138581716
 GameObject:
   m_ObjectHideFlags: 0
@@ -17527,6 +18233,10 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
 --- !u!1 &2140560956
 GameObject:
   m_ObjectHideFlags: 0
@@ -17639,3 +18349,52 @@ MonoBehaviour:
   visited: 0
   parent: {fileID: 0}
   distance: 0
+  moveToGrassland: 1
+  moveToLake: 0
+  moveToForest: 1
+  moveToMountain: 0
+--- !u!1 &2143104926
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2143104927}
+  - component: {fileID: 2143104928}
+  m_Layer: 0
+  m_Name: Player 02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2143104927
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143104926}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1396446540}
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2143104928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2143104926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13dbbd56dbbf4b74b9a783873c021bd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamID: 1
