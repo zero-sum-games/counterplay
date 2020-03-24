@@ -37,16 +37,16 @@ public class PlayerMove : UnitMove
                 if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
                 {
                     _buttonStartTime = Time.time;
-                    State = MoveState.Selecting;
+                    State = MoveState.Selected;
                 }
             
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    State = MoveState.Selecting;
+                    State = MoveState.Selected;
                 }
                 break;
                            
-            case MoveState.Selecting:
+            case MoveState.Selected:
             
                 FindSelectableTiles();
                 CheckMouse();

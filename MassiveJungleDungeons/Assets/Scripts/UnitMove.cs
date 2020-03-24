@@ -9,7 +9,7 @@ public class UnitMove : MonoBehaviour
     protected enum MoveState
     {
         Idle        = 0,
-        Selecting   = 1,
+        Selected    = 1,
         Moving      = 2
     }
 

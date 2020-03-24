@@ -10,6 +10,7 @@ public class UnitState : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        SetStateParameters();
     }
     
     public enum ElementalState
@@ -65,10 +66,5 @@ public class UnitState : MonoBehaviour
         }
 
         GetComponent<Renderer>().material.color = color;
-    }
-
-    private void Start()
-    {
-        SetStateParameters();
     }
 }

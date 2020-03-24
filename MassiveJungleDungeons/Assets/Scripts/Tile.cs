@@ -251,9 +251,7 @@ public class Tile : MonoBehaviour
                         adjacencyList.Add(tile);
                 }
             } */
-
         }
-
     }
 
     public void ResetTargetMarkers()

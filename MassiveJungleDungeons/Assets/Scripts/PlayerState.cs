@@ -20,9 +20,12 @@ public class PlayerState : UnitState
         else if (nextState > 2)
             nextState = 0;
 
-        _elementalState = (ElementalState) nextState;
-
-        _playerMove.SetRange((int) _elementalState);
+        if ((int) _elementalState != nextState)
+        {
+            _elementalState = (ElementalState) nextState;
+            _playerMove.SetRange((int) _elementalState);
+            SetStateParameters();
+        }
     }
 
     private void Start()
@@ -34,6 +37,5 @@ public class PlayerState : UnitState
     private void Update()
     {
         CheckKeyboard();
-        SetStateParameters();
     }
 }
