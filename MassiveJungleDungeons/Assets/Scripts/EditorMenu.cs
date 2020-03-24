@@ -4,14 +4,9 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
-//==============================================================================
-
 public static class EditorMenu
 {
-    //==========================================================================
-
-    // Assign default blank tile material to all tiles in the current scene
-    // [MenuItem("Tools/Assign Tile Material")]
+    [MenuItem("Tools/Assign Tile Material")]
     private static void AssignTileMaterial()
     {
         var tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -44,32 +39,22 @@ public static class EditorMenu
         }
     }
 
-    //==========================================================================
-
-    // Assign the tile script to all tiles in the current scene
-    // [MenuItem("Tools/Assign Tile Script")]
+    [MenuItem("Tools/Assign Tile Script")]
     private static void AssignTileScript()
     {
         var tiles = GameObject.FindGameObjectsWithTag("Tile");
         
-        // Check if object has a Tile component, if not add one
-        // Prevents duplicate tile components
         foreach (var t in tiles)
             if (t.TryGetComponent(typeof(Tile), out var component) == false)
             {
                 t.AddComponent<Tile>();
             }
     }
-    
-    //==========================================================================
 
-    // Runs AssignTileScript and AssignTileMaterial
-    //[MenuItem ("Tools/Assign Tile Type")]
-    //private static void AssignTileType()
-    //{
-    //    AssignTileScript();
-    //    AssignTileMaterial();
-    //}
-    
-
+    [MenuItem("Tools/Assign Tile Type")]
+    private static void AssignTileType()
+    {
+        AssignTileScript();
+        AssignTileMaterial();
+    }
 }

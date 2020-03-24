@@ -3,12 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//==============================================================================
-
 public class Tile : MonoBehaviour
 {
-    //==========================================================================
-
     public enum TileState
     {
         Default     = 0,
@@ -17,7 +13,6 @@ public class Tile : MonoBehaviour
         Current     = 3
     }
 
-    // indicates the state of a tile using the enum defined above ^^
     public TileState state = TileState.Default;
 
     public enum TileType
@@ -32,20 +27,13 @@ public class Tile : MonoBehaviour
 
     private Material _material;
 
-    //==========================================================================
-
-    // represents the tiles that are adjacent to a certain tile
     public List<Tile> adjacencyList = new List<Tile>();
 
-    // breadth-first search variables
     public bool visited = false;
     public Tile parent = null;
     public int distance = 0;
     private Renderer _selectableRangeColor;
 
-    //==========================================================================
-
-    // check all four neighbors and add to adjacency list if appropriate
     public void FindNeighbors(UnitMove unit)
     {
         Reset();
@@ -56,7 +44,6 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.left, unit);
     }
 
-    // reset all bfs variables, adjacency list, and tile state
     public void Reset()
     {
         state = TileState.Default;
@@ -67,14 +54,11 @@ public class Tile : MonoBehaviour
         distance = 0;
     }
 
-    //==========================================================================
-
     public bool moveToGrassland = true;
     public bool moveToLake = false;
     public bool moveToForest = true;
     public bool moveToMountain = false;
 
-    // adds neighbor tile to current tile's adjacency list if there is nothing on top and it is walkable
     private void CheckTile(Vector3 direction, UnitMove unitMove)
     {
         var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
@@ -84,7 +68,6 @@ public class Tile : MonoBehaviour
         {
             var tile = item.GetComponent<Tile>();
             
-            // Set Grassland as walkable
             if (moveToGrassland)
             {
                 if (tile != null && tile.type == TileType.Grassland)
@@ -93,9 +76,7 @@ public class Tile : MonoBehaviour
                         adjacencyList.Add(tile);
                 }
             }
-
             
-            // Set Forest as walkable
             if (moveToForest)
             {
                 if (tile != null && tile.type == TileType.Forest)
@@ -105,7 +86,6 @@ public class Tile : MonoBehaviour
                 }
             }
 
-            // Set Lake as walkable
             if (moveToLake)
             {
                 if (tile != null && tile.type == TileType.Lake)
@@ -115,7 +95,6 @@ public class Tile : MonoBehaviour
                 }
             }
 
-            // Set Mountain as walkable
             if (moveToMountain)
             {
                 if (tile != null && tile.type == TileType.Mountain)
@@ -124,14 +103,8 @@ public class Tile : MonoBehaviour
                         adjacencyList.Add(tile);
                 }
             }
-            
         }
-        
     }
-
-    
-
-    //==========================================================================
 
     private void Start()
     {
@@ -155,13 +128,11 @@ public class Tile : MonoBehaviour
                 _material = Resources.Load<Material>("Tiles/Mountain");
                 break;
         }
-
         GetComponent<Renderer>().material = _material;
     }
 
     private void Update()
     {
-        //changes selectable tiles' color to show if they are walkable/target/current
         switch (state)
         {
             default:
@@ -182,10 +153,7 @@ public class Tile : MonoBehaviour
                 break;
         }
     }
-    
-    //==========================================================================
-    
-    // In edit mode - change material whenever Tile Type is changed in the inspector
+        
     public void OnValidate()
     {
         switch (type)
@@ -210,10 +178,7 @@ public class Tile : MonoBehaviour
         GetComponent<Renderer>().material = _material;
     }
 
-
-    //==========================================================================
-    //==========================================================================
-    //  COMBAT ADJACENY COMPUTING
+    //  COMBAT ADJACENY COMPUTING 
 
     public void FindTarget(UnitCombat unit)
     {
@@ -299,5 +264,4 @@ public class Tile : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
 }

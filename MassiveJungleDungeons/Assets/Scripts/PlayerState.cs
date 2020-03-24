@@ -2,15 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//==============================================================================
 public class PlayerState : UnitState
 {
-    //==========================================================================
-
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
-
-    //==========================================================================
 
     private void CheckKeyboard()
     {
@@ -29,8 +24,6 @@ public class PlayerState : UnitState
 
         _playerMove.SetRange((int) _elementalState);
     }
-
-    //==========================================================================
 
     private void Start()
     {

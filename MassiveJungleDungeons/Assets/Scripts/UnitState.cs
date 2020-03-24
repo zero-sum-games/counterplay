@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//==============================================================================
 public class UnitState : MonoBehaviour
-{
-    //==========================================================================
+{ 
     
     public static UnitState Instance { get; private set; }
 
@@ -14,28 +12,21 @@ public class UnitState : MonoBehaviour
         Instance = this;
     }
     
-    //==========================================================================
-    
     public enum ElementalState
     {
         Grass   = 0,
         Water   = 1,
         Fire    = 2
     }
-    // Default Elemental State is Grass
+    
     protected ElementalState _elementalState = ElementalState.Grass;
     
-    //==========================================================================
-    
     // booleans for each type of terrain to be walkable
-        public bool moveToGrassland = false;
-        public bool moveToLake = false;
-        public bool moveToForest = false;
-        public bool moveToMountain = false;
+    public bool moveToGrassland = false;
+    public bool moveToLake = false;
+    public bool moveToForest = false;
+    public bool moveToMountain = false;
     
-    //==========================================================================
-    
-    // set the parameters of the game object according to current elemental state
     protected void SetStateParameters()
     {
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f
@@ -75,8 +66,6 @@ public class UnitState : MonoBehaviour
 
         GetComponent<Renderer>().material.color = color;
     }
-
-    //==========================================================================
 
     private void Start()
     {

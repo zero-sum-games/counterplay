@@ -23,14 +23,11 @@ public class UnitCombat : MonoBehaviour
     private GameObject targetMarker;
 
     private Tile _currentTile;
-    //==========================================================================
 
-    //State attribute parameters
     public void SetAttack(int elementalState)
     {
         switch (elementalState)
         {
-
             default:
             case 0: // Grass
                 atkRange = 2;
@@ -53,14 +50,11 @@ public class UnitCombat : MonoBehaviour
         }
     }
 
-    //==========================================================================
     protected void Init()
     {
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
     }
 
-    //==========================================================================
-    //Uses bfs to find targets at range. Range is explicit; targets cannot be further or closer than specified range.
     protected void FindRangeTiles()
     {
         ComputeAdjacencyList();
@@ -101,25 +95,20 @@ public class UnitCombat : MonoBehaviour
             seenTiles = new List<Tile>();
 
             MarkTargetableTiles();
-
         }
-
     }
 
-    //==========================================================================
-    //Calculates damage dealt
     protected void MakeAttack(PlayerCombat myTarget)
     {
         if (!myTarget.markedTarget) return;
         {
-            //Will make more complex later
+            // TODO: make more complex later
             if (myTarget.playerHP <= 0)
                 myTarget.playerHP -= atkDamage - (myTarget.playerDef);
             else { Destroy(myTarget.gameObject); }
         }
     }
 
-    //==========================================================================
     private void ComputeAdjacencyList()
     {
         foreach (var tile in _tiles)
@@ -170,7 +159,4 @@ public class UnitCombat : MonoBehaviour
 
         _withinRangeTiles.Clear();
     }
-
-   
-
 }
