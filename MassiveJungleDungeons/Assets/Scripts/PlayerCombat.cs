@@ -24,9 +24,8 @@ public class PlayerCombat : UnitCombat
         {
             combatMode = true;
             FindRangeTiles();
-            
         }
-        if (combatMode)
+        else if (combatMode)
         {
             if (Input.GetMouseButtonDown(0))
             {
@@ -40,15 +39,13 @@ public class PlayerCombat : UnitCombat
                         MakeAttack(myTarget);
                     }
                 }
-
-            } }
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+            } 
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift))
         {
                 combatMode = false;
                 RemoveTargetTiles();
         }
-
-        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -67,7 +64,6 @@ public class PlayerCombat : UnitCombat
         if (other.tag == "TargetMark")
         {
             markedTarget = false;
-
         }
     }
 }

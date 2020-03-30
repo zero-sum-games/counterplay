@@ -16,9 +16,11 @@
     <explicitExcludes>
       <Path>.idea</Path>
       <Path>.vs</Path>
+      <Path>Build</Path>
       <Path>Library</Path>
       <Path>Logs</Path>
       <Path>Temp</Path>
+      <Path>fmod</Path>
       <Path>obj</Path>
     </explicitExcludes>
   </component>
