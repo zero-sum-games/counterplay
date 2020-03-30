@@ -6,17 +6,23 @@ public class PlayerMove : UnitMove
 {
     private void CheckMouse()
     {
-        if (!Input.GetMouseButtonUp(0)) return;
-            if (Camera.main == null) return;
-                var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (!Physics.Raycast(ray, out var hit)) return;
-            
-                if (!hit.collider.CompareTag("Tile")) return;
-                    var t = hit.collider.GetComponent<Tile>();
-                    
-                    if(t.state == Tile.TileState.Selected)
-                        MoveToTile(t);
+        if (Input.GetMouseButtonUp(0))
+        {
+            var camera = Camera.main;
+            if(camera != null)
+            {
+                var ray = camera.ScreenPointToRay(Input.mousePosition);
+                if(Physics.Raycast(ray, out var hit))
+                {
+                    if(hit.collider.CompareTag("Tile"))
+                    {
+                        var t = hit.collider.GetComponent<Tile>();
+                        if (t.state == Tile.TileState.Selected)
+                            MoveToTile(t);
+                    }
+                }
+            }
+        }
     }
 
     private void Start()
