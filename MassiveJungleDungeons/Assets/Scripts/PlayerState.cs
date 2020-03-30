@@ -7,6 +7,11 @@ public class PlayerState : UnitState
     private PlayerMove _playerMove;
     private PlayerCombat _playerCombat;
 
+    public ElementalState GetElementalState()
+    {
+        return _elementalState;
+    }
+
     private void CheckKeyboard()
     {
         var nextState = (int) _elementalState;

@@ -147,7 +147,7 @@ public class UnitMove : MonoBehaviour
         foreach (var tile in _tiles)
         {
             var t = tile.GetComponent<Tile>();
-            t.FindNeighbors(this);
+            t.FindNeighbors(this, this.gameObject.GetComponent<PlayerState>().GetElementalState());
         }
     }
 

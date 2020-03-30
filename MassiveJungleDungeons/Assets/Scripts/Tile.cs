@@ -34,14 +34,14 @@ public class Tile : MonoBehaviour
     public int distance = 0;
     private Renderer _selectableRangeColor;
 
-    public void FindNeighbors(UnitMove unit)
+    public void FindNeighbors(UnitMove unit, UnitState.ElementalState elementalState)
     {
         Reset();
 
-        CheckTile(Vector3.forward, unit);
-        CheckTile(Vector3.back, unit);
-        CheckTile(Vector3.right, unit);
-        CheckTile(Vector3.left, unit);
+        CheckTile(Vector3.forward, unit, elementalState);
+        CheckTile(Vector3.back, unit, elementalState);
+        CheckTile(Vector3.right, unit, elementalState);
+        CheckTile(Vector3.left, unit, elementalState);
     }
 
     public void Reset()
@@ -54,12 +54,7 @@ public class Tile : MonoBehaviour
         distance = 0;
     }
 
-    public bool moveToGrassland = true;
-    public bool moveToLake = false;
-    public bool moveToForest = true;
-    public bool moveToMountain = false;
-
-    private void CheckTile(Vector3 direction, UnitMove unitMove)
+    private void CheckTile(Vector3 direction, UnitMove unitMove, UnitState.ElementalState elementalState)
     {
         var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
         var colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
@@ -67,40 +62,28 @@ public class Tile : MonoBehaviour
         foreach (var item in colliders)
         {
             var tile = item.GetComponent<Tile>();
-            
-            if (moveToGrassland)
+            if(tile != null)
             {
-                if (tile != null && tile.type == TileType.Grassland)
+                if(!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                 {
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
-                        adjacencyList.Add(tile);
-                }
-            }
-            
-            if (moveToForest)
-            {
-                if (tile != null && tile.type == TileType.Forest)
-                {
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
-                        adjacencyList.Add(tile);
-                }
-            }
+                    switch (elementalState)
+                    {
+                        default:
+                        case UnitState.ElementalState.Grass:
+                            if (tile.type == TileType.Grassland || tile.type == TileType.Forest)
+                                adjacencyList.Add(tile);
+                            break;
 
-            if (moveToLake)
-            {
-                if (tile != null && tile.type == TileType.Lake)
-                {
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
-                        adjacencyList.Add(tile);
-                }
-            }
+                        case UnitState.ElementalState.Water:
+                            if (tile.type == TileType.Lake)
+                                adjacencyList.Add(tile);
+                            break;
 
-            if (moveToMountain)
-            {
-                if (tile != null && tile.type == TileType.Mountain)
-                {
-                    if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
-                        adjacencyList.Add(tile);
+                        case UnitState.ElementalState.Fire:
+                            if (tile.type == TileType.Forest || tile.type == TileType.Grassland || tile.type == TileType.Mountain)
+                                adjacencyList.Add(tile);
+                            break;
+                    }
                 }
             }
         }

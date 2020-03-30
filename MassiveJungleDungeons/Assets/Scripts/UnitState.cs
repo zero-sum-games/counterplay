@@ -17,12 +17,6 @@ public class UnitState : MonoBehaviour
     protected ElementalState _elementalState = ElementalState.Grass;
 
     protected int _teamID;
-    
-    // booleans for each type of terrain to be walkable
-    public bool moveToGrassland = false;
-    public bool moveToLake = false;
-    public bool moveToForest = false;
-    public bool moveToMountain = false;
 
     private void Awake()
     {
@@ -42,29 +36,14 @@ public class UnitState : MonoBehaviour
             default:
             case ElementalState.Grass:
                 color = new Color32(54, 224, 91, 1);
-                
-                moveToGrassland = true;
-                moveToForest = true;
-                moveToLake = false;
-                moveToMountain = false;
                 break;
                 
             case ElementalState.Water:
                 color = new Color32(77, 125, 247, 1);
-                
-                moveToGrassland = true;
-                moveToForest = true;
-                moveToLake = true;
-                moveToMountain = false;
                 break;
 
             case ElementalState.Fire:
                 color = new Color32(242, 94, 61, 1);
-                
-                moveToGrassland = true;
-                moveToForest = true;
-                moveToLake = false;
-                moveToMountain = true;
                 break;
             
         }
