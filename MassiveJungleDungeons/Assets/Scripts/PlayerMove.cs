@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class PlayerMove : UnitMove
 {
+    private float _buttonStartTime; // when space is pressed
+    private float _buttonTimePressed; // how long space was held
+
+    public GameObject selector;
+
     private void CheckMouse()
     {
         if (Input.GetMouseButtonUp(0))
@@ -18,7 +23,11 @@ public class PlayerMove : UnitMove
                     {
                         var t = hit.collider.GetComponent<Tile>();
                         if (t.state == Tile.TileState.Selected)
+                        {
+                            var targetPosition = t.gameObject.transform.position;
+                            selector.transform.position = new Vector3(targetPosition.x, 0.51f, targetPosition.z);
                             MoveToTile(t);
+                        }
                     }
                 }
             }
@@ -30,9 +39,6 @@ public class PlayerMove : UnitMove
         Init();
     }
 
-    private float _buttonStartTime; // when space is pressed
-    private float _buttonTimePressed; // how long space was held
-
     private void Update()
     {
         if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
@@ -41,6 +47,7 @@ public class PlayerMove : UnitMove
             {
                 default:
                 case MoveState.Idle:
+                    selector.transform.position = new Vector3(transform.position.x, 0.51f, transform.position.z);
 
                     if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
                     {
@@ -55,7 +62,6 @@ public class PlayerMove : UnitMove
                     break;
 
                 case MoveState.Selected:
-
                     FindSelectableTiles();
                     CheckMouse();
 

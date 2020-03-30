@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public GameObject[] teams;
-
     private int _activeTeamIndex = 0;
 
     void Update()
@@ -17,7 +16,7 @@ public class GameManager : MonoBehaviour
             _activeTeamIndex++;
 
             if (_activeTeamIndex >= teams.Length)
-                _activeTeamIndex = 0;
+                _activeTeamIndex = 0; 
         }
     }
 

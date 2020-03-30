@@ -5,4 +5,7 @@ using UnityEngine;
 public class TeamManager : MonoBehaviour
 {
     public int teamID;
+
+    public GameObject[] units;
+    private int _activeUnitIndex = 0;
 }
