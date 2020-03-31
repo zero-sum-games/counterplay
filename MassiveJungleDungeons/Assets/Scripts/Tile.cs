@@ -23,7 +23,7 @@ public class Tile : MonoBehaviour
         Mountain    = 3
     }
 
-    public TileType type = TileType.Grassland;
+    public TileType type;
 
     private Material _material;
 
@@ -92,25 +92,11 @@ public class Tile : MonoBehaviour
     private void Start()
     {
         _selectableRangeColor = GetComponent<Renderer>();
-        switch(type)
-        {
-            default:
-            case TileType.Grassland:
-                _material = Resources.Load<Material>("Tiles/Grassland");
-                break;
+    }
 
-            case TileType.Lake:
-                _material = Resources.Load<Material>("Tiles/Lake");
-                break;
-
-            case TileType.Forest:
-                _material = Resources.Load<Material>("Tiles/Forest");
-                break;
-
-            case TileType.Mountain:
-                _material = Resources.Load<Material>("Tiles/Mountain");
-                break;
-        }
+    public void SetMaterial(Material material)
+    {
+        _material = material;
         GetComponent<Renderer>().material = _material;
     }
 

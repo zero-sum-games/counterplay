@@ -6,8 +6,24 @@ using UnityEngine.UI;
 
 public static class EditorMenu
 {
-    [MenuItem("Tools/Assign Tile Material")]
-    private static void AssignTileMaterial()
+    [MenuItem("Tools/Assign New Tile Scripts")]
+    private static void AssignNewTileScripts()
+    {
+        var tiles = GameObject.FindGameObjectsWithTag("Tile");
+
+        foreach (var t in tiles)
+            if (t.TryGetComponent(typeof(Tile), out var component) == false)
+            {
+                var material = t.GetComponent<Renderer>().material;
+
+                t.AddComponent<Tile>();
+
+                t.GetComponent<Tile>().SetMaterial(material);
+            }
+    }
+
+    [MenuItem("Tools/Assign Tile Materials by Type")]
+    private static void AssignTileMaterialsByType()
     {
         var tiles = GameObject.FindGameObjectsWithTag("Tile");
 
@@ -37,24 +53,5 @@ public static class EditorMenu
             }
             t.GetComponent<Renderer>().material = material;
         }
-    }
-
-    [MenuItem("Tools/Assign Tile Script")]
-    private static void AssignTileScript()
-    {
-        var tiles = GameObject.FindGameObjectsWithTag("Tile");
-        
-        foreach (var t in tiles)
-            if (t.TryGetComponent(typeof(Tile), out var component) == false)
-            {
-                t.AddComponent<Tile>();
-            }
-    }
-
-    [MenuItem("Tools/Assign Tile Type")]
-    private static void AssignTileType()
-    {
-        AssignTileScript();
-        AssignTileMaterial();
     }
 }
