@@ -62,5 +62,10 @@ crashlytics-build.properties
 
 #===============================================================================
 
+# FMOD local cache+
+/MassiveJungleDungeons/FMOD/MassiveJungleDungeons/.unsaved
+/MassiveJungleDungeons/FMOD/MassiveJungleDungeons/.user
+
 # USER-MADE FOLDERS
-/Predev/
+/Audio/
+/Design/
