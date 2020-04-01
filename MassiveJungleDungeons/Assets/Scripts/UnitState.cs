@@ -18,7 +18,7 @@ public class UnitState : MonoBehaviour
 
     protected int _teamID;
 
-    private void Awake()
+    private void Start()
     {
         Instance = this;
         SetStateParameters();

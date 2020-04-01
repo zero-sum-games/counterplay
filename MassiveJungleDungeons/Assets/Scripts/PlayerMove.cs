@@ -41,59 +41,59 @@ public class PlayerMove : UnitMove
 
     private void Update()
     {
-        if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
+        if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID()
+            || this.GetComponent<PlayerCombat>().state != UnitCombat.CombatState.Idle)
         {
-            switch (state)
-            {
-                default:
-                case MoveState.Idle:
-                    selector.transform.position = new Vector3(transform.position.x, 0.51f, transform.position.z);
+            state = MoveState.Idle;
+            return;
+        }
 
-                    if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
-                    {
-                        _buttonStartTime = Time.time;
-                        state = MoveState.Selected;
-                    }
+        switch (state)
+        {
+            default:
+            case MoveState.Idle:
+                selector.transform.position = new Vector3(transform.position.x, 0.51f, transform.position.z);
 
-                    else if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        state = MoveState.Selected;
-                    }
-                    break;
+                if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
+                {
+                    _buttonStartTime = Time.time;
+                    state = MoveState.Selected;
+                }
 
-                case MoveState.Selected:
-                    FindSelectableTiles();
-                    CheckMouse();
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    state = MoveState.Selected;
+                }
+                break;
 
-                    if (!Input.GetKeyDown(KeyCode.Space) && Input.GetKeyUp(KeyCode.Space))
-                    {
-                        _buttonTimePressed = Time.time - _buttonStartTime;
+            case MoveState.Selected:
+                FindSelectableTiles();
+                CheckMouse();
 
-                        if (_buttonTimePressed > 0.3)
-                        {
-                            RemoveSelectableTiles();
-                            state = MoveState.Idle;
-                        }
-                    }
+                if (!Input.GetKeyDown(KeyCode.Space) && Input.GetKeyUp(KeyCode.Space))
+                {
+                    _buttonTimePressed = Time.time - _buttonStartTime;
 
-                    else if (Input.GetKeyDown(KeyCode.Space))
+                    if (_buttonTimePressed > 0.3)
                     {
                         RemoveSelectableTiles();
                         state = MoveState.Idle;
                     }
-                    break;
+                }
 
-                case MoveState.Moving:
-                    Move();
-                    break;
+                else if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    RemoveSelectableTiles();
+                    state = MoveState.Idle;
+                }
+                break;
 
-                case MoveState.Moved:
-                    break;
-            }
-        }
-        else
-        {
-            state = MoveState.Idle;
+            case MoveState.Moving:
+                Move();
+                break;
+
+            case MoveState.Moved:
+                break;
         }
     }
 }

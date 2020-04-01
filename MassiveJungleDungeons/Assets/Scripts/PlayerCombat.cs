@@ -4,66 +4,38 @@ using UnityEngine;
 
 public class PlayerCombat : UnitCombat
 {
-    public bool combatMode = false;
-    public bool markedTarget = false;
+    private PlayerMove _playerMove;
 
-    PlayerState _playerState;
-
-    Color tempTarget;
-
-    private void Start()
+    private void Awake()
     {
-        Init();
-        _playerState = gameObject.GetComponent<PlayerState>();
-        playerHP = 100;
+        _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
+        _playerMove = this.GetComponent<PlayerMove>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !combatMode)
-        {
-            combatMode = true;
-            FindRangeTiles();
-        }
-        else if (combatMode)
-        {
-            if (Input.GetMouseButtonDown(0))
-            {
-                RaycastHit hit;
-                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.collider.tag == "Player")
-                    {
-                        var myTarget = hit.collider.gameObject.GetComponent<PlayerCombat>();
-                        MakeAttack(myTarget);
-                    }
-                }
-            } 
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftShift))
-        {
-                combatMode = false;
-                RemoveTargetTiles();
-        }
-    }
+        if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID()) return;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.tag == "TargetMark")
-        {
-            markedTarget = true;
-            tempTarget = other.GetComponent<Renderer>().material.color;
-            other.GetComponent<Renderer>().material.color = Color.yellow;
-            
-        }
-    }
+        if (_playerMove.state != UnitMove.MoveState.Idle) return;
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "TargetMark")
+        switch (state)
         {
-            markedTarget = false;
+            default:
+            case CombatState.Idle:
+                if (Input.GetMouseButtonDown(1))
+                    state = CombatState.Selecting;
+                break;
+
+            case CombatState.Selecting:
+                if (Input.GetMouseButtonDown(1))
+                    state = CombatState.Idle;
+                break;
+
+            case CombatState.Attacking:
+                break;
+
+            case CombatState.Attacked:
+                break;
         }
     }
 }

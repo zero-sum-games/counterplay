@@ -14,7 +14,7 @@ public class PlayerState : UnitState
 
     private void CheckKeyboard()
     {
-        if (_playerMove.state != UnitMove.MoveState.Idle) return;
+        if (_playerMove.state != UnitMove.MoveState.Idle || _playerCombat.state != UnitCombat.CombatState.Idle) return;
 
         var nextState = (int) _elementalState;
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
@@ -35,7 +35,7 @@ public class PlayerState : UnitState
         }
     }
 
-    private void Start()
+    private void Awake()
     {
         _playerMove = GetComponent<PlayerMove>();
         _playerCombat = GetComponent<PlayerCombat>();
