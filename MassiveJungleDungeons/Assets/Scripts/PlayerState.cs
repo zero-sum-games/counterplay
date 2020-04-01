@@ -30,7 +30,8 @@ public class PlayerState : UnitState
         if ((int) _elementalState != nextState)
         {
             _elementalState = (ElementalState) nextState;
-            _playerMove.SetRange((int) _elementalState);
+            _playerMove.SetMovementRange((int) _elementalState);
+            _playerCombat.SetAttackRange((int) _elementalState);
             SetStateParameters();
         }
     }

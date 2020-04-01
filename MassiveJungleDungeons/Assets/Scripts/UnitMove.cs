@@ -32,7 +32,7 @@ public class UnitMove : MonoBehaviour
 
     private float _halfUnitHeight;
 
-    public void SetRange(int elementalState)
+    public void SetMovementRange(int elementalState)
     {
         switch (elementalState)
         {
@@ -44,12 +44,12 @@ public class UnitMove : MonoBehaviour
             
             // Water
             case 1:
-                range = 3;
+                range = 5;
                 break;
 
             // Fire
             case 2:
-                range = 4;
+                range = 5;
                 break;
             
         }
@@ -85,7 +85,7 @@ public class UnitMove : MonoBehaviour
             if (t.distance >= range) 
                 continue;
 
-            foreach (var tile in t.adjacencyList.Where(tile => !tile.visited))
+            foreach (var tile in t.adjMovementList.Where(tile => !tile.visited))
             {
                 tile.parent = t;
                 tile.visited = true;
@@ -159,11 +159,11 @@ public class UnitMove : MonoBehaviour
         foreach (var tile in _tiles)
         {
             var t = tile.GetComponent<Tile>();
-            t.FindNeighbors(this, this.gameObject.GetComponent<PlayerState>().GetElementalState());
+            t.FindNeighbors(this.gameObject.GetComponent<PlayerState>().GetElementalState());
         }
     }
 
-    private Tile GetCurrentTile()
+    public Tile GetCurrentTile()
     {
         var tile = GetTargetTile(gameObject);
         tile.state = Tile.TileState.Current;
