@@ -43,7 +43,7 @@ public class PlayerMove : UnitMove
     {
         if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
         {
-            switch (State)
+            switch (state)
             {
                 default:
                 case MoveState.Idle:
@@ -52,12 +52,12 @@ public class PlayerMove : UnitMove
                     if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
                     {
                         _buttonStartTime = Time.time;
-                        State = MoveState.Selected;
+                        state = MoveState.Selected;
                     }
 
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
-                        State = MoveState.Selected;
+                        state = MoveState.Selected;
                     }
                     break;
 
@@ -72,14 +72,14 @@ public class PlayerMove : UnitMove
                         if (_buttonTimePressed > 0.3)
                         {
                             RemoveSelectableTiles();
-                            State = MoveState.Idle;
+                            state = MoveState.Idle;
                         }
                     }
 
                     else if (Input.GetKeyDown(KeyCode.Space))
                     {
                         RemoveSelectableTiles();
-                        State = MoveState.Idle;
+                        state = MoveState.Idle;
                     }
                     break;
 
@@ -93,7 +93,7 @@ public class PlayerMove : UnitMove
         }
         else
         {
-            State = MoveState.Idle;
+            state = MoveState.Idle;
         }
     }
 }

@@ -14,6 +14,8 @@ public class PlayerState : UnitState
 
     private void CheckKeyboard()
     {
+        if (_playerMove.state != UnitMove.MoveState.Idle) return;
+
         var nextState = (int) _elementalState;
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             nextState -= 1;

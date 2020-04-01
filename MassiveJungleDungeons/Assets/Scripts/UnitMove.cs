@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class UnitMove : MonoBehaviour
 {   
-    protected enum MoveState
+    public enum MoveState
     {
         Idle        = 0,
         Selected    = 1,
@@ -14,7 +14,7 @@ public class UnitMove : MonoBehaviour
         Moved       = 3
     }
 
-    protected MoveState State = MoveState.Idle;
+    public MoveState state = MoveState.Idle;
 
     protected int _teamID;
 
@@ -123,7 +123,7 @@ public class UnitMove : MonoBehaviour
         else
         {
             RemoveSelectableTiles();
-            State = MoveState.Moved;
+            state = MoveState.Moved;
         }
     }
 
@@ -132,7 +132,7 @@ public class UnitMove : MonoBehaviour
         _path.Clear();
 
         tile.state = Tile.TileState.Targeted;
-        State = MoveState.Moving;
+        state = MoveState.Moving;
 
         ResetTiles();
         
