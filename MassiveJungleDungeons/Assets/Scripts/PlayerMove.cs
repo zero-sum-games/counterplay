@@ -86,7 +86,14 @@ public class PlayerMove : UnitMove
                 case MoveState.Moving:
                     Move();
                     break;
+
+                case MoveState.Moved:
+                    break;
             }
+        }
+        else
+        {
+            State = MoveState.Idle;
         }
     }
 }

@@ -75,7 +75,7 @@ public class Tile : MonoBehaviour
                             break;
 
                         case UnitState.ElementalState.Water:
-                            if (tile.type == TileType.Lake)
+                            if (tile.type == TileType.Lake || tile.type == TileType.Grassland)
                                 adjacencyList.Add(tile);
                             break;
 

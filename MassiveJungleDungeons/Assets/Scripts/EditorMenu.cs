@@ -24,7 +24,7 @@ public static class EditorMenu
 
     [MenuItem("Tools/Assign Tile Materials by Type")]
     private static void AssignTileMaterialsByType()
-    {
+    { 
         var tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         foreach(var t in tiles)

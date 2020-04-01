@@ -10,7 +10,8 @@ public class UnitMove : MonoBehaviour
     {
         Idle        = 0,
         Selected    = 1,
-        Moving      = 2
+        Moving      = 2,
+        Moved       = 3
     }
 
     protected MoveState State = MoveState.Idle;
@@ -122,7 +123,7 @@ public class UnitMove : MonoBehaviour
         else
         {
             RemoveSelectableTiles();
-            State = MoveState.Idle;
+            State = MoveState.Moved;
         }
     }
 
@@ -132,12 +133,23 @@ public class UnitMove : MonoBehaviour
 
         tile.state = Tile.TileState.Targeted;
         State = MoveState.Moving;
+
+        ResetTiles();
         
         var next = tile;
         while (next != null)
         {
             _path.Push(next);
             next = next.parent;
+        }
+    }
+
+    private void ResetTiles()
+    {
+        foreach(var tile in _tiles)
+        {
+            var t = tile.GetComponent<Tile>();
+            t.state = Tile.TileState.Default;
         }
     }
 
