@@ -15,8 +15,8 @@ MonoBehaviour:
   SwitchSettingsMigration: 1
   HasSourceProject: 1
   HasPlatforms: 1
-  sourceProjectPath: fmod\massive-jungle-dungeons\massive-jungle-dungeons.fspro
-  sourceBankPath: fmod\massive-jungle-dungeons\Build
+  sourceProjectPath: FMOD\MassiveJungleDungeons\MassiveJungleDungeons.fspro
+  sourceBankPath: FMOD\MassiveJungleDungeons\Build
   SourceBankPathUnformatted: 
   AutomaticEventLoading: 1
   BankLoadType: 0
@@ -58,7 +58,9 @@ MonoBehaviour:
     Value: 0
   - Platform: 20
     Value: 0
-  BankDirectorySettings: []
+  BankDirectorySettings:
+  - Platform: 2
+    Value: Desktop
   VirtualChannelSettings:
   - Platform: 1
     Value: 1024
