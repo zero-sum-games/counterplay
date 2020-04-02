@@ -16440,13 +16440,15 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'SPACE (hold) = highlight tiles for movement
 
-    MOUSE (click) = select
-    tile when highlighted
+    MOUSE (L) = select tile
+    when highlighted
 
-    LEFT / RIGHT ARROW = cycle between elemental forms
+    MOUSE (R) = toggle attack tile selection
 
-    ENTER
-    = end your turn'
+    LEFT / RIGHT
+    ARROW = cycle between elemental forms
+
+    ENTER = end your turn'
 --- !u!222 &1929444519
 CanvasRenderer:
   m_ObjectHideFlags: 0
