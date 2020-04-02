@@ -88,8 +88,7 @@ public class Tile : MonoBehaviour
             var tile = item.GetComponent<Tile>();
             if (tile != null)
             {
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
-                    adjAttackList.Add(tile);
+                adjAttackList.Add(tile);
             }
         }
     }

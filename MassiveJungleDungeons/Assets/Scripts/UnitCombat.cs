@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitCombat : MonoBehaviour
 {
@@ -9,20 +10,30 @@ public class UnitCombat : MonoBehaviour
         Idle        = 0,
         Selected    = 1,
         Attacking   = 2,
-        Attacked    = 3
+        Attacked    = 3,
+        Dead        = 4
     }
 
     public CombatState state = CombatState.Idle;
 
     protected int _teamID;
 
-    private readonly List<Tile> _selectedTiles = new List<Tile>();
+    public int GetTeamID() { return _teamID; }
+
+    private readonly List<Tile> _tilesInRange = new List<Tile>();
     private GameObject[] _tiles;
 
-    private readonly Stack<Tile> _path = new Stack<Tile>();
     private Tile _currentTile;
 
+    protected GameObject _target;
+
     public int attackRange = 1;
+
+    public int health;
+    public int maxHealth;
+    public Transform healthBar;
+    public Slider healthFill;
+    protected float _healthBarYOffset = 1.0f;
 
     protected void Init()
     {
@@ -30,27 +41,41 @@ public class UnitCombat : MonoBehaviour
 
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
 
-        SetAttackRange((int)this.GetComponent<PlayerState>().GetElementalState());
+        SetAttackRange((int) this.GetComponent<PlayerState>().GetElementalState());
     }
 
-    protected void FindAndSelectTiles()
+    protected GameObject GetTarget()
+    {
+        if (_tilesInRange != null)
+            foreach(var tile in _tilesInRange)
+            {
+                var t = tile.transform;
+                if (Physics.Raycast(t.position, Vector3.up, out var hit, 1))
+                    if (hit.collider.gameObject.GetComponent<PlayerCombat>().GetTeamID() != _teamID)
+                        return hit.collider.gameObject;
+            }
+        return null;
+    }
+
+    protected void FindTilesInRange()
     {
         ComputeAdjacencyLists();
-
-        var process = new Queue<Tile>();
 
         if (Physics.Raycast(transform.position, Vector3.down, out var hit, 1))
             _currentTile = hit.collider.GetComponent<Tile>();
         _currentTile.visited = true;
+        _currentTile.state = Tile.TileState.Current;
+
+        var process = new Queue<Tile>();
         process.Enqueue(_currentTile);
 
         while (process.Count > 0)
         {
             var t = process.Dequeue();
 
-            _selectedTiles.Add(t);
+            _tilesInRange.Add(t);
 
-            if (t != _currentTile)
+            if(t != _currentTile)
                 t.state = Tile.TileState.Selected;
 
             if (t.distance >= attackRange)
@@ -82,12 +107,15 @@ public class UnitCombat : MonoBehaviour
     protected void RemoveSelectedTiles()
     {
         if (_currentTile != null)
+        {
+            _currentTile.state = Tile.TileState.Default;
             _currentTile = null;
+        }
 
-        foreach (var tile in _selectedTiles)
+        foreach (var tile in _tilesInRange)
             tile.Reset(false, true);
 
-        _selectedTiles.Clear();
+        _tilesInRange.Clear();
     }
 
     public void SetAttackRange(int elementalState)

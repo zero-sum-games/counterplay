@@ -75,7 +75,7 @@ public class PlayerMove : UnitMove
                 {
                     _buttonTimePressed = Time.time - _buttonStartTime;
 
-                    if (_buttonTimePressed > 0.3)
+                    if (_buttonTimePressed > 0.3f)
                     {
                         RemoveSelectedTiles();
                         state = MoveState.Idle;

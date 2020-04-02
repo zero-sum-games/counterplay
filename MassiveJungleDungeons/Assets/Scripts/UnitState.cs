@@ -14,7 +14,7 @@ public class UnitState : MonoBehaviour
         Fire    = 2
     }
     
-    protected ElementalState _elementalState = ElementalState.Grass;
+    public ElementalState elementalState = ElementalState.Grass;
 
     protected int _teamID;
 
@@ -31,7 +31,7 @@ public class UnitState : MonoBehaviour
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f
         Color32 color;
 
-        switch (_elementalState)
+        switch (elementalState)
         {
             default:
             case ElementalState.Grass:
