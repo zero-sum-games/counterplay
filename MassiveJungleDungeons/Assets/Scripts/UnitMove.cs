@@ -18,11 +18,11 @@ public class UnitMove : MonoBehaviour
 
     protected int _teamID;
 
-    private readonly List<Tile> _selectedTiles = new List<Tile>();
+    protected readonly List<Tile> _selectedTiles = new List<Tile>();
     private GameObject[] _tiles;
 
-    private readonly Stack<Tile> _path = new Stack<Tile>();
-    private Tile _currentTile;
+    protected readonly Stack<Tile> _path = new Stack<Tile>();
+    protected Tile _currentTile;
 
     public int range = 5;
     public float speed = 2.0f;
@@ -70,6 +70,7 @@ public class UnitMove : MonoBehaviour
 
         _currentTile = GetCurrentTile();
         _currentTile.visited = true;
+        _currentTile.SetActiveSelectors(false, false, true);
         process.Enqueue(_currentTile);
 
         while (process.Count > 0)
@@ -79,7 +80,10 @@ public class UnitMove : MonoBehaviour
             _selectedTiles.Add(t);
 
             if (t != _currentTile)
+            {
                 t.state = Tile.TileState.Selected;
+                t.SetActiveSelectors(true, false, false);
+            }
 
             if (t.distance >= range) 
                 continue;
@@ -121,7 +125,6 @@ public class UnitMove : MonoBehaviour
         }
         else
         {
-            RemoveSelectedTiles();
             state = MoveState.Moved;
         }
     }
@@ -134,7 +137,7 @@ public class UnitMove : MonoBehaviour
         state = MoveState.Moving;
 
         ResetTiles();
-        
+
         var next = tile;
         while (next != null)
         {
@@ -149,6 +152,11 @@ public class UnitMove : MonoBehaviour
         {
             var t = tile.GetComponent<Tile>();
             t.state = Tile.TileState.Default;
+
+            if (t == _currentTile)
+                t.SetActiveSelectors(true, false, false);
+            else
+                t.SetActiveSelectors(false, false, false);
         }
     }
 
@@ -182,14 +190,12 @@ public class UnitMove : MonoBehaviour
 
     protected void RemoveSelectedTiles()
     {
-        if (_currentTile != null)
-        {
-            _currentTile.state = Tile.TileState.Default;
-            _currentTile = null;
-        }
-
         foreach (var tile in _selectedTiles)
-            tile.Reset(true, false);
+            if (tile != _currentTile)
+            {
+                tile.SetActiveSelectors(false, false, false);
+                tile.Reset(true, false);
+            }
 
         _selectedTiles.Clear();
     }

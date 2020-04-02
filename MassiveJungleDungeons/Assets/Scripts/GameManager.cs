@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Return))
         {
-            // TODO: call reset function that resets states of all team's units when it becomes active again - add it in the team manager
+            teams[_activeTeamIndex].GetComponent<TeamManager>().Reset();
             
             _activeTeamIndex++;
 

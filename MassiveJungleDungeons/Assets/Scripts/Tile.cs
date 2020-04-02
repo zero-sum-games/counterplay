@@ -34,7 +34,10 @@ public class Tile : MonoBehaviour
     public Tile parent = null;
     public int distance = 0;
 
-    private Renderer _selectableRangeColor;
+    private Renderer _renderer;
+    private GameObject _unitSelector;
+    private GameObject _movementSelector;
+    private GameObject _combatSelector;
 
     public void Reset(bool resetMovement, bool resetCombat)
     {
@@ -128,41 +131,49 @@ public class Tile : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        LoadSelectors();
+    }
+
     private void Start()
     {
-        _selectableRangeColor = GetComponent<Renderer>();
+        _renderer = GetComponent<Renderer>();
     }
 
     public void SetMaterial(Material material)
     {
         _material = material;
-        GetComponent<Renderer>().material = _material;
+        _renderer.material = _material;
     }
 
-    private void Update()
+    public void SetActiveSelectors(bool setMovement, bool setCombat, bool setUnit)
     {
-        switch (state)
-        {
-            default:
-            case TileState.Default:
-                _selectableRangeColor.material = _material;
-                break;
+        _movementSelector.SetActive(setMovement);
+        _combatSelector.SetActive(setCombat);
+        _unitSelector.SetActive(setUnit);
+    }
 
-            case TileState.Selected:
-                _selectableRangeColor.material.color = new Color32(84, 157, 242, 50);
-                break;
+    public void LoadSelectors()
+    {
+        var selectorVector3 = new Vector3(this.transform.position.x, 0.51f, this.transform.position.z);
 
-            case TileState.Targeted:
-                _selectableRangeColor.material.color = new Color32(242, 86, 84, 50);
-                break;
+        _movementSelector = Instantiate(Resources.Load("MovementSelector"), selectorVector3, new Quaternion()) as GameObject;
+        _movementSelector.SetActive(false);
 
-            case TileState.Current:
-                _selectableRangeColor.material.color = new Color32(84, 242, 97, 50);
-                break;
-        }
+        _combatSelector = Instantiate(Resources.Load("CombatSelector"), selectorVector3, new Quaternion()) as GameObject;
+        _combatSelector.SetActive(false);
+
+        _unitSelector = Instantiate(Resources.Load("UnitSelector"), selectorVector3, new Quaternion()) as GameObject;
+        _unitSelector.SetActive(false);
     }
         
     public void OnValidate()
+    {
+        LoadMaterial();
+    }
+
+    public void LoadMaterial()
     {
         switch (type)
         {
@@ -184,6 +195,7 @@ public class Tile : MonoBehaviour
                 break;
         }
 
-        GetComponent<Renderer>().material = _material;
+        if (_renderer != null)
+            _renderer.material = _material;
     }
 }

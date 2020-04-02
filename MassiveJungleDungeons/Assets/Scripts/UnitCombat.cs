@@ -20,10 +20,11 @@ public class UnitCombat : MonoBehaviour
 
     public int GetTeamID() { return _teamID; }
 
-    private readonly List<Tile> _tilesInRange = new List<Tile>();
+    protected readonly List<Tile> _tilesInRange = new List<Tile>();
     private GameObject[] _tiles;
 
-    private Tile _currentTile;
+    protected Tile _currentTile;
+    protected Tile _targetTile;
 
     protected GameObject _target;
 
@@ -31,7 +32,7 @@ public class UnitCombat : MonoBehaviour
 
     public int health;
     public int maxHealth;
-    protected int _previousHealth;
+    public int previousHealth;
 
     public Transform healthBar;
     public Slider healthFill;
@@ -67,6 +68,7 @@ public class UnitCombat : MonoBehaviour
             _currentTile = hit.collider.GetComponent<Tile>();
         _currentTile.visited = true;
         _currentTile.state = Tile.TileState.Current;
+        _currentTile.SetActiveSelectors(false, false, true);
 
         var process = new Queue<Tile>();
         process.Enqueue(_currentTile);
@@ -78,7 +80,10 @@ public class UnitCombat : MonoBehaviour
             _tilesInRange.Add(t);
 
             if(t != _currentTile)
+            {
+                t.SetActiveSelectors(false, true, false);
                 t.state = Tile.TileState.Selected;
+            }
 
             if (t.distance >= attackRange)
                 continue;
@@ -108,14 +113,12 @@ public class UnitCombat : MonoBehaviour
 
     protected void RemoveSelectedTiles()
     {
-        if (_currentTile != null)
-        {
-            _currentTile.state = Tile.TileState.Default;
-            _currentTile = null;
-        }
-
         foreach (var tile in _tilesInRange)
-            tile.Reset(false, true);
+            if (tile != _currentTile)
+            {
+                tile.SetActiveSelectors(false, false, false);
+                tile.Reset(false, true);
+            }
 
         _tilesInRange.Clear();
     }

@@ -7,8 +7,6 @@ public class PlayerMove : UnitMove
     private float _buttonStartTime; // when space is pressed
     private float _buttonTimePressed; // how long space was held
 
-    public GameObject selector;
-
     private void CheckMouse()
     {
         if (Input.GetMouseButtonUp(0))
@@ -21,12 +19,14 @@ public class PlayerMove : UnitMove
                 {
                     if(hit.collider.CompareTag("Tile"))
                     {
-                        var t = hit.collider.GetComponent<Tile>();
-                        if (t.state == Tile.TileState.Selected)
+                        _currentTile.SetActiveSelectors(false, false, false);
+                        _currentTile = hit.collider.GetComponent<Tile>();
+
+                        if (_currentTile.state == Tile.TileState.Selected)
                         {
-                            var targetPosition = t.gameObject.transform.position;
-                            selector.transform.position = new Vector3(targetPosition.x, 0.51f, targetPosition.z);
-                            MoveToTile(t);
+                            var targetPosition = _currentTile.gameObject.transform.position;
+                            _currentTile.SetActiveSelectors(true, false, false);
+                            MoveToTile(_currentTile);
                         }
                     }
                 }
@@ -39,10 +39,22 @@ public class PlayerMove : UnitMove
         Init();
     }
 
+    public void Reset()
+    {
+        _currentTile.SetActiveSelectors(false, false, false);
+        _currentTile = null;
+
+        _path.Clear();
+
+        _selectedTiles.Clear();
+    }
+
     private void Update()
     {
         if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
         {
+            if (_currentTile != null)
+                _currentTile.Reset(true, false);
             state = MoveState.Idle;
             return;
         }
@@ -53,7 +65,9 @@ public class PlayerMove : UnitMove
         {
             default:
             case MoveState.Idle:
-                selector.transform.position = new Vector3(transform.position.x, 0.51f, transform.position.z);
+                if (_currentTile == null)
+                    _currentTile = GetCurrentTile();
+                _currentTile.SetActiveSelectors(false, false, true);
 
                 if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
                 {
@@ -90,10 +104,14 @@ public class PlayerMove : UnitMove
                 break;
 
             case MoveState.Moving:
+                RemoveSelectedTiles();
                 Move();
                 break;
 
             case MoveState.Moved:
+                _currentTile.SetActiveSelectors(false, false, false);
+                _currentTile = GetCurrentTile();
+                _currentTile.SetActiveSelectors(true, false, true);
                 break;
         }
     }
