@@ -7,26 +7,87 @@ public class UnitCombat : MonoBehaviour
     public enum CombatState
     {
         Idle        = 0,
-        Attacking   = 1,
-        Attacked    = 2
+        Selected    = 1,
+        Attacking   = 2,
+        Attacked    = 3
     }
 
     public CombatState state = CombatState.Idle;
 
     protected int _teamID;
 
-    public int attackRange;
+    private readonly List<Tile> _selectedTiles = new List<Tile>();
+    private GameObject[] _tiles;
 
-    protected GameObject _target;
+    private readonly Stack<Tile> _path = new Stack<Tile>();
+    private Tile _currentTile;
 
-    private void Awake()
+    public int attackRange = 1;
+
+    protected void Init()
     {
+        _tiles = GameObject.FindGameObjectsWithTag("Tile");
+
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
+
+        SetAttackRange((int)this.GetComponent<PlayerState>().GetElementalState());
     }
 
-    private void Start()
+    protected void FindAndSelectTiles()
     {
-        SetAttackRange((int)this.GetComponent<PlayerState>().GetElementalState());
+        ComputeAdjacencyLists();
+
+        var process = new Queue<Tile>();
+
+        if (Physics.Raycast(transform.position, Vector3.down, out var hit, 1))
+            _currentTile = hit.collider.GetComponent<Tile>();
+        _currentTile.visited = true;
+        process.Enqueue(_currentTile);
+
+        while (process.Count > 0)
+        {
+            var t = process.Dequeue();
+
+            _selectedTiles.Add(t);
+
+            if (t != _currentTile)
+                t.state = Tile.TileState.Selected;
+
+            if (t.distance >= attackRange)
+                continue;
+
+            foreach (var tile in t.adjAttackList)
+            {
+                if (tile.visited)
+                    continue;
+
+                tile.parent = t;
+                tile.visited = true;
+                tile.distance = t.distance + 1;
+
+                process.Enqueue(tile);
+            }
+        }
+    }
+
+    private void ComputeAdjacencyLists()
+    {
+        foreach (var tile in _tiles)
+        {
+            var t = tile.GetComponent<Tile>();
+            t.FindNeighbors();
+        }
+    }
+
+    protected void RemoveSelectedTiles()
+    {
+        if (_currentTile != null)
+            _currentTile = null;
+
+        foreach (var tile in _selectedTiles)
+            tile.Reset(false, true);
+
+        _selectedTiles.Clear();
     }
 
     public void SetAttackRange(int elementalState)
@@ -46,9 +107,8 @@ public class UnitCombat : MonoBehaviour
 
             // Fire
             case 2:
-                attackRange = 4;
+                attackRange = 1;
                 break;
-
         }
     }
 }

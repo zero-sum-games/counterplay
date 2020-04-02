@@ -18,7 +18,7 @@ public class UnitMove : MonoBehaviour
 
     protected int _teamID;
 
-    private readonly List<Tile> _selectableTiles = new List<Tile>();
+    private readonly List<Tile> _selectedTiles = new List<Tile>();
     private GameObject[] _tiles;
 
     private readonly Stack<Tile> _path = new Stack<Tile>();
@@ -51,7 +51,6 @@ public class UnitMove : MonoBehaviour
             case 2:
                 range = 5;
                 break;
-            
         }
     }
 
@@ -63,7 +62,7 @@ public class UnitMove : MonoBehaviour
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
     }
 
-    protected void FindSelectableTiles()
+    protected void FindAndSelectTiles()
     {
         ComputeAdjacencyLists();
 
@@ -77,8 +76,8 @@ public class UnitMove : MonoBehaviour
         {
             var t = process.Dequeue();
 
-            // TODO: rename the SELECTED state to SELECTABLE (?)
-            _selectableTiles.Add(t);
+            _selectedTiles.Add(t);
+
             if (t != _currentTile)
                 t.state = Tile.TileState.Selected;
 
@@ -122,7 +121,7 @@ public class UnitMove : MonoBehaviour
         }
         else
         {
-            RemoveSelectableTiles();
+            RemoveSelectedTiles();
             state = MoveState.Moved;
         }
     }
@@ -181,7 +180,7 @@ public class UnitMove : MonoBehaviour
         return tile;
     }
 
-    protected void RemoveSelectableTiles()
+    protected void RemoveSelectedTiles()
     {
         if (_currentTile != null)
         {
@@ -189,10 +188,10 @@ public class UnitMove : MonoBehaviour
             _currentTile = null;
         }
 
-        foreach (var tile in _selectableTiles)
-            tile.Reset();
+        foreach (var tile in _selectedTiles)
+            tile.Reset(true, false);
 
-        _selectableTiles.Clear();
+        _selectedTiles.Clear();
     }
 
     private void SetHeading(Vector3 target)

@@ -41,8 +41,9 @@ public class PlayerMove : UnitMove
 
     private void Update()
     {
-        if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID()
-            || this.GetComponent<PlayerCombat>().state != UnitCombat.CombatState.Idle)
+        if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID()) return;
+
+        if (this.GetComponent<PlayerCombat>().state != UnitCombat.CombatState.Idle)
         {
             state = MoveState.Idle;
             return;
@@ -67,7 +68,7 @@ public class PlayerMove : UnitMove
                 break;
 
             case MoveState.Selected:
-                FindSelectableTiles();
+                FindAndSelectTiles();
                 CheckMouse();
 
                 if (!Input.GetKeyDown(KeyCode.Space) && Input.GetKeyUp(KeyCode.Space))
@@ -76,14 +77,14 @@ public class PlayerMove : UnitMove
 
                     if (_buttonTimePressed > 0.3)
                     {
-                        RemoveSelectableTiles();
+                        RemoveSelectedTiles();
                         state = MoveState.Idle;
                     }
                 }
 
                 else if (Input.GetKeyDown(KeyCode.Space))
                 {
-                    RemoveSelectableTiles();
+                    RemoveSelectedTiles();
                     state = MoveState.Idle;
                 }
                 break;

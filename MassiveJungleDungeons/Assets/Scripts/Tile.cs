@@ -33,11 +33,39 @@ public class Tile : MonoBehaviour
     public bool visited = false;
     public Tile parent = null;
     public int distance = 0;
+
     private Renderer _selectableRangeColor;
 
+    public void Reset(bool resetMovement, bool resetCombat)
+    {
+        if (resetMovement)
+            adjMovementList.Clear();
+
+        if (resetCombat)
+            adjAttackList.Clear();
+
+        state = TileState.Default;
+
+        visited = false;
+        parent = null;
+        distance = 0;
+    }
+
+    // Use for computing tiles' adjacency lists for COMBAT
+    public void FindNeighbors()
+    {
+        Reset(false, true);
+
+        CheckTile(Vector3.forward);
+        CheckTile(Vector3.back);
+        CheckTile(Vector3.right);
+        CheckTile(Vector3.left);
+    }
+
+    // Use for computing tiles' adjacency lists for MOVEMENT
     public void FindNeighbors(UnitState.ElementalState elementalState)
     {
-        Reset();
+        Reset(true, false);
 
         CheckTile(Vector3.forward, elementalState);
         CheckTile(Vector3.back, elementalState);
@@ -45,14 +73,20 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.left, elementalState);
     }
 
-    public void Reset()
+    private void CheckTile(Vector3 direction)
     {
-        state = TileState.Default;
+        var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
+        var colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
 
-        adjMovementList.Clear();
-        visited = false;
-        parent = null;
-        distance = 0;
+        foreach (var item in colliders)
+        {
+            var tile = item.GetComponent<Tile>();
+            if (tile != null)
+            {
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
+                    adjAttackList.Add(tile);
+            }
+        }
     }
 
     private void CheckTile(Vector3 direction, UnitState.ElementalState elementalState)
@@ -63,11 +97,10 @@ public class Tile : MonoBehaviour
         foreach (var item in colliders)
         {
             var tile = item.GetComponent<Tile>();
-            if(tile != null)
+            if (tile != null)
             {
-                if(!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
+                if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                 {
-                    adjAttackList.Add(tile);
                     switch (elementalState)
                     {
                         default:
@@ -146,43 +179,7 @@ public class Tile : MonoBehaviour
                 _material = Resources.Load<Material>("Tiles/Mountain");
                 break;
         }
+
         GetComponent<Renderer>().material = _material;
-    }
-
-    public void FindTarget(UnitCombat unit)
-    {
-        Reset();
-
-        CheckAttackTile(Vector3.forward, unit);
-        CheckAttackTile(Vector3.back, unit);
-        CheckAttackTile(Vector3.right, unit);
-        CheckAttackTile(Vector3.left, unit);
-    }
-
-
-    private void CheckAttackTile(Vector3 direction, UnitCombat unitCombat)
-    {
-        Vector3 halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
-        Collider[] colliders = Physics.OverlapBox(transform.position + direction, halfExtents);
-
-        foreach (Collider item in colliders)
-        {
-            Tile tile = item.GetComponent<Tile>();
-            if (tile != null)
-            {
-                RaycastHit hit;
-                if (!Physics.Raycast(tile.transform.position, Vector3.up, out hit, 1))
-                    adjMovementList.Add(tile);
-            }
-        }
-    }
-
-    public void ResetTargetMarkers()
-    {
-        GameObject[] TargetMarks = GameObject.FindGameObjectsWithTag("TargetMark");
-        foreach(var Mark in TargetMarks)
-        {
-            Destroy(gameObject);
-        }
     }
 }
