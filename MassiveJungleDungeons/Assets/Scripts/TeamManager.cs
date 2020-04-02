@@ -6,6 +6,5 @@ public class TeamManager : MonoBehaviour
 {
     public int teamID;
 
-    //public GameObject[] units;
-    //private int _activeUnitIndex = 0;
+    // TODO: add unit manager for individual teams
 }

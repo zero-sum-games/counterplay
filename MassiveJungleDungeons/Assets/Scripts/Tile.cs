@@ -51,7 +51,9 @@ public class Tile : MonoBehaviour
         distance = 0;
     }
 
-    // Use for computing tiles' adjacency lists for COMBAT
+    /// <summary>
+    /// Use for computing tiles' adjacency lists for combat.
+    /// </summary>
     public void FindNeighbors()
     {
         Reset(false, true);
@@ -62,7 +64,10 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.left);
     }
 
-    // Use for computing tiles' adjacency lists for MOVEMENT
+    /// <summary>
+    /// Use for computing tiles' adjacency lists for movement.
+    /// </summary>
+    /// <param name="elementalState">Used to inform a tile to add adjacent tiles only if they are traversible by this elemental state.</param>
     public void FindNeighbors(UnitState.ElementalState elementalState)
     {
         Reset(true, false);
