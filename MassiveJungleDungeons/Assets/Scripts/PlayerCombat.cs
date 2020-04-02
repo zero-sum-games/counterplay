@@ -14,6 +14,7 @@ public class PlayerCombat : UnitCombat
     private void Awake()
     {
         _playerMove = this.GetComponent<PlayerMove>();
+        _previousHealth = health;
     }
 
     private void Start()
@@ -125,6 +126,7 @@ public class PlayerCombat : UnitCombat
         if (_target != null)
         {
             var target = _target.GetComponent<PlayerCombat>();
+            _previousHealth = target.health;
             target.health -= amount;
             if (target.health > 0)
                 target.state = CombatState.Dead;
@@ -133,7 +135,9 @@ public class PlayerCombat : UnitCombat
 
     private void DrawHealthBar()
     {
-        healthFill.value = (float) health / maxHealth;
+        if(_previousHealth != health)
+            _previousHealth -= 2;
+        healthFill.value = (float) _previousHealth / maxHealth;
 
         var currentPosition = transform.position;
         healthBar.position = new Vector3(currentPosition.x, currentPosition.y + _healthBarYOffset, currentPosition.z);

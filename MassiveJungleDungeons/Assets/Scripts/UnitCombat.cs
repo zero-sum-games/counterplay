@@ -31,6 +31,8 @@ public class UnitCombat : MonoBehaviour
 
     public int health;
     public int maxHealth;
+    protected int _previousHealth;
+
     public Transform healthBar;
     public Slider healthFill;
     protected float _healthBarYOffset = 1.0f;

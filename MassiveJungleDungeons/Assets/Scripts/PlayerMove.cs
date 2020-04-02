@@ -41,13 +41,13 @@ public class PlayerMove : UnitMove
 
     private void Update()
     {
-        if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID()) return;
-
-        if (this.GetComponent<PlayerCombat>().state != UnitCombat.CombatState.Idle)
+        if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
         {
             state = MoveState.Idle;
             return;
         }
+
+        if (this.GetComponent<PlayerCombat>().state != UnitCombat.CombatState.Idle) return;
 
         switch (state)
         {

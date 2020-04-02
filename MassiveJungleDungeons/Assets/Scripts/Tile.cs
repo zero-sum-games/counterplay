@@ -149,15 +149,15 @@ public class Tile : MonoBehaviour
                 break;
 
             case TileState.Selected:
-                _selectableRangeColor.material.color = Color.red;
+                _selectableRangeColor.material.color = new Color32(84, 157, 242, 50);
                 break;
 
             case TileState.Targeted:
-                _selectableRangeColor.material.color = Color.green;
+                _selectableRangeColor.material.color = new Color32(242, 86, 84, 50);
                 break;
 
             case TileState.Current:
-                _selectableRangeColor.material.color = Color.magenta;
+                _selectableRangeColor.material.color = new Color32(84, 242, 97, 50);
                 break;
         }
     }
@@ -168,19 +168,19 @@ public class Tile : MonoBehaviour
         {
             default:
             case TileType.Grassland:
-                _material = Resources.Load<Material>("Tiles/Grassland");
+                _material = Resources.Load<Material>("Tiles/Materials/Grassland");
                 break;
 
             case TileType.Lake:
-                _material = Resources.Load<Material>("Tiles/Lake");
+                _material = Resources.Load<Material>("Tiles/Materials/Lake");
                 break;
 
             case TileType.Forest:
-                _material = Resources.Load<Material>("Tiles/Forest");
+                _material = Resources.Load<Material>("Tiles/Materials/Forest");
                 break;
 
             case TileType.Mountain:
-                _material = Resources.Load<Material>("Tiles/Mountain");
+                _material = Resources.Load<Material>("Tiles/Materials/Mountain");
                 break;
         }
 
