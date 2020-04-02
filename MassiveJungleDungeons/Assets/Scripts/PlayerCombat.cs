@@ -64,7 +64,10 @@ public class PlayerCombat : UnitCombat
                     selector.SetActive(true);
 
                     if (_target == null)
+                    {
+                        selector.SetActive(false);
                         state = CombatState.Idle;
+                    }
                     else
                         state = CombatState.Attacking;
                 }
@@ -123,6 +126,8 @@ public class PlayerCombat : UnitCombat
         {
             var target = _target.GetComponent<PlayerCombat>();
             target.health -= amount;
+            if (target.health > 0)
+                target.state = CombatState.Dead;
         }
     }
 
