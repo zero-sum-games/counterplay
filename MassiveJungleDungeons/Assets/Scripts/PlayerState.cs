@@ -48,10 +48,43 @@ public class PlayerState : UnitState
     {
         if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
             CheckKeyboard();
+
+        DrawElementalTriangle();
     }
 
     public void OnValidate()
     {
         SetStateParameters();
+    }
+
+    private void DrawElementalTriangle()
+    {
+        // the float (1.5f) subtraction is taken from the canvas transform's x position
+        var currentPosition = transform.position;
+        elementalTriangle.position = new Vector3(currentPosition.x - 1.0f, currentPosition.y + _elementalTriangleYOffset, currentPosition.z);
+
+        elementalTriangle.LookAt(Camera.main.transform);
+
+        switch(elementalState)
+        {
+            default:
+            case ElementalState.Grass:
+                elementalTriangleGrass.gameObject.SetActive(true);
+                elementalTriangleWater.gameObject.SetActive(false);
+                elementalTriangleFire.gameObject.SetActive(false);
+                break;
+
+            case ElementalState.Water:
+                elementalTriangleGrass.gameObject.SetActive(false);
+                elementalTriangleWater.gameObject.SetActive(true);
+                elementalTriangleFire.gameObject.SetActive(false);
+                break;
+
+            case ElementalState.Fire:
+                elementalTriangleGrass.gameObject.SetActive(false);
+                elementalTriangleWater.gameObject.SetActive(false);
+                elementalTriangleFire.gameObject.SetActive(true);
+                break;
+        }
     }
 }

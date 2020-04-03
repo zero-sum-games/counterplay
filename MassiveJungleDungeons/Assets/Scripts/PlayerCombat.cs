@@ -168,7 +168,7 @@ public class PlayerCombat : UnitCombat
         healthFill.value = (float) previousHealth / maxHealth;
 
         var currentPosition = transform.position;
-        healthBar.position = new Vector3(currentPosition.x, currentPosition.y + _healthBarYOffset, currentPosition.z);
+        healthBar.position = new Vector3(currentPosition.x + 0.75f, currentPosition.y + _healthBarYOffset, currentPosition.z);
 
         healthBar.LookAt(Camera.main.transform);
     }

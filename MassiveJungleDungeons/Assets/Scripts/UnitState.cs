@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UnitState : MonoBehaviour
 { 
@@ -18,6 +19,12 @@ public class UnitState : MonoBehaviour
 
     protected int _teamID;
 
+    public Transform elementalTriangle;
+    public Image elementalTriangleFire;
+    public Image elementalTriangleGrass;
+    public Image elementalTriangleWater;
+    protected float _elementalTriangleYOffset = 2.0f;
+
     private void Start()
     {
         Instance = this;
@@ -28,6 +35,9 @@ public class UnitState : MonoBehaviour
 
     public void SetStateParameters()
     {
+        var renderer = GetComponent<Renderer>();
+        if (renderer == null) return;
+
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f
         Color32 color;
 
@@ -48,6 +58,7 @@ public class UnitState : MonoBehaviour
             
         }
 
-        GetComponent<Renderer>().material.color = color;
+        if (renderer.sharedMaterial != null)
+            renderer.sharedMaterial.color = color;
     }
 }

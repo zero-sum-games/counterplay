@@ -36,7 +36,7 @@ public class UnitCombat : MonoBehaviour
 
     public Transform healthBar;
     public Slider healthFill;
-    protected float _healthBarYOffset = 1.0f;
+    protected float _healthBarYOffset = 0.75f;
 
     protected void Init()
     {
