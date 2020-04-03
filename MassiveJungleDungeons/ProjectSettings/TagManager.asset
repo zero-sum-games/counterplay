@@ -8,6 +8,8 @@ TagManager:
   - GameManager
   - Unit
   - Team
+  - TargetMark
+  - 3D Tile Object
   layers:
   - Default
   - TransparentFX

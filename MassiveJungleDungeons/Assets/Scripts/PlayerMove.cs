@@ -65,9 +65,9 @@ public class PlayerMove : UnitMove
         {
             default:
             case MoveState.Idle:
-                if (_currentTile == null)
-                    _currentTile = GetCurrentTile();
-                _currentTile.SetActiveSelectors(false, false, true);
+                _currentTile = GetCurrentTile();
+                if (_currentTile != null)
+                    _currentTile.SetActiveSelectors(false, false, true);
 
                 if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
                 {

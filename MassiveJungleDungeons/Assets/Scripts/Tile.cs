@@ -156,7 +156,7 @@ public class Tile : MonoBehaviour
 
     public void LoadSelectors()
     {
-        var selectorVector3 = new Vector3(this.transform.position.x, 0.51f, this.transform.position.z);
+        var selectorVector3 = new Vector3(this.transform.position.x, 0.55f, this.transform.position.z);
 
         _movementSelector = Instantiate(Resources.Load("MovementSelector"), selectorVector3, new Quaternion()) as GameObject;
         _movementSelector.SetActive(false);
@@ -195,7 +195,8 @@ public class Tile : MonoBehaviour
                 break;
         }
 
-        if (_renderer != null)
-            _renderer.material = _material;
+        if (_renderer == null)
+            _renderer = this.GetComponent<Renderer>();
+        _renderer.material = _material;
     }
 }
