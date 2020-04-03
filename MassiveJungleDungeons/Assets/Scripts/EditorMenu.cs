@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEditor;
 using UnityEngine.UI;
 
+#if (UNITY_EDITOR)
 public static class EditorMenu
 {
     private static GameObject[] _tiles;
@@ -81,3 +82,4 @@ public static class EditorMenu
             GameObject.DestroyImmediate(tileObject);
     }
 }
+#endif

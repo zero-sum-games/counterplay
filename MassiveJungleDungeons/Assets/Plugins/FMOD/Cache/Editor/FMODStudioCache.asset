@@ -18,6 +18,24 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 0
+--- !u!114 &-7815032887513061921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD/MassiveJungleDungeons/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637215265092305483
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-6574411705297384740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,7 +88,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMOD/MassiveJungleDungeons/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637212475099105300
+  lastModified: 637215265092315457
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -108,14 +126,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -884958185847965893}
-  - {fileID: 6074706339410853911}
+  - {fileID: -7815032887513061921}
   EditorEvents: []
   EditorParameters: []
   MasterBanks:
-  - {fileID: 6074706339410853911}
+  - {fileID: -7815032887513061921}
   StringsBanks:
   - {fileID: -884958185847965893}
-  stringsBankWriteTime: 637212475099105300
+  stringsBankWriteTime: 637215265092315457
   cacheVersion: 3
 --- !u!114 &6074706339410853911
 MonoBehaviour:
@@ -134,4 +152,4 @@ MonoBehaviour:
   lastModified: 637212475099065434
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
