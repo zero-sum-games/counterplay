@@ -22,8 +22,8 @@ public static class EditorMenu
             }
     }
 
-    [MenuItem("Tools/Load Tile Materials By Type")]
-    private static void AssignTileMaterialsByType()
+    [MenuItem("Tools/Load Tile Materials")]
+    private static void LoadTileMaterials()
     { 
         var tiles = GameObject.FindGameObjectsWithTag("Tile");
 
@@ -33,13 +33,14 @@ public static class EditorMenu
         }
     }
 
-    [MenuItem("Tools/Remove 3D Objects From Tiles")]
-    private static void Remove3DObjectsFromTiles()
-    {
-        var tileObjects = GameObject.FindGameObjectsWithTag("3D Tile Object");
 
-        foreach (var tileObject in tileObjects)
-            GameObject.DestroyImmediate(tileObject);
+    [MenuItem("Tools/Load Unit Materials")]
+    private static void LoadUnitMaterials()
+    {
+        var units = GameObject.FindGameObjectsWithTag("Unit");
+
+        foreach (var unit in units)
+            unit.GetComponent<PlayerState>().SetStateParameters();
     }
 
     [MenuItem("Tools/Load 3D Objects On Tiles")]
@@ -72,5 +73,14 @@ public static class EditorMenu
             }
             GameObject.Instantiate(tileObject, new Vector3(tile.transform.position.x, 0.5f, tile.transform.position.z), new Quaternion());
         }
+    }
+
+    [MenuItem("Tools/Remove 3D Objects From Tiles")]
+    private static void Remove3DObjectsFromTiles()
+    {
+        var tileObjects = GameObject.FindGameObjectsWithTag("3D Tile Object");
+
+        foreach (var tileObject in tileObjects)
+            GameObject.DestroyImmediate(tileObject);
     }
 }

@@ -49,4 +49,9 @@ public class PlayerState : UnitState
         if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
             CheckKeyboard();
     }
+
+    public void OnValidate()
+    {
+        SetStateParameters();
+    }
 }

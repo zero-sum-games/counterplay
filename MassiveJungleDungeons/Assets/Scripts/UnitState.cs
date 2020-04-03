@@ -26,7 +26,7 @@ public class UnitState : MonoBehaviour
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
     }
 
-    protected void SetStateParameters()
+    public void SetStateParameters()
     {
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f
         Color32 color;
