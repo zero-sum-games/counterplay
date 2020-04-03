@@ -35,6 +35,7 @@ public class Tile : MonoBehaviour
     public int distance = 0;
 
     private Renderer _renderer;
+
     private GameObject _unitSelector;
     private GameObject _movementSelector;
     private GameObject _combatSelector;
@@ -156,16 +157,40 @@ public class Tile : MonoBehaviour
 
     public void LoadSelectors()
     {
-        var selectorVector3 = new Vector3(this.transform.position.x, 0.55f, this.transform.position.z);
+        GameObject GetSelector(int selectorID)
+        {
+            var selectorVector3 = new Vector3(this.transform.position.x, 0.55f, this.transform.position.z);
 
-        _movementSelector = Instantiate(Resources.Load("MovementSelector"), selectorVector3, new Quaternion()) as GameObject;
-        _movementSelector.SetActive(false);
+            GameObject selector;
 
-        _combatSelector = Instantiate(Resources.Load("CombatSelector"), selectorVector3, new Quaternion()) as GameObject;
-        _combatSelector.SetActive(false);
+            switch(selectorID)
+            {
+                // MOVEMENT
+                default:
+                case 0:
+                    selector = Instantiate(Resources.Load("MovementSelector"), selectorVector3, new Quaternion()) as GameObject;
+                    break;
 
-        _unitSelector = Instantiate(Resources.Load("UnitSelector"), selectorVector3, new Quaternion()) as GameObject;
-        _unitSelector.SetActive(false);
+                // COMBAT
+                case 1:
+                    selector = Instantiate(Resources.Load("CombatSelector"), selectorVector3, new Quaternion()) as GameObject;
+                    break;
+
+                // UNIT
+                case 2:
+                    selector = Instantiate(Resources.Load("UnitSelector"), selectorVector3, new Quaternion()) as GameObject;
+                    break;
+
+            }
+            selector.SetActive(false);
+            selector.transform.parent = this.transform;
+
+            return selector;
+        }
+
+        _movementSelector   = GetSelector(0);
+        _combatSelector     = GetSelector(1);
+        _unitSelector       = GetSelector(2);
     }
         
     public void OnValidate()
