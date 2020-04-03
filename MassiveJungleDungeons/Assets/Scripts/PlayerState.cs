@@ -85,5 +85,7 @@ public class PlayerState : UnitState
                 elementalTriangleFire.gameObject.SetActive(true);
                 break;
         }
+
+        elementalTriangleDeselected.gameObject.SetActive(false);
     }
 }

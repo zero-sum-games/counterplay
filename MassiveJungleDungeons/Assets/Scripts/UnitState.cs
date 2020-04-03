@@ -21,9 +21,12 @@ public class UnitState : MonoBehaviour
 
     public Transform elementalTriangle;
     public Transform elementalTriangleRotation;
+
     public Image elementalTriangleFire;
     public Image elementalTriangleGrass;
     public Image elementalTriangleWater;
+    public Image elementalTriangleDeselected;
+
     protected float _elementalTriangleXOffset = 0.0f;
     protected float _elementalTriangleYOffset = 2.4f;
 
