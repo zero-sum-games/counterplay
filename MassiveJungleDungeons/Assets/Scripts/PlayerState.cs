@@ -49,7 +49,10 @@ public class PlayerState : UnitState
         if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
             CheckKeyboard();
 
-        DrawElementalTriangle();
+        if (_playerMove.state == UnitMove.MoveState.Idle && _playerCombat.state == UnitCombat.CombatState.Idle)
+            DrawElementalTriangle(false);
+        else
+            DrawElementalTriangle(true);
     }
 
     public void OnValidate()
@@ -57,12 +60,23 @@ public class PlayerState : UnitState
         SetStateParameters();
     }
 
-    private void DrawElementalTriangle()
+    private void DrawElementalTriangle(bool isElementalTriangleDeselected)
     {
         // the float (-1.0f) subtraction is taken from the canvas transform's x position
         var currentPosition = transform.position;
         elementalTriangle.position = new Vector3(currentPosition.x + _elementalTriangleXOffset, currentPosition.y + _elementalTriangleYOffset, currentPosition.z);
         elementalTriangle.LookAt(new Vector3(elementalTriangleRotation.transform.position.x, Camera.main.transform.position.y, elementalTriangleRotation.transform.position.z));
+
+        if (isElementalTriangleDeselected) 
+        { 
+            elementalTriangleDeselected.gameObject.SetActive(true);
+            elementalTriangleGrass.gameObject.SetActive(false);
+            elementalTriangleWater.gameObject.SetActive(false);
+            elementalTriangleFire.gameObject.SetActive(false);
+            return; 
+        }
+
+        elementalTriangleDeselected.gameObject.SetActive(false);
 
         switch (elementalState)
         {
@@ -85,7 +99,5 @@ public class PlayerState : UnitState
                 elementalTriangleFire.gameObject.SetActive(true);
                 break;
         }
-
-        elementalTriangleDeselected.gameObject.SetActive(false);
     }
 }

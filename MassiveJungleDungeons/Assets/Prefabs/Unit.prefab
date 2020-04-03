@@ -897,6 +897,7 @@ MonoBehaviour:
   elementalTriangleFire: {fileID: 6548857322700762916}
   elementalTriangleGrass: {fileID: 8111399730683730435}
   elementalTriangleWater: {fileID: 7692645314667570156}
+  elementalTriangleDeselected: {fileID: 876614525030610293}
 --- !u!114 &334273723
 MonoBehaviour:
   m_ObjectHideFlags: 0
