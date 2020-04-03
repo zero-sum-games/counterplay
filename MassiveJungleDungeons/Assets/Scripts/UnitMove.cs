@@ -67,10 +67,14 @@ public class UnitMove : MonoBehaviour
         ComputeAdjacencyLists();
 
         var process = new Queue<Tile>();
-
         _currentTile = GetCurrentTile();
+        if (_currentTile == null) return; 
+        
+
         _currentTile.visited = true;
         _currentTile.SetActiveSelectors(false, false, true);
+        
+        
         process.Enqueue(_currentTile);
 
         while (process.Count > 0)
@@ -173,8 +177,10 @@ public class UnitMove : MonoBehaviour
     public Tile GetCurrentTile()
     {
         var tile = GetTargetTile(gameObject);
-        tile.state = Tile.TileState.Current;
-
+        if (tile != null)
+        {
+            tile.state = Tile.TileState.Current;
+        }
         return tile;
     }
 
