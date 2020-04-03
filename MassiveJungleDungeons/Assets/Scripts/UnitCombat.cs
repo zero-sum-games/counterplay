@@ -17,7 +17,6 @@ public class UnitCombat : MonoBehaviour
     public CombatState state = CombatState.Idle;
 
     protected int _teamID;
-
     public int GetTeamID() { return _teamID; }
 
     protected readonly List<Tile> _tilesInRange = new List<Tile>();
@@ -35,8 +34,10 @@ public class UnitCombat : MonoBehaviour
     public int previousHealth;
 
     public Transform healthBar;
+    public Transform healthBarRotation;
     public Slider healthFill;
-    protected float _healthBarYOffset = 0.75f;
+    protected float _healthBarXOffset = 0.0f;
+    protected float _healthBarYOffset = 1.2f;
 
     protected void Init()
     {

@@ -19,7 +19,6 @@ public class PlayerMove : UnitMove
                 {
                     if(hit.collider.CompareTag("Tile"))
                     {
-                        _currentTile.SetActiveSelectors(false, false, false);
                         _currentTile = hit.collider.GetComponent<Tile>();
 
                         if (_currentTile.state == Tile.TileState.Selected)

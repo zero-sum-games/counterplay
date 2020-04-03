@@ -59,13 +59,12 @@ public class PlayerState : UnitState
 
     private void DrawElementalTriangle()
     {
-        // the float (1.5f) subtraction is taken from the canvas transform's x position
+        // the float (-1.0f) subtraction is taken from the canvas transform's x position
         var currentPosition = transform.position;
-        elementalTriangle.position = new Vector3(currentPosition.x - 1.0f, currentPosition.y + _elementalTriangleYOffset, currentPosition.z);
+        elementalTriangle.position = new Vector3(currentPosition.x + _elementalTriangleXOffset, currentPosition.y + _elementalTriangleYOffset, currentPosition.z);
+        elementalTriangle.LookAt(new Vector3(elementalTriangleRotation.transform.position.x, Camera.main.transform.position.y, elementalTriangleRotation.transform.position.z));
 
-        elementalTriangle.LookAt(Camera.main.transform);
-
-        switch(elementalState)
+        switch (elementalState)
         {
             default:
             case ElementalState.Grass:

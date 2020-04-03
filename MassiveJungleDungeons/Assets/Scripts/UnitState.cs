@@ -20,10 +20,12 @@ public class UnitState : MonoBehaviour
     protected int _teamID;
 
     public Transform elementalTriangle;
+    public Transform elementalTriangleRotation;
     public Image elementalTriangleFire;
     public Image elementalTriangleGrass;
     public Image elementalTriangleWater;
-    protected float _elementalTriangleYOffset = 2.0f;
+    protected float _elementalTriangleXOffset = 0.0f;
+    protected float _elementalTriangleYOffset = 2.4f;
 
     private void Start()
     {

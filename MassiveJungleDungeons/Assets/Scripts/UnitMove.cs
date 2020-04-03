@@ -119,6 +119,8 @@ public class UnitMove : MonoBehaviour
                 var transform1 = transform;
                 transform1.forward = _heading;
                 transform1.position += _velocity * Time.deltaTime;
+
+                transform.rotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
             }
             else
             {
