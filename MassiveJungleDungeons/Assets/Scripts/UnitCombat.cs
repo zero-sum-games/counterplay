@@ -39,6 +39,9 @@ public class UnitCombat : MonoBehaviour
     protected float _healthBarXOffset = 0.0f;
     protected float _healthBarYOffset = 1.2f;
 
+    protected bool _displayForCombatSelection = false;
+    public void SetDisplayForCombatSelection(bool shouldDisplayForCombatSelection) { _displayForCombatSelection = shouldDisplayForCombatSelection; }
+
     protected void Init()
     {
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
