@@ -9,10 +9,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        // TODO: write handling for making sure that players can only end turn if appropriate (units not moving or attacking, etc.)
-
         if(Input.GetKeyDown(KeyCode.Return))
         {
+            if (!teams[_activeTeamIndex].GetComponent<TeamManager>().CanAdvance()) return;
+
             teams[_activeTeamIndex].GetComponent<TeamManager>().Reset();
             
             _activeTeamIndex++;
