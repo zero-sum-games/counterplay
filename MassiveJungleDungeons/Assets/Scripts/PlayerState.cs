@@ -17,6 +17,7 @@ public class PlayerState : UnitState
         if (_playerMove.state != UnitMove.MoveState.Idle || _playerCombat.state != UnitCombat.CombatState.Idle) return;
 
         var nextState = (int) elementalState;
+
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             nextState -= 1;
         else if(Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow))
@@ -30,9 +31,6 @@ public class PlayerState : UnitState
         if ((int) elementalState != nextState)
         {
             elementalState = (ElementalState) nextState;
-
-            _playerMove.SetMovementRange((int) elementalState);
-            _playerCombat.SetAttackRange((int) elementalState);
 
             SetStateParameters();
         }

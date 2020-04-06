@@ -1,0 +1,22 @@
+{
+  "Grassland": {
+    "Grass": "1.0f",
+    "Water": "1.0f",
+    "Fire": "1.0f"
+  },
+  "Forest": {
+    "Grass": "0.5f",
+    "Water": "1.5f",
+    "Fire": "2.0f"
+  },
+  "Lake": {
+    "Grass": "",
+    "Water": "",
+    "Fire": ""
+  },
+  "Mountain": {
+    "Grass": "",
+    "Water": "",
+    "Fire": ""
+  }
+}

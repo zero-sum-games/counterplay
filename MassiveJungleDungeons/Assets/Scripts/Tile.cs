@@ -32,13 +32,27 @@ public class Tile : MonoBehaviour
 
     public bool visited = false;
     public Tile parent = null;
-    public int distance = 0;
+
+    private int _attackCost = 0;
+
+    private float _movementCost = 0.0f;
+    private float[] _movementCostsPerTileType;
 
     private Renderer _renderer;
 
     private GameObject _unitSelector;
     private GameObject _movementSelector;
     private GameObject _combatSelector;
+
+    private void Awake()
+    {
+        LoadSelectors();
+    }
+
+    private void Start()
+    {
+        _renderer = GetComponent<Renderer>();
+    }
 
     public void Reset(bool resetMovement, bool resetCombat)
     {
@@ -52,7 +66,11 @@ public class Tile : MonoBehaviour
 
         visited = false;
         parent = null;
-        distance = 0;
+
+        _attackCost = 0;
+
+        _movementCost = 0.0f;
+        _movementCostsPerTileType = new float[] { };
     }
 
     /// <summary>
@@ -91,9 +109,7 @@ public class Tile : MonoBehaviour
         {
             var tile = item.GetComponent<Tile>();
             if (tile != null)
-            {
                 adjAttackList.Add(tile);
-            }
         }
     }
 
@@ -108,38 +124,90 @@ public class Tile : MonoBehaviour
             if (tile != null)
             {
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
-                {
-                    switch (elementalState)
-                    {
-                        default:
-                        case UnitState.ElementalState.Grass:
-                            if (tile.type == TileType.Grassland || tile.type == TileType.Forest)
-                                adjMovementList.Add(tile);
-                            break;
+                    adjMovementList.Add(tile);
+                //{
+                //    switch (elementalState)
+                //    {
+                //        default:
+                //        case UnitState.ElementalState.Grass:
+                //            if (tile.type == TileType.Grassland || tile.type == TileType.Forest)
+                //                adjMovementList.Add(tile);
+                //            break;
 
-                        case UnitState.ElementalState.Water:
-                            if (tile.type == TileType.Lake || tile.type == TileType.Grassland)
-                                adjMovementList.Add(tile);
-                            break;
+                //        case UnitState.ElementalState.Water:
+                //            if (tile.type == TileType.Lake || tile.type == TileType.Grassland)
+                //                adjMovementList.Add(tile);
+                //            break;
 
-                        case UnitState.ElementalState.Fire:
-                            if (tile.type == TileType.Forest || tile.type == TileType.Grassland || tile.type == TileType.Mountain)
-                                adjMovementList.Add(tile);
-                            break;
-                    }
-                }
+                //        case UnitState.ElementalState.Fire:
+                //            if (tile.type == TileType.Forest || tile.type == TileType.Grassland || tile.type == TileType.Mountain)
+                //                adjMovementList.Add(tile);
+                //            break;
+                //    }
+                //}
             }
         }
     }
 
-    private void Awake()
+    public int GetAttackCost() { return _attackCost; }
+
+    public void SetAttackCost(int parentAttackCost)
     {
-        LoadSelectors();
+        _attackCost = parentAttackCost + 1;
     }
 
-    private void Start()
+    public float GetMovementCost() { return _movementCost; }
+
+    public void SetMovementCost(float parentMovementCost)
     {
-        _renderer = GetComponent<Renderer>();
+        if (_movementCostsPerTileType == null) return;
+
+        float costToNextTile;
+
+        // Don't forget to put extra tile types in this switch case
+        switch(type)
+        {
+            default:
+            case TileType.Grassland:
+                costToNextTile = _movementCostsPerTileType[0];
+                break;
+
+            case TileType.Forest:
+                costToNextTile = _movementCostsPerTileType[1];
+                break;
+
+            case TileType.Lake:
+                costToNextTile = _movementCostsPerTileType[2];
+                break;
+
+            case TileType.Mountain:
+                costToNextTile = _movementCostsPerTileType[3];
+                break;
+        }
+
+        _movementCost = parentMovementCost + costToNextTile;
+    }
+
+    public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
+    {
+        // _movementCostsPerTileType = [0 = Grassland, 1 = Forest, 2 = Lake, 3 = Mountain]
+        // Use this ^^ when inputting values below for each elemental state
+
+        switch(elementalState)
+        {
+            default:
+            case UnitState.ElementalState.Grass:
+                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.5f, 100.0f };
+                break;
+
+            case UnitState.ElementalState.Water:
+                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.25f, 100.0f };
+                break;
+
+            case UnitState.ElementalState.Fire:
+                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 100.0f, 0.25f };
+                break;
+        }
     }
 
     public void SetMaterial(Material material)

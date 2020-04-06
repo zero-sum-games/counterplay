@@ -24,35 +24,13 @@ public class UnitMove : MonoBehaviour
     protected readonly Stack<Tile> _path = new Stack<Tile>();
     protected Tile _currentTile;
 
-    public int range = 5;
+    private float _movementBudget = 1.0f;
     public float speed = 2.0f;
 
     private Vector3 _velocity;
     private Vector3 _heading;
 
     private float _halfUnitHeight;
-
-    public void SetMovementRange(int elementalState)
-    {
-        switch (elementalState)
-        {
-            // Grass
-            default:
-            case 0:
-                range = 5;
-                break;
-            
-            // Water
-            case 1:
-                range = 5;
-                break;
-
-            // Fire
-            case 2:
-                range = 5;
-                break;
-        }
-    }
 
     protected void Init()
     {
@@ -88,14 +66,16 @@ public class UnitMove : MonoBehaviour
                 t.SetActiveSelectors(true, false, false);
             }
 
-            if (t.distance >= range) 
+            if (t.GetMovementCost() >= _movementBudget) 
                 continue;
 
             foreach (var tile in t.adjMovementList.Where(tile => !tile.visited))
             {
                 tile.parent = t;
                 tile.visited = true;
-                tile.distance = t.distance + 1;
+
+                tile.CalculateMovementCostsPerTileType(this.GetComponent<PlayerState>().GetElementalState());
+                tile.SetMovementCost(t.GetMovementCost());
 
                 process.Enqueue(tile);
             }

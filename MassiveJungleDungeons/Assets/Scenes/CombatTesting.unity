@@ -22187,6 +22187,11 @@ PrefabInstance:
       propertyPath: selector
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 7619294933972292247, guid: d875f4135b3d59d4296b8b4b21346068,
+        type: 3}
+      propertyPath: movementBudget
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7619294933972292330, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
       propertyPath: m_Name
@@ -58904,6 +58909,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7619294933972292247, guid: d875f4135b3d59d4296b8b4b21346068,
+        type: 3}
+      propertyPath: movementBudget
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7619294933972292330, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}

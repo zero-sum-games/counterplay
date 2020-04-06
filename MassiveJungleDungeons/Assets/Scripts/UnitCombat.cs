@@ -27,7 +27,8 @@ public class UnitCombat : MonoBehaviour
 
     protected GameObject _target;
 
-    public int attackRange = 1;
+    private int _attackBudget = 2;
+    private int[] _attackBudgetsPerTileType;
 
     public int health;
     public int maxHealth;
@@ -47,8 +48,6 @@ public class UnitCombat : MonoBehaviour
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
-
-        SetAttackRange((int) this.GetComponent<PlayerState>().GetElementalState());
     }
 
     protected GameObject GetTarget()
@@ -74,6 +73,9 @@ public class UnitCombat : MonoBehaviour
         _currentTile.state = Tile.TileState.Current;
         _currentTile.SetActiveSelectors(false, false, true);
 
+        SetAttackBudgetsPerTileType(_currentTile.type);
+        SetAttackBudget(this.GetComponent<PlayerState>().GetElementalState());
+
         var process = new Queue<Tile>();
         process.Enqueue(_currentTile);
 
@@ -89,7 +91,7 @@ public class UnitCombat : MonoBehaviour
                 t.state = Tile.TileState.Selected;
             }
 
-            if (t.distance >= attackRange)
+            if (t.GetAttackCost() >= _attackBudget)
                 continue;
 
             foreach (var tile in t.adjAttackList)
@@ -99,7 +101,8 @@ public class UnitCombat : MonoBehaviour
 
                 tile.parent = t;
                 tile.visited = true;
-                tile.distance = t.distance + 1;
+
+                tile.SetAttackCost(t.GetAttackCost());
 
                 process.Enqueue(tile);
             }
@@ -127,24 +130,47 @@ public class UnitCombat : MonoBehaviour
         _tilesInRange.Clear();
     }
 
-    public void SetAttackRange(int elementalState)
+    public void SetAttackBudget(UnitState.ElementalState elementalState)
     {
         switch (elementalState)
         {
-            // Grass
             default:
-            case 0:
-                attackRange = 2;
+            case UnitState.ElementalState.Grass:
+                _attackBudget = _attackBudgetsPerTileType[0];
                 break;
 
-            // Water
-            case 1:
-                attackRange = 3;
+            case UnitState.ElementalState.Water:
+                _attackBudget = _attackBudgetsPerTileType[1];
                 break;
 
-            // Fire
-            case 2:
-                attackRange = 1;
+            case UnitState.ElementalState.Fire:
+                _attackBudget = _attackBudgetsPerTileType[2];
+                break;
+        }
+    }
+
+    private void SetAttackBudgetsPerTileType(Tile.TileType tileType)
+    {
+        // _attackBudgetsPerTileType = [0 = Grass, 1 = Water, 2 = Fire]
+        // Use this ^^ when inputting values below for each elemental state
+
+        switch(tileType)
+        {
+            default:
+            case Tile.TileType.Grassland:
+                _attackBudgetsPerTileType = new int[] { 2, 2, 2 };
+                break;
+
+            case Tile.TileType.Forest:
+                _attackBudgetsPerTileType = new int[] { 3, 2, 1 };
+                break;
+
+            case Tile.TileType.Lake:
+                _attackBudgetsPerTileType = new int[] { 1, 3, 0 };
+                break;
+
+            case Tile.TileType.Mountain:
+                _attackBudgetsPerTileType = new int[] { 0, 0, 3 };
                 break;
         }
     }
