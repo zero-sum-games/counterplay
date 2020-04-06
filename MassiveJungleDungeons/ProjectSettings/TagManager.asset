@@ -10,6 +10,7 @@ TagManager:
   - Team
   - TargetMark
   - 3D Tile Object
+  - DeathText
   layers:
   - Default
   - TransparentFX

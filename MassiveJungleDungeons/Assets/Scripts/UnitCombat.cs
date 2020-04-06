@@ -34,6 +34,8 @@ public class UnitCombat : MonoBehaviour
     public int maxHealth;
     public int previousHealth;
 
+    public Text deathText;
+
     public Transform healthBar;
     public Transform healthBarRotation;
     public Slider healthFill;

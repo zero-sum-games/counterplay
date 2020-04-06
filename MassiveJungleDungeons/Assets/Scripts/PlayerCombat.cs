@@ -194,7 +194,12 @@ public class PlayerCombat : UnitCombat
             target.health -= damage;
 
             if (target.health <= 0)
+            {
                 target.state = CombatState.Dead;
+
+                if(deathText != null && !deathText.gameObject.activeInHierarchy)
+                    deathText.gameObject.SetActive(true);
+            }
         }
     }
 

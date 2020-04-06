@@ -877,7 +877,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  range: 5
   speed: 2.6
 --- !u!114 &7619294933972292240
 MonoBehaviour:
@@ -891,7 +890,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87ec6b969bcfc34194367a91fd8c825, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  elementalState: 0
+  elementalState: 1
   elementalTriangle: {fileID: 4106055148937990227}
   elementalTriangleRotation: {fileID: 6012277368703848646}
   elementalTriangleFire: {fileID: 6548857322700762916}
@@ -911,10 +910,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  attackRange: 0
-  health: 100
-  maxHealth: 100
+  health: 15
+  maxHealth: 15
   previousHealth: 0
+  deathText: {fileID: 0}
   healthBar: {fileID: 7984121705153112928}
   healthBarRotation: {fileID: 6012277368703848646}
   healthFill: {fileID: 4215629514829640189}
