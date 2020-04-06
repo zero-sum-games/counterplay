@@ -125,21 +125,7 @@ public class PlayerCombat : UnitCombat
                         _targetTile.Reset(false, true);
                     }
 
-                    switch (this.GetComponent<PlayerState>().GetElementalState())
-                    {
-                        default:
-                        case UnitState.ElementalState.Grass:
-                            DealDamage(40);
-                            break;
-
-                        case UnitState.ElementalState.Water:
-                            DealDamage(30);
-                            break;
-
-                        case UnitState.ElementalState.Fire:
-                            DealDamage(50);
-                            break;
-                    }
+                    DealDamage(this.GetComponent<PlayerState>().GetElementalState());
                     state = CombatState.Attacked;
                 }
                 break;
@@ -160,13 +146,53 @@ public class PlayerCombat : UnitCombat
         }
     }
 
-    private void DealDamage(int amount)
+    private void DealDamage(UnitState.ElementalState playerState)
     {
         if (_target != null)
         {
             var target = _target.GetComponent<PlayerCombat>();
             target.previousHealth = target.health;
-            target.health -= amount;
+
+            var targetState = _target.GetComponent<PlayerState>().GetElementalState();
+
+            int specialDamageMultiplier = Random.value >= 0.5f ? 6 : 5;
+            int regularDamageMultiplier = Random.value >= 0.5f ? 4 : 3;
+            int smallDamageMultiplier = Random.value >= 0.5f ? 2 : 1;
+
+            int damage = 1;
+            switch(playerState)
+            {
+                default:
+                case UnitState.ElementalState.Grass:
+                    if (targetState == UnitState.ElementalState.Grass)
+                        damage *= regularDamageMultiplier;
+                    else if (targetState == UnitState.ElementalState.Water)
+                        damage *= specialDamageMultiplier;
+                    else
+                        damage *= smallDamageMultiplier;
+                    break;
+
+                case UnitState.ElementalState.Water:
+                    if (targetState == UnitState.ElementalState.Water)
+                        damage *= regularDamageMultiplier;
+                    else if (targetState == UnitState.ElementalState.Fire)
+                        damage *= specialDamageMultiplier;
+                    else
+                        damage *= smallDamageMultiplier;
+                    break;
+
+                case UnitState.ElementalState.Fire:
+                    if (targetState == UnitState.ElementalState.Fire)
+                        damage *= regularDamageMultiplier;
+                    else if (targetState == UnitState.ElementalState.Grass)
+                        damage *= specialDamageMultiplier;
+                    else
+                        damage *= smallDamageMultiplier;
+                    break;
+            }
+
+            target.health -= damage;
+
             if (target.health <= 0)
                 target.state = CombatState.Dead;
         }

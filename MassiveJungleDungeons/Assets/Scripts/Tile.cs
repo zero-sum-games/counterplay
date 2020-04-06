@@ -125,26 +125,6 @@ public class Tile : MonoBehaviour
             {
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                     adjMovementList.Add(tile);
-                //{
-                //    switch (elementalState)
-                //    {
-                //        default:
-                //        case UnitState.ElementalState.Grass:
-                //            if (tile.type == TileType.Grassland || tile.type == TileType.Forest)
-                //                adjMovementList.Add(tile);
-                //            break;
-
-                //        case UnitState.ElementalState.Water:
-                //            if (tile.type == TileType.Lake || tile.type == TileType.Grassland)
-                //                adjMovementList.Add(tile);
-                //            break;
-
-                //        case UnitState.ElementalState.Fire:
-                //            if (tile.type == TileType.Forest || tile.type == TileType.Grassland || tile.type == TileType.Mountain)
-                //                adjMovementList.Add(tile);
-                //            break;
-                //    }
-                //}
             }
         }
     }
