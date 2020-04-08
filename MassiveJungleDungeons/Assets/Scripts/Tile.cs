@@ -18,8 +18,8 @@ public class Tile : MonoBehaviour
     public enum TileType
     {
         Grassland   = 0,
-        Lake        = 1,
-        Forest      = 2,
+        Forest      = 1,
+        Lake        = 2,
         Mountain    = 3
     }
 
@@ -113,6 +113,8 @@ public class Tile : MonoBehaviour
         }
     }
 
+    // TODO: remove the double functions at some point since movement is calculated on cost basis... combine the functions
+    // somehow but keep the notion of adding to movement and attack adjacency lists separate
     private void CheckTile(Vector3 direction, UnitState.ElementalState elementalState)
     {
         var halfExtents = new Vector3(0.25f, 0.5f, 0.25f);
@@ -142,28 +144,8 @@ public class Tile : MonoBehaviour
     {
         if (_movementCostsPerTileType == null) return;
 
-        float costToNextTile;
-
-        // Don't forget to put extra tile types in this switch case
-        switch(type)
-        {
-            default:
-            case TileType.Grassland:
-                costToNextTile = _movementCostsPerTileType[0];
-                break;
-
-            case TileType.Forest:
-                costToNextTile = _movementCostsPerTileType[1];
-                break;
-
-            case TileType.Lake:
-                costToNextTile = _movementCostsPerTileType[2];
-                break;
-
-            case TileType.Mountain:
-                costToNextTile = _movementCostsPerTileType[3];
-                break;
-        }
+        // ** Make sure the tile type enum values correspond with the values set in costs and shit **
+        float costToNextTile = _movementCostsPerTileType[(int) type];
 
         _movementCost = parentMovementCost + costToNextTile;
     }
