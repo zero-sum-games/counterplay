@@ -68,3 +68,7 @@ crashlytics-build.properties
 
 # USER-MADE FOLDERS
 /Audio/
+
+# Asset store ignores
+/MassiveJungleDungeons/[Aa]ssets/PolygonKnights/
+/MassiveJungleDungeons/[Aa]ssets/PolygonVikings/
