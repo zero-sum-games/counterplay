@@ -7,7 +7,7 @@
 ## About 
 Counterplay is a project for the class, AET 334M (Video Game Systems Design), that demonstrates a unique intersection of primary, secondary, and progression systems. The purpose of the class is to gain a perspective towards video game systems and how they shape an entire game's basis of gameplay via building an implementation over the course of the semester. 
 
-For this particular project, we initially accepted a prompt of sorts to act as inspiration. Our prompt is was:
+For this particular project, we initially accepted a randomly generated prompt to act as inspiration, which was...
 
 _"A little boy comes to you and presents you with an Egyptian god."_
 
@@ -61,4 +61,4 @@ In-progress...
 
 ## Acknowledgements
 
-Thank you to the professor, Tyler Coleman, for teaching an informative and thought-provoking class, especially in the midst of the COVID-19 pandemic.
+Thank you to the professor, Tyler Coleman, for teaching an informative and thought-provoking class, especially while having to juggle everything in midst of the COVID-19 pandemic.
