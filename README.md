@@ -15,7 +15,7 @@ This was a quite interesting and random prompt, but it lead our team to create a
 
 ## Demo
 
-The most current build can be found on [itch.io](https://maxwellmatt.itch.io/).
+The most current build can be found on <a href="https://maxwellmatt.itch.io/counterplay" target="_blank">itch.io</a>.
 
 ### Controls
 - SPACE highlights tiles for movement
