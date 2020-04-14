@@ -23,7 +23,6 @@ public class PlayerMove : UnitMove
 
                         if (_currentTile.state == Tile.TileState.Selected)
                         {
-                            var targetPosition = _currentTile.gameObject.transform.position;
                             _currentTile.SetActiveSelectors(true, false, false);
                             MoveToTile(_currentTile);
                         }

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using UnityEngine.UI;
 
 #if (UNITY_EDITOR)
 public static class EditorMenu

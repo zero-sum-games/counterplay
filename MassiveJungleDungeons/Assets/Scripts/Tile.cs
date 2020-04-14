@@ -70,7 +70,7 @@ public class Tile : MonoBehaviour
         _attackCost = 0;
 
         _movementCost = 0.0f;
-        _movementCostsPerTileType = new float[] { };
+        _movementCostsPerTileType = new float[] {};
     }
 
     /// <summary>
@@ -124,10 +124,8 @@ public class Tile : MonoBehaviour
         {
             var tile = item.GetComponent<Tile>();
             if (tile != null)
-            {
                 if (!Physics.Raycast(tile.transform.position, Vector3.up, out _, 1))
                     adjMovementList.Add(tile);
-            }
         }
     }
 
@@ -152,8 +150,8 @@ public class Tile : MonoBehaviour
 
     public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
     {
-        // _movementCostsPerTileType = [0 = Grassland, 1 = Forest, 2 = Lake, 3 = Mountain]
-        // Use this ^^ when inputting values below for each elemental state
+        // ** [0 = Grassland, 1 = Forest, 2 = Lake, 3 = Mountain] **
+        // ** Use this ^^ when inputting values below for each elemental state **
 
         switch(elementalState)
         {

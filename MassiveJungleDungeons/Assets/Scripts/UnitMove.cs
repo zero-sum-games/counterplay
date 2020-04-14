@@ -109,9 +109,7 @@ public class UnitMove : MonoBehaviour
             }
         }
         else
-        {
             state = MoveState.Moved;
-        }
     }
 
     protected void MoveToTile(Tile tile)
