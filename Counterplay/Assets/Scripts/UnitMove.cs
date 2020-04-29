@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+//==============================================================================
 public class UnitMove : MonoBehaviour
-{   
+{
+    //==========================================================================
     public enum MoveState
     {
         Idle        = 0,
@@ -32,6 +34,7 @@ public class UnitMove : MonoBehaviour
 
     private float _halfUnitHeight;
 
+    //==========================================================================
     protected void Init()
     {
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -40,6 +43,7 @@ public class UnitMove : MonoBehaviour
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
     }
 
+    //==========================================================================
     protected void FindAndSelectTiles()
     {
         ComputeAdjacencyLists();
@@ -82,6 +86,38 @@ public class UnitMove : MonoBehaviour
         }
     }
 
+    private void ComputeAdjacencyLists()
+    {
+        // for dynamically added / deleted tiles, make sure to reset tiles list object here
+        foreach (var tile in _tiles)
+        {
+            var t = tile.GetComponent<Tile>();
+            t.FindNeighbors(this.gameObject.GetComponent<PlayerState>().GetElementalState());
+        }
+    }
+
+    //==========================================================================
+    public Tile GetCurrentTile()
+    {
+        var tile = GetTargetTile(gameObject);
+
+        if (tile != null)
+            tile.state = Tile.TileState.Current;
+
+        return tile;
+    }
+
+    private static Tile GetTargetTile(GameObject target)
+    {
+        Tile tile = null;
+
+        if (Physics.Raycast(target.transform.position, Vector3.down, out var hit, 1))
+            tile = hit.collider.GetComponent<Tile>();
+
+        return tile;
+    }
+
+    //==========================================================================
     protected void Move()
     {
         if (_path.Count > 0)
@@ -112,6 +148,18 @@ public class UnitMove : MonoBehaviour
             state = MoveState.Moved;
     }
 
+    private void SetHeading(Vector3 target)
+    {
+        _heading = target - transform.position;
+        _heading.Normalize();
+    }
+
+    private void SetHorizontalVelocity()
+    {
+        _velocity = _heading * speed;
+    }
+
+    //==========================================================================
     protected void MoveToTile(Tile tile)
     {
         _path.Clear();
@@ -131,7 +179,7 @@ public class UnitMove : MonoBehaviour
 
     private void ResetTiles()
     {
-        foreach(var tile in _tiles)
+        foreach (var tile in _tiles)
         {
             var t = tile.GetComponent<Tile>();
             t.state = Tile.TileState.Default;
@@ -143,36 +191,7 @@ public class UnitMove : MonoBehaviour
         }
     }
 
-    private void ComputeAdjacencyLists()
-    {
-        // for dynamically added / deleted tiles, make sure to reset tiles list object here
-        foreach (var tile in _tiles)
-        {
-            var t = tile.GetComponent<Tile>();
-            t.FindNeighbors(this.gameObject.GetComponent<PlayerState>().GetElementalState());
-        }
-    }
-
-    public Tile GetCurrentTile()
-    {
-        var tile = GetTargetTile(gameObject);
-
-        if (tile != null)
-            tile.state = Tile.TileState.Current;
-
-        return tile;
-    }
-
-    private static Tile GetTargetTile(GameObject target)
-    {
-        Tile tile = null;
-
-        if (Physics.Raycast(target.transform.position, Vector3.down, out var hit, 1))
-            tile = hit.collider.GetComponent<Tile>();
-
-        return tile;
-    }
-
+    //==========================================================================
     protected void RemoveSelectedTiles()
     {
         foreach (var tile in _selectedTiles)
@@ -183,16 +202,5 @@ public class UnitMove : MonoBehaviour
             }
 
         _selectedTiles.Clear();
-    }
-
-    private void SetHeading(Vector3 target)
-    {
-        _heading = target - transform.position;
-        _heading.Normalize();
-    }
-
-    private void SetHorizontalVelocity()
-    {
-        _velocity = _heading * speed;
     }
 }

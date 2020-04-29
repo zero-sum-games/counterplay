@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//==============================================================================
 public class UnitCombat : MonoBehaviour
 {
+    //==========================================================================
     public enum CombatState
     {
         Idle        = 0,
@@ -45,6 +47,7 @@ public class UnitCombat : MonoBehaviour
     protected bool _displayForCombatSelection = false;
     public void SetDisplayForCombatSelection(bool shouldDisplayForCombatSelection) { _displayForCombatSelection = shouldDisplayForCombatSelection; }
 
+    //==========================================================================
     protected void Init()
     {
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
@@ -52,6 +55,7 @@ public class UnitCombat : MonoBehaviour
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
     }
 
+    //==========================================================================
     protected GameObject GetTarget()
     {
         if (_tilesInRange != null)
@@ -65,6 +69,7 @@ public class UnitCombat : MonoBehaviour
         return null;
     }
 
+    //==========================================================================
     protected void FindTilesInRange()
     {
         ComputeAdjacencyLists();
@@ -120,18 +125,6 @@ public class UnitCombat : MonoBehaviour
         }
     }
 
-    protected void RemoveSelectedTiles()
-    {
-        foreach (var tile in _tilesInRange)
-            if (tile != _currentTile)
-            {
-                tile.SetActiveSelectors(false, false, false);
-                tile.Reset(false, true);
-            }
-
-        _tilesInRange.Clear();
-    }
-
     public void SetAttackBudget(UnitState.ElementalState elementalState)
     {
         switch (elementalState)
@@ -156,7 +149,7 @@ public class UnitCombat : MonoBehaviour
         // _attackBudgetsPerTileType = [0 = Grass, 1 = Water, 2 = Fire]
         // Use this ^^ when inputting values below for each elemental state
 
-        switch(tileType)
+        switch (tileType)
         {
             default:
             case Tile.TileType.Grassland:
@@ -175,5 +168,18 @@ public class UnitCombat : MonoBehaviour
                 _attackBudgetsPerTileType = new int[] { 0, 0, 3 };
                 break;
         }
+    }
+
+    //==========================================================================
+    protected void RemoveSelectedTiles()
+    {
+        foreach (var tile in _tilesInRange)
+            if (tile != _currentTile)
+            {
+                tile.SetActiveSelectors(false, false, false);
+                tile.Reset(false, true);
+            }
+
+        _tilesInRange.Clear();
     }
 }

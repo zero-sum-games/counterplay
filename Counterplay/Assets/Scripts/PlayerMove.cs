@@ -2,49 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//==============================================================================
 public class PlayerMove : UnitMove
 {
+    //==========================================================================
     private float _buttonStartTime; // when space is pressed
     private float _buttonTimePressed; // how long space was held
-
-    private void CheckMouse()
-    {
-        if (Input.GetMouseButtonUp(0))
-        {
-            var camera = Camera.main;
-            if(camera != null)
-            {
-                var ray = camera.ScreenPointToRay(Input.mousePosition);
-                if(Physics.Raycast(ray, out var hit))
-                {
-                    if(hit.collider.CompareTag("Tile"))
-                    {
-                        _currentTile = hit.collider.GetComponent<Tile>();
-
-                        if (_currentTile.state == Tile.TileState.Selected)
-                        {
-                            _currentTile.SetActiveSelectors(true, false, false);
-                            MoveToTile(_currentTile);
-                        }
-                    }
-                }
-            }
-        }
-    }
 
     private void Start()
     {
         Init();
-    }
-
-    public void Reset()
-    {
-        _currentTile.SetActiveSelectors(false, false, false);
-        _currentTile = null;
-
-        _path.Clear();
-
-        _selectedTiles.Clear();
     }
 
     private void Update()
@@ -112,5 +79,41 @@ public class PlayerMove : UnitMove
                 _currentTile.SetActiveSelectors(true, false, true);
                 break;
         }
+    }
+
+    //==========================================================================
+    private void CheckMouse()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            var camera = Camera.main;
+            if(camera != null)
+            {
+                var ray = camera.ScreenPointToRay(Input.mousePosition);
+                if(Physics.Raycast(ray, out var hit))
+                {
+                    if(hit.collider.CompareTag("Tile"))
+                    {
+                        _currentTile = hit.collider.GetComponent<Tile>();
+
+                        if (_currentTile.state == Tile.TileState.Selected)
+                        {
+                            _currentTile.SetActiveSelectors(true, false, false);
+                            MoveToTile(_currentTile);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public void Reset()
+    {
+        _currentTile.SetActiveSelectors(false, false, false);
+        _currentTile = null;
+
+        _path.Clear();
+
+        _selectedTiles.Clear();
     }
 }

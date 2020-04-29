@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+//==============================================================================
 public class UnitState : MonoBehaviour
-{ 
-    
+{
+    //==========================================================================
     public static UnitState Instance { get; private set; }
 
     public enum ElementalState
@@ -34,6 +35,7 @@ public class UnitState : MonoBehaviour
     protected bool _displayForCombatSelection = false;
     public void SetDisplayForCombatSelection(bool shouldDisplayForCombatSelection) { _displayForCombatSelection = shouldDisplayForCombatSelection; }
 
+    //==========================================================================
     private void Start()
     {
         Instance = this;
@@ -42,6 +44,7 @@ public class UnitState : MonoBehaviour
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
     }
 
+    //==========================================================================
     public void SetStateParameters()
     {
         var renderer = GetComponent<Renderer>();
@@ -64,7 +67,6 @@ public class UnitState : MonoBehaviour
             case ElementalState.Fire:
                 color = new Color32(242, 94, 61, 1);
                 break;
-            
         }
 
         if (renderer.sharedMaterial != null)

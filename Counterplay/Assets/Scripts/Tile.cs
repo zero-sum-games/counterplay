@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//==============================================================================
 public class Tile : MonoBehaviour
 {
+    //==========================================================================
     public enum TileState
     {
         Default     = 0,
@@ -44,14 +46,42 @@ public class Tile : MonoBehaviour
     private GameObject _movementSelector;
     private GameObject _combatSelector;
 
+
+    //==========================================================================
     private void Awake()
     {
         LoadSelectors();
     }
 
+    private void OnValidate()
+    {
+        LoadMaterial();
+    }
+
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
+    }
+
+    //==========================================================================
+    public void FindNeighbors()
+    {
+        Reset(false, true);
+
+        CheckTile(Vector3.forward);
+        CheckTile(Vector3.back);
+        CheckTile(Vector3.right);
+        CheckTile(Vector3.left);
+    }
+
+    public void FindNeighbors(UnitState.ElementalState elementalState)
+    {
+        Reset(true, false);
+
+        CheckTile(Vector3.forward, elementalState);
+        CheckTile(Vector3.back, elementalState);
+        CheckTile(Vector3.right, elementalState);
+        CheckTile(Vector3.left, elementalState);
     }
 
     public void Reset(bool resetMovement, bool resetCombat)
@@ -70,34 +100,7 @@ public class Tile : MonoBehaviour
         _attackCost = 0;
 
         _movementCost = 0.0f;
-        _movementCostsPerTileType = new float[] {};
-    }
-
-    /// <summary>
-    /// Use for computing tiles' adjacency lists for combat.
-    /// </summary>
-    public void FindNeighbors()
-    {
-        Reset(false, true);
-
-        CheckTile(Vector3.forward);
-        CheckTile(Vector3.back);
-        CheckTile(Vector3.right);
-        CheckTile(Vector3.left);
-    }
-
-    /// <summary>
-    /// Use for computing tiles' adjacency lists for movement.
-    /// </summary>
-    /// <param name="elementalState">Used to inform a tile to add adjacent tiles only if they are traversible by this elemental state.</param>
-    public void FindNeighbors(UnitState.ElementalState elementalState)
-    {
-        Reset(true, false);
-
-        CheckTile(Vector3.forward, elementalState);
-        CheckTile(Vector3.back, elementalState);
-        CheckTile(Vector3.right, elementalState);
-        CheckTile(Vector3.left, elementalState);
+        _movementCostsPerTileType = new float[] { };
     }
 
     private void CheckTile(Vector3 direction)
@@ -129,6 +132,29 @@ public class Tile : MonoBehaviour
         }
     }
 
+    //==========================================================================
+    public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
+    {
+        // ** [0 = Grassland, 1 = Forest, 2 = Lake, 3 = Mountain] **
+        // ** Use this ^^ when inputting values below for each elemental state **
+
+        switch (elementalState)
+        {
+            default:
+            case UnitState.ElementalState.Grass:
+                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.5f, 100.0f };
+                break;
+
+            case UnitState.ElementalState.Water:
+                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.25f, 100.0f };
+                break;
+
+            case UnitState.ElementalState.Fire:
+                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 100.0f, 0.25f };
+                break;
+        }
+    }
+
     public int GetAttackCost() { return _attackCost; }
 
     public void SetAttackCost(int parentAttackCost)
@@ -148,41 +174,7 @@ public class Tile : MonoBehaviour
         _movementCost = parentMovementCost + costToNextTile;
     }
 
-    public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
-    {
-        // ** [0 = Grassland, 1 = Forest, 2 = Lake, 3 = Mountain] **
-        // ** Use this ^^ when inputting values below for each elemental state **
-
-        switch(elementalState)
-        {
-            default:
-            case UnitState.ElementalState.Grass:
-                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.5f, 100.0f };
-                break;
-
-            case UnitState.ElementalState.Water:
-                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.25f, 100.0f };
-                break;
-
-            case UnitState.ElementalState.Fire:
-                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 100.0f, 0.25f };
-                break;
-        }
-    }
-
-    public void SetMaterial(Material material)
-    {
-        _material = material;
-        _renderer.material = _material;
-    }
-
-    public void SetActiveSelectors(bool setMovement, bool setCombat, bool setUnit)
-    {
-        _movementSelector.SetActive(setMovement);
-        _combatSelector.SetActive(setCombat);
-        _unitSelector.SetActive(setUnit);
-    }
-
+    //==========================================================================
     public void LoadSelectors()
     {
         GameObject GetSelector(int selectorID)
@@ -220,10 +212,12 @@ public class Tile : MonoBehaviour
         _combatSelector     = GetSelector(1);
         _unitSelector       = GetSelector(2);
     }
-        
-    public void OnValidate()
+
+    public void SetActiveSelectors(bool setMovement, bool setCombat, bool setUnit)
     {
-        LoadMaterial();
+        _movementSelector.SetActive(setMovement);
+        _combatSelector.SetActive(setCombat);
+        _unitSelector.SetActive(setUnit);
     }
 
     public void LoadMaterial()
@@ -250,6 +244,12 @@ public class Tile : MonoBehaviour
 
         if (_renderer == null)
             _renderer = this.GetComponent<Renderer>();
+        _renderer.material = _material;
+    }
+
+    public void SetMaterial(Material material)
+    {
+        _material = material;
         _renderer.material = _material;
     }
 }

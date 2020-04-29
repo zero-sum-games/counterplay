@@ -2,13 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//==============================================================================
 public class PlayerCombat : UnitCombat
 {
+    //==========================================================================
     private PlayerMove _playerMove;
 
     private float _buttonStartTime; // when right-mouse is pressed
     private float _buttonTimePressed; // how long right-mouse was held
 
+    //==========================================================================
     private void Awake()
     {
         _playerMove = this.GetComponent<PlayerMove>();
@@ -18,25 +21,6 @@ public class PlayerCombat : UnitCombat
     private void Start()
     {
         Init();
-    }
-
-    public void Reset()
-    {
-        if(_targetTile != null)
-        {
-            _targetTile.SetActiveSelectors(false, false, false);
-            _targetTile = null;
-
-            _target = null;
-        }
-
-        if(_currentTile != null)
-        {
-            _currentTile.SetActiveSelectors(false, false, false);
-            _currentTile = null;
-        }
-
-        _tilesInRange.Clear();
     }
 
     private void Update()
@@ -69,7 +53,7 @@ public class PlayerCombat : UnitCombat
                     FindTilesInRange();
 
                     _target = GetTarget();
-                    if(_target != null)
+                    if (_target != null)
                         if (Physics.Raycast(_target.transform.position, Vector3.down, out var hit, 1))
                             if (hit.collider.tag == "Tile")
                                 _targetTile = hit.collider.gameObject.GetComponent<Tile>();
@@ -117,7 +101,7 @@ public class PlayerCombat : UnitCombat
                 break;
 
             case CombatState.Attacking:
-                if(Input.GetKeyDown(KeyCode.Space))
+                if (Input.GetKeyDown(KeyCode.Space))
                 {
                     if (_targetTile != null)
                     {
@@ -131,7 +115,7 @@ public class PlayerCombat : UnitCombat
                 break;
 
             case CombatState.Attacked:
-                if(_targetTile != null)
+                if (_targetTile != null)
                 {
                     _targetTile.SetActiveSelectors(false, false, false);
                     _targetTile = null;
@@ -146,85 +130,24 @@ public class PlayerCombat : UnitCombat
         }
     }
 
-    private void DealDamage(UnitState.ElementalState playerState)
-    {
-        if (_target != null)
-        {
-            var target = _target.GetComponent<PlayerCombat>();
-            target.previousHealth = target.health;
-
-            var targetState = _target.GetComponent<PlayerState>().GetElementalState();
-
-            int specialDamageMultiplier = Random.value >= 0.5f ? 6 : 5;
-            int regularDamageMultiplier = Random.value >= 0.5f ? 4 : 3;
-            int smallDamageMultiplier = Random.value >= 0.5f ? 2 : 1;
-
-            int damage = 1;
-            switch(playerState)
-            {
-                default:
-                case UnitState.ElementalState.Grass:
-                    if (targetState == UnitState.ElementalState.Grass)
-                        damage *= regularDamageMultiplier;
-                    else if (targetState == UnitState.ElementalState.Water)
-                        damage *= specialDamageMultiplier;
-                    else
-                        damage *= smallDamageMultiplier;
-                    break;
-
-                case UnitState.ElementalState.Water:
-                    if (targetState == UnitState.ElementalState.Water)
-                        damage *= regularDamageMultiplier;
-                    else if (targetState == UnitState.ElementalState.Fire)
-                        damage *= specialDamageMultiplier;
-                    else
-                        damage *= smallDamageMultiplier;
-                    break;
-
-                case UnitState.ElementalState.Fire:
-                    if (targetState == UnitState.ElementalState.Fire)
-                        damage *= regularDamageMultiplier;
-                    else if (targetState == UnitState.ElementalState.Grass)
-                        damage *= specialDamageMultiplier;
-                    else
-                        damage *= smallDamageMultiplier;
-                    break;
-            }
-
-            target.health -= damage;
-
-            if (target.health <= 0)
-            {
-                target.state = CombatState.Dead;
-
-                if(deathText != null && !deathText.gameObject.activeInHierarchy)
-                    deathText.gameObject.SetActive(true);
-            }
-        }
-    }
+    //==========================================================================
 
     private void DrawHealthBar()
     {
+        if (previousHealth != health)
+            previousHealth -= 1;
+
+        healthFill.value = (float) previousHealth / maxHealth;
+
         if (!healthBar.gameObject.activeInHierarchy)
             healthBar.gameObject.SetActive(true);
 
-        if(previousHealth != health)
-            previousHealth -= 1;
-        healthFill.value = (float) previousHealth / maxHealth;
-
         var currentPosition = transform.position;
         healthBar.position = new Vector3(currentPosition.x + _healthBarXOffset, currentPosition.y + _healthBarYOffset, currentPosition.z);
-
         healthBar.LookAt(new Vector3(healthBarRotation.transform.position.x, Camera.main.transform.position.y, healthBarRotation.transform.position.z));
     }
 
-    IEnumerator SetUnitUIs(bool shouldBeActive, float timeDelay)
-    {
-        yield return new WaitForSeconds(timeDelay);
-        SetUnitUIs(shouldBeActive);
-    }
-
-    public void SetUnitUIs(bool shouldBeActive)
+    private void SetUnitUIs(bool shouldBeActive)
     {
         foreach (var unit in GameObject.FindGameObjectsWithTag("Unit"))
         {
@@ -239,5 +162,88 @@ public class PlayerCombat : UnitCombat
             unitState.SetDisplayForCombatSelection(shouldBeActive);
             unitState.elementalTriangle.gameObject.SetActive(shouldBeActive);
         }
+    }
+
+    IEnumerator SetUnitUIs(bool shouldBeActive, float timeDelay)
+    {
+        yield return new WaitForSeconds(timeDelay);
+        SetUnitUIs(shouldBeActive);
+    }
+
+    private void DealDamage(UnitState.ElementalState playerState)
+    {
+        if (_target != null)
+        {
+            var target = _target.GetComponent<PlayerCombat>();
+            target.previousHealth = target.health;
+
+            var targetState = _target.GetComponent<PlayerState>().GetElementalState();
+
+            int strongDamageMultipliter = Random.value >= 0.5f ? 6 : 5;
+            int normalDamageMultiplier = Random.value >= 0.5f ? 4 : 3;
+            int weakDamageMultiplier = Random.value >= 0.5f ? 2 : 1;
+
+            int damage = 1;
+            switch (playerState)
+            {
+                default:
+                case UnitState.ElementalState.Grass:
+                    if (targetState == UnitState.ElementalState.Grass)
+                        damage *= normalDamageMultiplier;
+                    else if (targetState == UnitState.ElementalState.Water)
+                        damage *= strongDamageMultipliter;
+                    else
+                        damage *= weakDamageMultiplier;
+                    break;
+
+                case UnitState.ElementalState.Water:
+                    if (targetState == UnitState.ElementalState.Water)
+                        damage *= normalDamageMultiplier;
+                    else if (targetState == UnitState.ElementalState.Fire)
+                        damage *= strongDamageMultipliter;
+                    else
+                        damage *= weakDamageMultiplier;
+                    break;
+
+                case UnitState.ElementalState.Fire:
+                    if (targetState == UnitState.ElementalState.Fire)
+                        damage *= normalDamageMultiplier;
+                    else if (targetState == UnitState.ElementalState.Grass)
+                        damage *= strongDamageMultipliter;
+                    else
+                        damage *= weakDamageMultiplier;
+                    break;
+            }
+
+            target.health -= damage;
+
+            if (target.health <= 0)
+            {
+                target.state = CombatState.Dead;
+
+                if (deathText != null && !deathText.gameObject.activeInHierarchy)
+                    deathText.gameObject.SetActive(true);
+            }
+        }
+    }
+
+    //==========================================================================
+    public void Reset()
+    {
+        if (_targetTile != null)
+        {
+            _targetTile.SetActiveSelectors(false, false, false);
+            _targetTile = null;
+
+            _target = null;
+        }
+
+        if (_currentTile != null)
+        {
+            _currentTile.SetActiveSelectors(false, false, false);
+            _currentTile = null;
+        }
+
+        _tilesInRange.Clear();
     }
 }
