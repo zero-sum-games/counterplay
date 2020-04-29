@@ -57,15 +57,15 @@ public class UnitState : MonoBehaviour
         {
             default:
             case ElementalState.Grass:
-                color = new Color32(54, 224, 91, 1);
+                color = new Color32(54, 224, 92, 1);
                 break;
                 
             case ElementalState.Water:
-                color = new Color32(77, 125, 247, 1);
+                color = new Color32(72, 128, 248, 1);
                 break;
 
             case ElementalState.Fire:
-                color = new Color32(242, 94, 61, 1);
+                color = new Color32(242, 94, 64, 1);
                 break;
         }
 
