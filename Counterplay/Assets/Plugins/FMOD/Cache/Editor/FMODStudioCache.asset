@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: Fmod/Counterplay/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637224695845291203
+  lastModified: 637224704356595184
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -150,6 +150,24 @@ MonoBehaviour:
   - Name: Desktop
     Value: 700
   Exists: 1
+--- !u!114 &-784578694588626848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: Fmod/Counterplay/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637224704356585209
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-713682179643065736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,7 +185,7 @@ MonoBehaviour:
   lastModified: 637224695845171526
   LoadResult: 0
   FileSizes: []
-  Exists: 1
+  Exists: 0
 --- !u!114 &-508320113988740090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,14 +218,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -8021994793645455640}
-  - {fileID: -713682179643065736}
+  - {fileID: -784578694588626848}
   EditorEvents: []
   EditorParameters: []
   MasterBanks:
-  - {fileID: -713682179643065736}
+  - {fileID: -784578694588626848}
   StringsBanks:
   - {fileID: -8021994793645455640}
-  stringsBankWriteTime: 637224695845291203
+  stringsBankWriteTime: 637224704356595184
   cacheVersion: 3
 --- !u!114 &6074706339410853911
 MonoBehaviour:
