@@ -19,13 +19,24 @@ public class Tile : MonoBehaviour
 
     public enum TileType
     {
-        Grassland   = 0,
+        Neutral   = 0,
         Forest      = 1,
         Lake        = 2,
         Mountain    = 3
+        
+    }
+
+    public enum subTileType
+    {
+        Grassland   = 0,
+        Ash         = 1,
+        Marsh       = 2,
+        MtnPass     = 3
     }
 
     public TileType type;
+    public subTileType subType;
+    public TypeModifier mod;
 
     private Material _material;
 
@@ -61,6 +72,8 @@ public class Tile : MonoBehaviour
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
+
+        mod = GameObject.Find("GameManager").GetComponent<TypeModifier>();
     }
 
     //==========================================================================
@@ -135,22 +148,22 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
     {
-        // ** [0 = Grassland, 1 = Forest, 2 = Lake, 3 = Mountain] **
+        // ** [0 = Neutral, 1 = Forest, 2 = Lake, 3 = Mountain] **
         // ** Use this ^^ when inputting values below for each elemental state **
 
         switch (elementalState)
         {
             default:
             case UnitState.ElementalState.Grass:
-                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.5f, 100.0f };
+                _movementCostsPerTileType = mod.types[0].moveRange;
                 break;
 
             case UnitState.ElementalState.Water:
-                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 0.25f, 100.0f };
+                _movementCostsPerTileType = mod.types[1].moveRange; ;
                 break;
 
             case UnitState.ElementalState.Fire:
-                _movementCostsPerTileType = new float[] { 0.5f, 1.0f, 100.0f, 0.25f };
+                _movementCostsPerTileType = mod.types[2].moveRange;
                 break;
         }
     }
@@ -225,9 +238,26 @@ public class Tile : MonoBehaviour
         switch (type)
         {
             default:
-            case TileType.Grassland:
-                _material = Resources.Load<Material>("Tiles/Materials/Grassland");
-                break;
+            case TileType.Neutral:
+                switch (subType)
+                {
+                    default:
+                    case subTileType.Grassland:
+                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
+                        break;
+
+                    case subTileType.Ash:
+                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
+                        break;
+
+                    case subTileType.Marsh:
+                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
+                        break;
+
+                    case subTileType.MtnPass:
+                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
+                        break;
+                } break;
 
             case TileType.Lake:
                 _material = Resources.Load<Material>("Tiles/Materials/Lake");

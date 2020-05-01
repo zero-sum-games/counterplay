@@ -26,6 +26,7 @@ public class UnitCombat : MonoBehaviour
 
     protected Tile _currentTile;
     protected Tile _targetTile;
+    public TypeModifier atkMod;
 
     protected GameObject _target;
 
@@ -53,6 +54,8 @@ public class UnitCombat : MonoBehaviour
         _tiles = GameObject.FindGameObjectsWithTag("Tile");
 
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
+
+        atkMod = GameObject.Find("GameManager").GetComponent<TypeModifier>();
     }
 
     //==========================================================================
@@ -152,20 +155,20 @@ public class UnitCombat : MonoBehaviour
         switch (tileType)
         {
             default:
-            case Tile.TileType.Grassland:
-                _attackBudgetsPerTileType = new int[] { 2, 2, 2 };
+            case Tile.TileType.Neutral:
+                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[0], atkMod.types[1].atkRange[0], atkMod.types[2].atkRange[0] };
                 break;
 
             case Tile.TileType.Forest:
-                _attackBudgetsPerTileType = new int[] { 3, 2, 1 };
+                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[1], atkMod.types[1].atkRange[1], atkMod.types[2].atkRange[1] };
                 break;
 
             case Tile.TileType.Lake:
-                _attackBudgetsPerTileType = new int[] { 1, 3, 0 };
+                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[2], atkMod.types[1].atkRange[2], atkMod.types[2].atkRange[2] };
                 break;
 
             case Tile.TileType.Mountain:
-                _attackBudgetsPerTileType = new int[] { 0, 0, 3 };
+                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[3], atkMod.types[1].atkRange[3], atkMod.types[2].atkRange[3] };
                 break;
         }
     }

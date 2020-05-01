@@ -53,8 +53,23 @@ public static class EditorMenu
             switch(tile.GetComponent<Tile>().type)
             {
                 default:
-                case Tile.TileType.Grassland:
-                    tileObject = Resources.Load("Grass") as GameObject;
+                case Tile.TileType.Neutral:
+                    switch (tile.GetComponent<Tile>().subType)
+                    {
+                        default:
+                        case Tile.subTileType.Grassland:
+                            tileObject = Resources.Load("Grass") as GameObject;
+                            break;
+                        case Tile.subTileType.Ash:
+                            tileObject = Resources.Load("Ash") as GameObject;
+                            break;
+                        case Tile.subTileType.Marsh:
+                            tileObject = Resources.Load("Marsh") as GameObject;
+                            break;
+                        case Tile.subTileType.MtnPass:
+                            tileObject = Resources.Load("MtnPass") as GameObject;
+                            break;
+                    }
                     break;
 
                 case Tile.TileType.Forest:
