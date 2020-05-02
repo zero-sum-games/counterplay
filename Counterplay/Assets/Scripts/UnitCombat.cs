@@ -9,11 +9,11 @@ public class UnitCombat : MonoBehaviour
     //==========================================================================
     public enum CombatState
     {
-        Idle        = 0,
-        Selected    = 1,
-        Attacking   = 2,
-        Attacked    = 3,
-        Dead        = 4
+        Idle            = 0,
+        Selected        = 1,
+        Attacking       = 2,
+        HasAttacked     = 3,
+        Dead            = 4
     }
 
     public CombatState state = CombatState.Idle;
@@ -56,20 +56,6 @@ public class UnitCombat : MonoBehaviour
         _teamID = transform.parent.gameObject.GetComponent<TeamManager>().teamID;
 
         atkMod = GameObject.Find("GameManager").GetComponent<TypeModifier>();
-    }
-
-    //==========================================================================
-    protected GameObject GetTarget()
-    {
-        if (_tilesInRange != null)
-            foreach(var tile in _tilesInRange)
-            {
-                var t = tile.transform;
-                if (Physics.Raycast(t.position, Vector3.up, out var hit, 1))
-                    if (hit.collider.gameObject.GetComponent<PlayerCombat>().GetTeamID() != _teamID)
-                        return hit.collider.gameObject;
-            }
-        return null;
     }
 
     //==========================================================================

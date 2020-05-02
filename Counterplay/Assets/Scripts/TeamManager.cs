@@ -20,7 +20,7 @@ public class TeamManager : MonoBehaviour
             if (playerMove.state != UnitMove.MoveState.Idle && playerMove.state != UnitMove.MoveState.Moved) return false;
 
             var playerCombat = unit.GetComponent<PlayerCombat>();
-            if (playerCombat.state != UnitCombat.CombatState.Idle && playerCombat.state != UnitCombat.CombatState.Attacked) return false;
+            if (playerCombat.state != UnitCombat.CombatState.Idle && playerCombat.state != UnitCombat.CombatState.HasAttacked) return false;
         }
 
         return true;

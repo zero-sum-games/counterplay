@@ -22291,7 +22291,7 @@ PrefabInstance:
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.5
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
@@ -22301,7 +22301,7 @@ PrefabInstance:
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -5.5
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
@@ -59031,7 +59031,7 @@ PrefabInstance:
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
@@ -59041,7 +59041,7 @@ PrefabInstance:
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.5
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7619294933972292246, guid: d875f4135b3d59d4296b8b4b21346068,
         type: 3}
@@ -59167,5 +59167,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: IsoCamera
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8011597589557624413, guid: 695ee10a60083614187c52303d0f5707, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 695ee10a60083614187c52303d0f5707, type: 3}

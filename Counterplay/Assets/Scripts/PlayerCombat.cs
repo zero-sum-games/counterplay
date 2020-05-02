@@ -45,18 +45,12 @@ public class PlayerCombat : UnitCombat
         {
             default:
             case CombatState.Idle:
-                if (Input.GetMouseButtonDown(1))
+                if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
-                    if (!Input.GetMouseButtonUp(1))
+                    if (!Input.GetKeyUp(KeyCode.LeftShift))
                         _buttonStartTime = Time.time;
 
                     FindTilesInRange();
-
-                    _target = GetTarget();
-                    if (_target != null)
-                        if (Physics.Raycast(_target.transform.position, Vector3.down, out var hit, 1))
-                            if (hit.collider.tag == "Tile")
-                                _targetTile = hit.collider.gameObject.GetComponent<Tile>();
 
                     SetUnitUIs(true);
 
@@ -65,23 +59,7 @@ public class PlayerCombat : UnitCombat
                 break;
 
             case CombatState.Selected:
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    RemoveSelectedTiles();
-
-                    if (_target == null)
-                    {
-                        SetUnitUIs(false);
-                        state = CombatState.Idle;
-                    }
-                    else
-                    {
-                        _targetTile.SetActiveSelectors(false, true, false);
-                        state = CombatState.Attacking;
-                    }
-                }
-
-                if (!Input.GetMouseButtonDown(1) && Input.GetMouseButtonUp(1))
+                if (!Input.GetKeyDown(KeyCode.LeftShift) && Input.GetKeyUp(KeyCode.LeftShift))
                 {
                     _buttonTimePressed = Time.time - _buttonStartTime;
                     if (_buttonTimePressed > 0.3f)
@@ -91,38 +69,39 @@ public class PlayerCombat : UnitCombat
                         state = CombatState.Idle;
                     }
                 }
-
-                else if (Input.GetMouseButtonDown(1))
+                else if (Input.GetKeyDown(KeyCode.LeftShift))
                 {
                     RemoveSelectedTiles();
+
                     SetUnitUIs(false);
-                    state = CombatState.Idle;
                 }
+
+                CheckMouse();
                 break;
 
             case CombatState.Attacking:
-                if (Input.GetKeyDown(KeyCode.Space))
-                {
-                    if (_targetTile != null)
-                    {
-                        _targetTile.SetActiveSelectors(false, true, false);
-                        _targetTile.Reset(false, true);
-                    }
+                // TODO: apply tile manipulation effect here...
 
+                if (_target != null)
+                {
                     DealDamage(this.GetComponent<PlayerState>().GetElementalState());
-                    state = CombatState.Attacked;
+
+                    _target = null;
+                    ResetTargetTile();
+
+                    StartCoroutine(SetUnitUIs(false, 0.8f));
                 }
+
+                else
+                {
+                    ResetTargetTile();
+                    SetUnitUIs(false);
+                }
+                
+                state = CombatState.HasAttacked;
                 break;
 
-            case CombatState.Attacked:
-                if (_targetTile != null)
-                {
-                    _targetTile.SetActiveSelectors(false, false, false);
-                    _targetTile = null;
-                    _target = null;
-
-                    StartCoroutine(SetUnitUIs(false, 1.5f));
-                }
+            case CombatState.HasAttacked:
                 break;
 
             case CombatState.Dead:
@@ -131,22 +110,6 @@ public class PlayerCombat : UnitCombat
     }
 
     //==========================================================================
-
-    private void DrawHealthBar()
-    {
-        if (previousHealth != health)
-            previousHealth -= 1;
-
-        healthFill.value = (float) previousHealth / maxHealth;
-
-        if (!healthBar.gameObject.activeInHierarchy)
-            healthBar.gameObject.SetActive(true);
-
-        var currentPosition = transform.position;
-        healthBar.position = new Vector3(currentPosition.x + _healthBarXOffset, currentPosition.y + _healthBarYOffset, currentPosition.z);
-        healthBar.LookAt(new Vector3(healthBarRotation.transform.position.x, Camera.main.transform.position.y, healthBarRotation.transform.position.z));
-    }
-
     private void SetUnitUIs(bool shouldBeActive)
     {
         foreach (var unit in GameObject.FindGameObjectsWithTag("Unit"))
@@ -168,6 +131,79 @@ public class PlayerCombat : UnitCombat
     {
         yield return new WaitForSeconds(timeDelay);
         SetUnitUIs(shouldBeActive);
+    }
+
+    private void CheckMouse()
+    {
+        if (Input.GetMouseButtonUp(0))
+        {
+            var camera = Camera.main;
+            if (camera != null)
+            {
+                var ray = camera.ScreenPointToRay(Input.mousePosition);
+                if (Physics.Raycast(ray, out var hit))
+                {
+                    if (hit.collider.CompareTag("Tile"))
+                    {
+                        _targetTile = hit.collider.GetComponent<Tile>();
+
+                        if (_targetTile.state == Tile.TileState.Selected)
+                        {
+                            _targetTile.SetActiveSelectors(false, true, false);
+                            _target = CheckTargetTile();
+
+                            state = CombatState.Attacking;
+                        }
+                        else
+                        {
+                            ResetTargetTile();
+                            SetUnitUIs(false);
+
+                            state = CombatState.Idle;
+                        }
+
+                        RemoveSelectedTiles();
+                    }
+                    else if(hit.collider.CompareTag("Unit") && hit.collider.gameObject.GetComponent<PlayerCombat>().GetTeamID() != _teamID)
+                    {
+                        _target = hit.collider.gameObject;
+
+                        if (Physics.Raycast(_target.transform.position, Vector3.down, out var tile, 1f))
+                        {
+                            _targetTile = tile.collider.gameObject.GetComponent<Tile>();
+                            _targetTile.SetActiveSelectors(false, true, false);
+                        }
+
+                        state = CombatState.Attacking;
+
+                        RemoveSelectedTiles();
+                    }
+                }
+            }
+        }
+    }
+
+    private GameObject CheckTargetTile()
+    {
+        if (Physics.Raycast(_targetTile.transform.position, Vector3.up, out var hit, 1f))
+            if (hit.collider.gameObject.GetComponent<PlayerCombat>().GetTeamID() != _teamID)
+                return hit.collider.gameObject;
+        return null;
+    }
+
+    private void DrawHealthBar()
+    {
+        if (previousHealth != health)
+            previousHealth -= 1;
+
+        healthFill.value = (float) previousHealth / maxHealth;
+
+        if (!healthBar.gameObject.activeInHierarchy)
+            healthBar.gameObject.SetActive(true);
+
+        var currentPosition = transform.position;
+        healthBar.position = new Vector3(currentPosition.x + _healthBarXOffset, currentPosition.y + _healthBarYOffset, currentPosition.z);
+        healthBar.LookAt(new Vector3(healthBarRotation.transform.position.x, Camera.main.transform.position.y, healthBarRotation.transform.position.z));
     }
 
     private void DealDamage(UnitState.ElementalState playerState)
@@ -230,13 +266,9 @@ public class PlayerCombat : UnitCombat
     //==========================================================================
     public void Reset()
     {
-        if (_targetTile != null)
-        {
-            _targetTile.SetActiveSelectors(false, false, false);
-            _targetTile = null;
+        _target = null;
 
-            _target = null;
-        }
+        ResetTargetTile();
 
         if (_currentTile != null)
         {
@@ -245,5 +277,14 @@ public class PlayerCombat : UnitCombat
         }
 
         _tilesInRange.Clear();
+    }
+
+    private void ResetTargetTile()
+    {
+        if (_targetTile != null)
+        {
+            _targetTile.SetActiveSelectors(false, false, false);
+            _targetTile = null;
+        }
     }
 }
