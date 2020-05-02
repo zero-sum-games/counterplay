@@ -99,19 +99,9 @@ public class UnitMove : MonoBehaviour
     //==========================================================================
     public Tile GetCurrentTile()
     {
-        var tile = GetTargetTile(gameObject);
-
-        if (tile != null)
-            tile.state = Tile.TileState.Current;
-
-        return tile;
-    }
-
-    private static Tile GetTargetTile(GameObject target)
-    {
         Tile tile = null;
 
-        if (Physics.Raycast(target.transform.position, Vector3.down, out var hit, 1))
+        if (Physics.Raycast(transform.position, Vector3.down, out var hit, 1))
             tile = hit.collider.GetComponent<Tile>();
 
         return tile;

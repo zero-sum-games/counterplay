@@ -30,9 +30,11 @@ public class PlayerMove : UnitMove
         {
             default:
             case MoveState.Idle:
-                _currentTile = GetCurrentTile();
-                if (_currentTile != null)
+                if(_currentTile == null)
+                {
+                    _currentTile = GetCurrentTile();
                     _currentTile.SetActiveSelectors(false, false, true);
+                }
 
                 if (Input.GetKeyDown(KeyCode.Space) && !Input.GetKeyUp(KeyCode.Space))
                 {
@@ -100,6 +102,11 @@ public class PlayerMove : UnitMove
                         {
                             _currentTile.SetActiveSelectors(true, false, false);
                             MoveToTile(_currentTile);
+                        }
+                        else
+                        {
+                            RemoveSelectedTiles();
+                            state = MoveState.Idle;
                         }
                     }
                 }
