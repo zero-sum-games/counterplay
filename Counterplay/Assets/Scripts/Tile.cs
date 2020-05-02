@@ -159,7 +159,7 @@ public class Tile : MonoBehaviour
                 break;
 
             case UnitState.ElementalState.Water:
-                _movementCostsPerTileType = mod.types[1].moveRange; ;
+                _movementCostsPerTileType = mod.types[1].moveRange;
                 break;
 
             case UnitState.ElementalState.Fire:
