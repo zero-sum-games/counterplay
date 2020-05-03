@@ -58,11 +58,6 @@ public class Tile : MonoBehaviour
         LoadSelectors();
     }
 
-    private void OnValidate()
-    {
-        //Load3DObject();
-    }
-
     private void Start()
     {
         _renderer = GetComponent<Renderer>();
@@ -142,8 +137,6 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
     {
-        // ** [0 = Neutral, 1 = Forest, 2 = Lake, 3 = Mountain] **
-        // ** Use this ^^ when inputting values below for each elemental state **
         switch (elementalState)
         {
             default:
@@ -243,5 +236,13 @@ public class Tile : MonoBehaviour
 
         GameObject tileObjectInstance = GameObject.Instantiate(tileObject, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.Euler(0.0f, 0.0f, 0.0f));
         tileObjectInstance.transform.parent = transform;
+        tileObjectInstance.transform.SetSiblingIndex(0);
+    }
+
+    public void Remove3DObject()
+    {
+        Transform tileObject = transform.GetChild(0);
+        if (tileObject != null)
+            Destroy(tileObject.gameObject);
     }
 }

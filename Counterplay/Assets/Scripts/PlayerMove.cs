@@ -20,7 +20,9 @@ public class PlayerMove : UnitMove
         {
             if (_currentTile != null)
                 _currentTile.Reset(true, false);
+
             state = MoveState.Idle;
+
             return;
         }
 

@@ -135,9 +135,7 @@ public class UnitCombat : MonoBehaviour
 
     private void SetAttackBudgetsPerTileType(Tile.TileType tileType)
     {
-        // _attackBudgetsPerTileType = [0 = Grass, 1 = Water, 2 = Fire]
-        // Use this ^^ when inputting values below for each elemental state
-
+        // [0 = Grass, 1 = Water, 2 = Fire]
         int tileTypeIndex = (int) tileType;
         _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[tileTypeIndex], atkMod.types[1].atkRange[tileTypeIndex], atkMod.types[2].atkRange[tileTypeIndex] };
     }

@@ -46,7 +46,7 @@ public class UnitState : MonoBehaviour
     //==========================================================================
     public void SetStateParameters()
     {
-        var renderer = GetComponent<Renderer>();
+        Renderer renderer = GetComponent<Renderer>();
         if (renderer == null) return;
 
         // Color32 allows for byte values instead of floats from 0.0f - 1.0f
