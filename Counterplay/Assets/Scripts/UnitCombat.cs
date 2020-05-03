@@ -116,21 +116,7 @@ public class UnitCombat : MonoBehaviour
 
     public void SetAttackBudget(UnitState.ElementalState elementalState)
     {
-        switch (elementalState)
-        {
-            default:
-            case UnitState.ElementalState.Grass:
-                _attackBudget = _attackBudgetsPerTileType[0];
-                break;
-
-            case UnitState.ElementalState.Water:
-                _attackBudget = _attackBudgetsPerTileType[1];
-                break;
-
-            case UnitState.ElementalState.Fire:
-                _attackBudget = _attackBudgetsPerTileType[2];
-                break;
-        }
+        _attackBudget = _attackBudgetsPerTileType[(int) elementalState];
     }
 
     private void SetAttackBudgetsPerTileType(Tile.TileType tileType)

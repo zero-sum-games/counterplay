@@ -137,21 +137,7 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
     {
-        switch (elementalState)
-        {
-            default:
-            case UnitState.ElementalState.Grass:
-                _movementCostsPerTileType = mod.types[0].moveRange;
-                break;
-
-            case UnitState.ElementalState.Water:
-                _movementCostsPerTileType = mod.types[1].moveRange;
-                break;
-
-            case UnitState.ElementalState.Fire:
-                _movementCostsPerTileType = mod.types[2].moveRange;
-                break;
-        }
+        _movementCostsPerTileType = mod.types[(int) elementalState].moveRange;
     }
 
     public float GetMovementCost() { return _movementCost; }
