@@ -48,3 +48,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Tiles
+    uniqueID: 902740415
+    locked: 0
+  - name: Terrain Asset
+    uniqueID: 916074419
+    locked: 0
+  - name: Units
+    uniqueID: 2538522517
+    locked: 0
+  - name: UI
+    uniqueID: 2193336953
+    locked: 0

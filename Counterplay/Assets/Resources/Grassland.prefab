@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1593255069347587275}
   - component: {fileID: 1593255069350374853}
   - component: {fileID: 1593255069349330269}
+  - component: {fileID: 364447161361130675}
   m_Layer: 0
   m_Name: Grass_00
   m_TagString: 3D Tile Object
@@ -79,6 +80,25 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1818360608 &364447161361130675
+PositionConstraint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1593255069347351063}
+  m_Enabled: 1
+  m_Weight: 1
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
+  m_AffectTranslationX: 1
+  m_AffectTranslationY: 1
+  m_AffectTranslationZ: 1
+  m_IsContraintActive: 0
+  m_IsLocked: 0
+  m_Sources:
+  - sourceTransform: {fileID: 6978462821788363643}
+    weight: 1
 --- !u!1 &6978462821788363642
 GameObject:
   m_ObjectHideFlags: 0
@@ -89,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6978462821788363643}
   m_Layer: 0
-  m_Name: Grass
+  m_Name: Grassland
   m_TagString: 3D Tile Object
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +123,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6978462821788363642}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 0.5, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.0335, y: 0.035, z: 0.035}
   m_Children:
   - {fileID: 1593255069347587275}
