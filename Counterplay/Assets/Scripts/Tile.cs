@@ -24,7 +24,7 @@ public class Tile : MonoBehaviour
         Lake        = 2,
         Mountain    = 3,
         Ash         = 4,
-        Marsh       = 5,
+        Ice         = 5,
         MtnPass     = 6
     }
 

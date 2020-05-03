@@ -24,6 +24,9 @@ public class TypeModifier : MonoBehaviour
         {
             string[] row = data[i].Split(new char[] { ',' });
 
+            for(int j = 0; j < row.Length; j++)
+                row[j] = row[j].Replace(" ", "");
+
             Type t = new Type();
 
             t.state = row[0];

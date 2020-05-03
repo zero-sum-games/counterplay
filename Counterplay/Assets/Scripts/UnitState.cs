@@ -31,7 +31,6 @@ public class UnitState : MonoBehaviour
     protected float _elementalTriangleXOffset = 0.0f;
     protected float _elementalTriangleYOffset = 2.4f;
 
-    protected bool _isElementalTriangleDeselected = false;
     protected bool _displayForCombatSelection = false;
     public void SetDisplayForCombatSelection(bool shouldDisplayForCombatSelection) { _displayForCombatSelection = shouldDisplayForCombatSelection; }
 

@@ -1,4 +1,0 @@
-State,AtkRange,AtkDamage,moveGrass,moveForest,moveLake,moveMountain,moveAsh,moveMarsh,moveMtnpass
-Grass,3,3,0.5,1,0,0,0.5,0.5,0.5
-Water,4,2,0.5,0,1,0,0.5,0.5,0.5
-Fire,1,5,0.5,0,0,1,0.5,0.5,0.5
