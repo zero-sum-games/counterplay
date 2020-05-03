@@ -59,7 +59,7 @@ public class PlayerState : UnitState
 
         elementalTriangleDeselected.gameObject.SetActive(false);
 
-        switch (elementalState)
+        switch (_elementalState)
         {
             default:
             case ElementalState.Grass:
@@ -86,7 +86,7 @@ public class PlayerState : UnitState
     {
         if (_playerMove.state != UnitMove.MoveState.Idle || _playerCombat.state != UnitCombat.CombatState.Idle) return;
 
-        var nextState = (int) elementalState;
+        var nextState = (int) _elementalState;
 
         if(Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow))
             nextState -= 1;
@@ -98,17 +98,39 @@ public class PlayerState : UnitState
         else if (nextState > 2)
             nextState = 0;
 
-        if ((int) elementalState != nextState)
+        if ((int) _elementalState != nextState)
         {
-            elementalState = (ElementalState) nextState;
+            if (!IsValidStateChange((ElementalState) nextState)) return;
+
+            _elementalState = (ElementalState) nextState;
 
             SetStateParameters();
+        }
+    }
+
+    private bool IsValidStateChange(ElementalState nextState)
+    {
+        Tile tile = GetComponent<PlayerMove>().GetCurrentTile();
+        Tile.TileType tileType = tile.GetComponent<Tile>().type;
+
+        switch(tileType)
+        {
+            default:
+            case Tile.TileType.Grassland:
+            case Tile.TileType.Forest:
+                return true;
+
+            case Tile.TileType.Lake:
+                return nextState != ElementalState.Fire;
+
+            case Tile.TileType.Mountain:
+                return nextState == ElementalState.Fire;
         }
     }
 
     //==========================================================================
     public ElementalState GetElementalState()
     {
-        return elementalState;
+        return _elementalState;
     }
 }

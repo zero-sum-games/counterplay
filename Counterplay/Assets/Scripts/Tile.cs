@@ -19,23 +19,17 @@ public class Tile : MonoBehaviour
 
     public enum TileType
     {
-        Neutral   = 0,
+        Grassland   = 0,
         Forest      = 1,
         Lake        = 2,
-        Mountain    = 3
-        
-    }
-
-    public enum subTileType
-    {
-        Grassland   = 0,
-        Ash         = 1,
-        Marsh       = 2,
-        MtnPass     = 3
+        Mountain    = 3,
+        Ash         = 4,
+        Marsh       = 5,
+        MtnPass     = 6
     }
 
     public TileType type;
-    public subTileType subType;
+
     public TypeModifier mod;
 
     private Material _material;
@@ -66,7 +60,7 @@ public class Tile : MonoBehaviour
 
     private void OnValidate()
     {
-        LoadMaterial();
+        //Load3DObject();
     }
 
     private void Start()
@@ -77,6 +71,25 @@ public class Tile : MonoBehaviour
     }
 
     //==========================================================================
+    public void Reset(bool resetMovement, bool resetCombat)
+    {
+        if (resetMovement)
+            adjMovementList.Clear();
+
+        if (resetCombat)
+            adjAttackList.Clear();
+
+        state = TileState.Default;
+
+        visited = false;
+        parent = null;
+
+        _attackCost = 0;
+
+        _movementCost = 0.0f;
+        _movementCostsPerTileType = new float[] { };
+    }
+
     public void FindNeighbors()
     {
         Reset(false, true);
@@ -95,25 +108,6 @@ public class Tile : MonoBehaviour
         CheckTile(Vector3.back, elementalState);
         CheckTile(Vector3.right, elementalState);
         CheckTile(Vector3.left, elementalState);
-    }
-
-    public void Reset(bool resetMovement, bool resetCombat)
-    {
-        if (resetMovement)
-            adjMovementList.Clear();
-
-        if (resetCombat)
-            adjAttackList.Clear();
-
-        state = TileState.Default;
-
-        visited = false;
-        parent = null;
-
-        _attackCost = 0;
-
-        _movementCost = 0.0f;
-        _movementCostsPerTileType = new float[] { };
     }
 
     private void CheckTile(Vector3 direction)
@@ -150,7 +144,6 @@ public class Tile : MonoBehaviour
     {
         // ** [0 = Neutral, 1 = Forest, 2 = Lake, 3 = Mountain] **
         // ** Use this ^^ when inputting values below for each elemental state **
-
         switch (elementalState)
         {
             default:
@@ -168,13 +161,6 @@ public class Tile : MonoBehaviour
         }
     }
 
-    public int GetAttackCost() { return _attackCost; }
-
-    public void SetAttackCost(int parentAttackCost)
-    {
-        _attackCost = parentAttackCost + 1;
-    }
-
     public float GetMovementCost() { return _movementCost; }
 
     public void SetMovementCost(float parentMovementCost)
@@ -185,6 +171,14 @@ public class Tile : MonoBehaviour
         float costToNextTile = _movementCostsPerTileType[(int) type];
 
         _movementCost = parentMovementCost + costToNextTile;
+    }
+
+    //==========================================================================
+    public int GetAttackCost() { return _attackCost; }
+
+    public void SetAttackCost(int parentAttackCost)
+    {
+        _attackCost = parentAttackCost + 1;
     }
 
     //==========================================================================
@@ -233,53 +227,19 @@ public class Tile : MonoBehaviour
         _unitSelector.SetActive(setUnit);
     }
 
-    public void LoadMaterial()
-    {
-        switch (type)
-        {
-            default:
-            case TileType.Neutral:
-                switch (subType)
-                {
-                    default:
-                    case subTileType.Grassland:
-                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
-                        break;
-
-                    case subTileType.Ash:
-                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
-                        break;
-
-                    case subTileType.Marsh:
-                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
-                        break;
-
-                    case subTileType.MtnPass:
-                        _material = Resources.Load<Material>("Tiles/Materials/Grassland");
-                        break;
-                } break;
-
-            case TileType.Lake:
-                _material = Resources.Load<Material>("Tiles/Materials/Lake");
-                break;
-
-            case TileType.Forest:
-                _material = Resources.Load<Material>("Tiles/Materials/Forest");
-                break;
-
-            case TileType.Mountain:
-                _material = Resources.Load<Material>("Tiles/Materials/Mountain");
-                break;
-        }
-
-        if (_renderer == null)
-            _renderer = this.GetComponent<Renderer>();
-        _renderer.material = _material;
-    }
-
+    //==========================================================================
     public void SetMaterial(Material material)
     {
         _material = material;
         _renderer.material = _material;
+    }
+
+    public void Load3DObject()
+    {
+        GameObject tileObject;
+        tileObject = Resources.Load(type.ToString()) as GameObject;
+
+        GameObject tileObjectInstance = GameObject.Instantiate(tileObject, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.Euler(0.0f, 0.0f, 0.0f));
+        tileObjectInstance.transform.parent = transform;
     }
 }

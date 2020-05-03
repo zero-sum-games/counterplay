@@ -24,16 +24,6 @@ public static class EditorMenu
             }
     }
 
-    [MenuItem("Tools/Load Tile Materials")]
-    private static void LoadTileMaterials()
-    {
-        if (_tiles == null) InitTiles();
-
-        foreach (var t in _tiles)
-            t.GetComponent<Tile>().LoadMaterial();
-    }
-
-
     [MenuItem("Tools/Load Unit Materials")]
     private static void LoadUnitMaterials()
     {
@@ -47,46 +37,7 @@ public static class EditorMenu
         if (_tiles == null) InitTiles();
 
         foreach (var tile in _tiles)
-        {
-            GameObject tileObject;
-
-            switch(tile.GetComponent<Tile>().type)
-            {
-                default:
-                case Tile.TileType.Neutral:
-                    switch (tile.GetComponent<Tile>().subType)
-                    {
-                        default:
-                        case Tile.subTileType.Grassland:
-                            tileObject = Resources.Load("Grass") as GameObject;
-                            break;
-                        case Tile.subTileType.Ash:
-                            tileObject = Resources.Load("Ash") as GameObject;
-                            break;
-                        case Tile.subTileType.Marsh:
-                            tileObject = Resources.Load("Marsh") as GameObject;
-                            break;
-                        case Tile.subTileType.MtnPass:
-                            tileObject = Resources.Load("MtnPass") as GameObject;
-                            break;
-                    }
-                    break;
-
-                case Tile.TileType.Forest:
-                    tileObject = Resources.Load("Forest") as GameObject;
-                    break;
-
-                case Tile.TileType.Lake:
-                    tileObject = Resources.Load("Water") as GameObject;
-                    break;
-
-                case Tile.TileType.Mountain:
-                    tileObject = Resources.Load("Mountain") as GameObject;
-                    break;
-            }
-            var tileObjectInstance = GameObject.Instantiate(tileObject, new Vector3(tile.transform.position.x, 0.5f, tile.transform.position.z), Quaternion.Euler(0.0f, 0.0f, 0.0f));
-            tileObjectInstance.transform.parent = tile.transform;
-        }
+            tile.GetComponent<Tile>().Load3DObject();
     }
 
     [MenuItem("Tools/Remove 3D Objects From Tiles")]

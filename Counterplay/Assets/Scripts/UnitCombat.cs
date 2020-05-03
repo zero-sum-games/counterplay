@@ -138,25 +138,8 @@ public class UnitCombat : MonoBehaviour
         // _attackBudgetsPerTileType = [0 = Grass, 1 = Water, 2 = Fire]
         // Use this ^^ when inputting values below for each elemental state
 
-        switch (tileType)
-        {
-            default:
-            case Tile.TileType.Neutral:
-                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[0], atkMod.types[1].atkRange[0], atkMod.types[2].atkRange[0] };
-                break;
-
-            case Tile.TileType.Forest:
-                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[1], atkMod.types[1].atkRange[1], atkMod.types[2].atkRange[1] };
-                break;
-
-            case Tile.TileType.Lake:
-                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[2], atkMod.types[1].atkRange[2], atkMod.types[2].atkRange[2] };
-                break;
-
-            case Tile.TileType.Mountain:
-                _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[3], atkMod.types[1].atkRange[3], atkMod.types[2].atkRange[3] };
-                break;
-        }
+        int tileTypeIndex = (int) tileType;
+        _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[tileTypeIndex], atkMod.types[1].atkRange[tileTypeIndex], atkMod.types[2].atkRange[tileTypeIndex] };
     }
 
     //==========================================================================
