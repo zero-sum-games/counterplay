@@ -186,7 +186,8 @@ public class Tile : MonoBehaviour
     {
         GameObject GetSelector(int selectorID)
         {
-            var selectorVector3 = new Vector3(this.transform.position.x, 0.55f, this.transform.position.z);
+            Vector3 position = new Vector3(this.transform.position.x, 0.52f, this.transform.position.z);
+            Quaternion rotation = Quaternion.identity;
 
             GameObject selector;
 
@@ -195,20 +196,21 @@ public class Tile : MonoBehaviour
                 // MOVEMENT
                 default:
                 case 0:
-                    selector = Instantiate(Resources.Load("MovementSelector"), selectorVector3, new Quaternion()) as GameObject;
+                    selector = Instantiate(Resources.Load("MovementSelector"), position, rotation) as GameObject;
                     break;
 
                 // COMBAT
                 case 1:
-                    selector = Instantiate(Resources.Load("CombatSelector"), selectorVector3, new Quaternion()) as GameObject;
+                    selector = Instantiate(Resources.Load("CombatSelector"), position, rotation) as GameObject;
                     break;
 
                 // UNIT
                 case 2:
-                    selector = Instantiate(Resources.Load("UnitSelector"), selectorVector3, new Quaternion()) as GameObject;
+                    selector = Instantiate(Resources.Load("UnitSelector"), position, rotation) as GameObject;
                     break;
 
             }
+
             selector.SetActive(false);
             selector.transform.parent = this.transform;
 

@@ -79,6 +79,9 @@ public class UnitCombat : MonoBehaviour
         {
             var t = process.Dequeue();
 
+            if (t.GetAttackCost() > _attackBudget)
+                continue;
+
             _tilesInRange.Add(t);
 
             if(t != _currentTile)
@@ -86,9 +89,6 @@ public class UnitCombat : MonoBehaviour
                 t.SetActiveSelectors(false, true, false);
                 t.state = Tile.TileState.Selected;
             }
-
-            if (t.GetAttackCost() >= _attackBudget)
-                continue;
 
             foreach (var tile in t.adjAttackList)
             {
