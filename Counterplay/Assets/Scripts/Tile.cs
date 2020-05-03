@@ -24,7 +24,7 @@ public class Tile : MonoBehaviour
         Lake        = 2,
         Mountain    = 3,
         Ash         = 4,
-        Marsh       = 5,
+        Ice         = 5,
         MtnPass     = 6
     }
 
@@ -56,11 +56,6 @@ public class Tile : MonoBehaviour
     private void Awake()
     {
         LoadSelectors();
-    }
-
-    private void OnValidate()
-    {
-        //Load3DObject();
     }
 
     private void Start()
@@ -142,23 +137,7 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void CalculateMovementCostsPerTileType(UnitState.ElementalState elementalState)
     {
-        // ** [0 = Neutral, 1 = Forest, 2 = Lake, 3 = Mountain] **
-        // ** Use this ^^ when inputting values below for each elemental state **
-        switch (elementalState)
-        {
-            default:
-            case UnitState.ElementalState.Grass:
-                _movementCostsPerTileType = mod.types[0].moveRange;
-                break;
-
-            case UnitState.ElementalState.Water:
-                _movementCostsPerTileType = mod.types[1].moveRange;
-                break;
-
-            case UnitState.ElementalState.Fire:
-                _movementCostsPerTileType = mod.types[2].moveRange;
-                break;
-        }
+        _movementCostsPerTileType = mod.types[(int) elementalState].moveRange;
     }
 
     public float GetMovementCost() { return _movementCost; }
@@ -184,40 +163,22 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void LoadSelectors()
     {
-        GameObject GetSelector(int selectorID)
-        {
-            var selectorVector3 = new Vector3(this.transform.position.x, 0.55f, this.transform.position.z);
+        _movementSelector = GetSelector("MovementSelector");
+        _combatSelector = GetSelector("CombatSelector");
+        _unitSelector = GetSelector("UnitSelector");
+    }
 
-            GameObject selector;
+    private GameObject GetSelector(String selectorName)
+    {
+        Vector3 position = new Vector3(this.transform.position.x, 0.52f, this.transform.position.z);
+        Quaternion rotation = Quaternion.identity;
 
-            switch(selectorID)
-            {
-                // MOVEMENT
-                default:
-                case 0:
-                    selector = Instantiate(Resources.Load("MovementSelector"), selectorVector3, new Quaternion()) as GameObject;
-                    break;
+        GameObject selector = Instantiate(Resources.Load(selectorName), position, rotation) as GameObject;
 
-                // COMBAT
-                case 1:
-                    selector = Instantiate(Resources.Load("CombatSelector"), selectorVector3, new Quaternion()) as GameObject;
-                    break;
+        selector.transform.parent = this.transform;
+        selector.SetActive(false);
 
-                // UNIT
-                case 2:
-                    selector = Instantiate(Resources.Load("UnitSelector"), selectorVector3, new Quaternion()) as GameObject;
-                    break;
-
-            }
-            selector.SetActive(false);
-            selector.transform.parent = this.transform;
-
-            return selector;
-        }
-
-        _movementSelector   = GetSelector(0);
-        _combatSelector     = GetSelector(1);
-        _unitSelector       = GetSelector(2);
+        return selector;
     }
 
     public void SetActiveSelectors(bool setMovement, bool setCombat, bool setUnit)
@@ -241,5 +202,13 @@ public class Tile : MonoBehaviour
 
         GameObject tileObjectInstance = GameObject.Instantiate(tileObject, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.Euler(0.0f, 0.0f, 0.0f));
         tileObjectInstance.transform.parent = transform;
+        tileObjectInstance.transform.SetSiblingIndex(0);
+    }
+
+    public void Remove3DObject()
+    {
+        Transform tileObject = transform.GetChild(0);
+        if (tileObject != null)
+            Destroy(tileObject.gameObject);
     }
 }

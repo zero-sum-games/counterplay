@@ -23,7 +23,6 @@ public class PlayerState : UnitState
 
     private void Update()
     {
-        _isElementalTriangleDeselected = !(_playerMove.state == UnitMove.MoveState.Idle && _playerCombat.state == UnitCombat.CombatState.Idle);
         DrawElementalTriangle();
 
         if (_teamID != GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID())
@@ -48,7 +47,7 @@ public class PlayerState : UnitState
         elementalTriangle.position = new Vector3(currentPosition.x + _elementalTriangleXOffset, currentPosition.y + _elementalTriangleYOffset, currentPosition.z);
         elementalTriangle.LookAt(new Vector3(elementalTriangleRotation.transform.position.x, Camera.main.transform.position.y, elementalTriangleRotation.transform.position.z));
 
-        if (_isElementalTriangleDeselected)
+        if (!(_playerMove.state == UnitMove.MoveState.Idle && _playerCombat.state == UnitCombat.CombatState.Idle))
         {
             elementalTriangleDeselected.gameObject.SetActive(true);
             elementalTriangleGrass.gameObject.SetActive(false);

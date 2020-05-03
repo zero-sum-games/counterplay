@@ -62,6 +62,9 @@ public class UnitMove : MonoBehaviour
         {
             var t = process.Dequeue();
 
+            if (t.GetMovementCost() > _movementBudget)
+                continue;
+
             _selectedTiles.Add(t);
 
             if (t != _currentTile)
@@ -69,9 +72,6 @@ public class UnitMove : MonoBehaviour
                 t.state = Tile.TileState.Selected;
                 t.SetActiveSelectors(true, false, false);
             }
-
-            if (t.GetMovementCost() >= _movementBudget) 
-                continue;
 
             foreach (var tile in t.adjMovementList.Where(tile => !tile.visited))
             {

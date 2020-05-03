@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//==============================================================================
 public class TypeModifier : MonoBehaviour
 {
+    //==========================================================================
     public struct Type
     {
         public string state;
@@ -17,12 +19,16 @@ public class TypeModifier : MonoBehaviour
 
     public TextAsset dataModifiers;
 
+    //==========================================================================
     private void Start()
     {
         string[] data = dataModifiers.text.Split(new char[] { '\n' });
         for(int i=1; i <= data.Length-1; i++)
         {
             string[] row = data[i].Split(new char[] { ',' });
+
+            for (int j = 0; j < row.Length; j++)
+                row[j] = row[j].Trim();
 
             Type t = new Type();
 

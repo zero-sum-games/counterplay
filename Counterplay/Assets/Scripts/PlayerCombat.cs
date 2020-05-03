@@ -81,6 +81,7 @@ public class PlayerCombat : UnitCombat
 
             case CombatState.Attacking:
                 // TODO: apply tile manipulation effect here...
+                ManipulateTile();
 
                 if (_target != null)
                 {
@@ -150,7 +151,7 @@ public class PlayerCombat : UnitCombat
                         if (_targetTile.state == Tile.TileState.Selected)
                         {
                             _targetTile.SetActiveSelectors(false, true, false);
-                            _target = CheckTargetTile();
+                            _target = GetTargetTile();
 
                             state = CombatState.Attacking;
                         }
@@ -183,11 +184,48 @@ public class PlayerCombat : UnitCombat
         }
     }
 
-    private GameObject CheckTargetTile()
+    public void ManipulateTile()
+    {
+        Tile.TileType tileType = _targetTile.type;
+
+        UnitState.ElementalState elementalState = GetComponent<PlayerState>().GetElementalState();
+        switch(elementalState)
+        {
+            default:
+            case UnitState.ElementalState.Grass:
+                if (tileType == Tile.TileType.Lake)
+                {
+                    _targetTile.Remove3DObject();
+                    _targetTile.type = Tile.TileType.Ice;
+                }
+                break;
+
+            case UnitState.ElementalState.Water:
+                if (tileType == Tile.TileType.Mountain)
+                {
+                    _targetTile.Remove3DObject();
+                    _targetTile.type = Tile.TileType.MtnPass;
+                }
+                break;
+            
+            case UnitState.ElementalState.Fire:
+                if (tileType == Tile.TileType.Forest)
+                {
+                    _targetTile.Remove3DObject();
+                    _targetTile.type = Tile.TileType.Ash;
+                }
+                break;
+        }
+
+        _targetTile.Load3DObject();
+    }
+
+    private GameObject GetTargetTile()
     {
         if (Physics.Raycast(_targetTile.transform.position, Vector3.up, out var hit, 1f))
             if (hit.collider.gameObject.GetComponent<PlayerCombat>().GetTeamID() != _teamID)
                 return hit.collider.gameObject;
+
         return null;
     }
 

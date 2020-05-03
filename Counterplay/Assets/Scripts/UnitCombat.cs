@@ -79,6 +79,9 @@ public class UnitCombat : MonoBehaviour
         {
             var t = process.Dequeue();
 
+            if (t.GetAttackCost() > _attackBudget)
+                continue;
+
             _tilesInRange.Add(t);
 
             if(t != _currentTile)
@@ -86,9 +89,6 @@ public class UnitCombat : MonoBehaviour
                 t.SetActiveSelectors(false, true, false);
                 t.state = Tile.TileState.Selected;
             }
-
-            if (t.GetAttackCost() >= _attackBudget)
-                continue;
 
             foreach (var tile in t.adjAttackList)
             {
@@ -116,28 +116,12 @@ public class UnitCombat : MonoBehaviour
 
     public void SetAttackBudget(UnitState.ElementalState elementalState)
     {
-        switch (elementalState)
-        {
-            default:
-            case UnitState.ElementalState.Grass:
-                _attackBudget = _attackBudgetsPerTileType[0];
-                break;
-
-            case UnitState.ElementalState.Water:
-                _attackBudget = _attackBudgetsPerTileType[1];
-                break;
-
-            case UnitState.ElementalState.Fire:
-                _attackBudget = _attackBudgetsPerTileType[2];
-                break;
-        }
+        _attackBudget = _attackBudgetsPerTileType[(int) elementalState];
     }
 
     private void SetAttackBudgetsPerTileType(Tile.TileType tileType)
     {
-        // _attackBudgetsPerTileType = [0 = Grass, 1 = Water, 2 = Fire]
-        // Use this ^^ when inputting values below for each elemental state
-
+        // [0 = Grass, 1 = Water, 2 = Fire]
         int tileTypeIndex = (int) tileType;
         _attackBudgetsPerTileType = new int[] { atkMod.types[0].atkRange[tileTypeIndex], atkMod.types[1].atkRange[tileTypeIndex], atkMod.types[2].atkRange[tileTypeIndex] };
     }
