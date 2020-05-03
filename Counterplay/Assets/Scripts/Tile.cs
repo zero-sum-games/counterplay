@@ -163,42 +163,22 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void LoadSelectors()
     {
-        GameObject GetSelector(int selectorID)
-        {
-            Vector3 position = new Vector3(this.transform.position.x, 0.52f, this.transform.position.z);
-            Quaternion rotation = Quaternion.identity;
+        _movementSelector = GetSelector("MovementSelector");
+        _combatSelector = GetSelector("CombatSelector");
+        _unitSelector = GetSelector("UnitSelector");
+    }
 
-            GameObject selector;
+    private GameObject GetSelector(String selectorName)
+    {
+        Vector3 position = new Vector3(this.transform.position.x, 0.52f, this.transform.position.z);
+        Quaternion rotation = Quaternion.identity;
 
-            switch(selectorID)
-            {
-                // MOVEMENT
-                default:
-                case 0:
-                    selector = Instantiate(Resources.Load("MovementSelector"), position, rotation) as GameObject;
-                    break;
+        GameObject selector = Instantiate(Resources.Load(selectorName), position, rotation) as GameObject;
 
-                // COMBAT
-                case 1:
-                    selector = Instantiate(Resources.Load("CombatSelector"), position, rotation) as GameObject;
-                    break;
+        selector.transform.parent = this.transform;
+        selector.SetActive(false);
 
-                // UNIT
-                case 2:
-                    selector = Instantiate(Resources.Load("UnitSelector"), position, rotation) as GameObject;
-                    break;
-
-            }
-
-            selector.SetActive(false);
-            selector.transform.parent = this.transform;
-
-            return selector;
-        }
-
-        _movementSelector   = GetSelector(0);
-        _combatSelector     = GetSelector(1);
-        _unitSelector       = GetSelector(2);
+        return selector;
     }
 
     public void SetActiveSelectors(bool setMovement, bool setCombat, bool setUnit)
