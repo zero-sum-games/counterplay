@@ -80,7 +80,6 @@ public class PlayerCombat : UnitCombat
                 break;
 
             case CombatState.Attacking:
-                // TODO: apply tile manipulation effect here...
                 ManipulateTile();
 
                 if (_target != null)

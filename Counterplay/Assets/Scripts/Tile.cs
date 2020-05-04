@@ -82,7 +82,7 @@ public class Tile : MonoBehaviour
         _attackCost = 0;
 
         _movementCost = 0.0f;
-        _movementCostsPerTileType = new float[] { };
+        _movementCostsPerTileType = new float[] {};
     }
 
     public void FindNeighbors()
@@ -163,9 +163,9 @@ public class Tile : MonoBehaviour
     //==========================================================================
     public void LoadSelectors()
     {
-        _movementSelector = GetSelector("MovementSelector");
-        _combatSelector = GetSelector("CombatSelector");
-        _unitSelector = GetSelector("UnitSelector");
+        _movementSelector   = GetSelector("MovementSelector");
+        _combatSelector     = GetSelector("CombatSelector");
+        _unitSelector       = GetSelector("UnitSelector");
     }
 
     private GameObject GetSelector(String selectorName)
@@ -195,6 +195,7 @@ public class Tile : MonoBehaviour
         _renderer.material = _material;
     }
 
+    //==========================================================================
     public void Load3DObject()
     {
         int randomIndex = UnityEngine.Random.Range(1, 1);

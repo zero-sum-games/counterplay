@@ -80,7 +80,7 @@ public class PlayerMove : UnitMove
             case MoveState.Moved:
                 _currentTile.SetActiveSelectors(false, false, false);
                 _currentTile = GetCurrentTile();
-                _currentTile.SetActiveSelectors(true, false, true);
+                _currentTile.SetActiveSelectors(false, false, true);
                 break;
         }
     }

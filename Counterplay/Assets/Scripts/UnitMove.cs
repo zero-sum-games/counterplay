@@ -114,6 +114,7 @@ public class UnitMove : MonoBehaviour
         {
             var t = _path.Peek();
 
+            // TODO: LeanTween here
             var target = t.transform.position;
             target.y += _halfUnitHeight + t.GetComponent<Collider>().bounds.extents.y;
 
