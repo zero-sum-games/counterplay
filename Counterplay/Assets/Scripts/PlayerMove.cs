@@ -77,7 +77,7 @@ public class PlayerMove : UnitMove
                 Move();
                 break;
 
-            case MoveState.Moved:
+            case MoveState.HasMoved:
                 _currentTile.SetActiveSelectors(false, false, false);
                 _currentTile = GetCurrentTile();
                 _currentTile.SetActiveSelectors(false, false, true);

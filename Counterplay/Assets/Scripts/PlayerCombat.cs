@@ -35,7 +35,7 @@ public class PlayerCombat : UnitCombat
             return;
         }
 
-        if (_playerMove.state != UnitMove.MoveState.Idle && _playerMove.state != UnitMove.MoveState.Moved)
+        if (_playerMove.state != UnitMove.MoveState.Idle && _playerMove.state != UnitMove.MoveState.HasMoved)
         {
             state = CombatState.Idle;
             return;
@@ -169,12 +169,22 @@ public class PlayerCombat : UnitCombat
                         _target = hit.collider.gameObject;
 
                         if (Physics.Raycast(_target.transform.position, Vector3.down, out var tile, 1f))
-                        {
                             _targetTile = tile.collider.gameObject.GetComponent<Tile>();
-                            _targetTile.SetActiveSelectors(false, true, false);
+                            
+                        if(!_tilesInRange.Contains(_targetTile))
+                        {
+                            ResetTargetTile();
+                            SetUnitUIs(false);
+
+                            state = CombatState.Idle;
                         }
 
-                        state = CombatState.Attacking;
+                        else 
+                        {
+                            _target = null;
+                            _targetTile.SetActiveSelectors(false, true, false);
+                            state = CombatState.Attacking;
+                        }
 
                         RemoveSelectedTiles();
                     }

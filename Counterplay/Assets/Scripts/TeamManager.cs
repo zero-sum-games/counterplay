@@ -17,7 +17,7 @@ public class TeamManager : MonoBehaviour
         foreach(var unit in units)
         {
             var playerMove = unit.GetComponent<PlayerMove>();
-            if (playerMove.state != UnitMove.MoveState.Idle && playerMove.state != UnitMove.MoveState.Moved) return false;
+            if (playerMove.state != UnitMove.MoveState.Idle && playerMove.state != UnitMove.MoveState.HasMoved) return false;
 
             var playerCombat = unit.GetComponent<PlayerCombat>();
             if (playerCombat.state != UnitCombat.CombatState.Idle && playerCombat.state != UnitCombat.CombatState.HasAttacked) return false;

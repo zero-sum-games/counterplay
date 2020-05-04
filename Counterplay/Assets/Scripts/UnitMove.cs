@@ -13,7 +13,7 @@ public class UnitMove : MonoBehaviour
         Idle        = 0,
         Selected    = 1,
         Moving      = 2,
-        Moved       = 3
+        HasMoved    = 3
     }
 
     public MoveState state = MoveState.Idle;
@@ -136,7 +136,7 @@ public class UnitMove : MonoBehaviour
             }
         }
         else
-            state = MoveState.Moved;
+            state = MoveState.HasMoved;
     }
 
     private void SetHeading(Vector3 target)
