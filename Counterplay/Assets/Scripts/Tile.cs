@@ -197,8 +197,8 @@ public class Tile : MonoBehaviour
 
     public void Load3DObject()
     {
-        GameObject tileObject;
-        tileObject = Resources.Load(type.ToString()) as GameObject;
+        int randomIndex = UnityEngine.Random.Range(1, 1);
+        GameObject tileObject = Resources.Load("Tiles/" + type.ToString() + "/" + type.ToString() + randomIndex) as GameObject;
 
         GameObject tileObjectInstance = GameObject.Instantiate(tileObject, new Vector3(transform.position.x, 0.5f, transform.position.z), Quaternion.Euler(0.0f, 0.0f, 0.0f));
         tileObjectInstance.transform.parent = transform;
