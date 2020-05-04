@@ -173,6 +173,8 @@ public class PlayerCombat : UnitCombat
                             
                         if(!_tilesInRange.Contains(_targetTile))
                         {
+                            _target = null;
+
                             ResetTargetTile();
                             SetUnitUIs(false);
 
@@ -181,7 +183,6 @@ public class PlayerCombat : UnitCombat
 
                         else 
                         {
-                            _target = null;
                             _targetTile.SetActiveSelectors(false, true, false);
                             state = CombatState.Attacking;
                         }
