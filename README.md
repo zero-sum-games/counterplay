@@ -18,9 +18,10 @@ This was a quite interesting and random prompt, but it lead our team to create a
 The most current build can be found on <a href="https://maxwellmatt.itch.io/counterplay" target="_blank">itch.io</a>.
 
 ### Controls
-- SPACE highlights tiles for movement
-- LEFT MOUSE selects a highlighted tile to move to
-- RIGHT MOUSE displays combat range (use SPACE to confirm target and execute attack)
+
+- SPACE - highlights tiles within movement range
+- LEFT SHIFT - displays all tiles within attack range
+- MOUSE - select tile for either movement or combat
 
 ## Systems
 
@@ -57,8 +58,13 @@ The most current build can be found on <a href="https://maxwellmatt.itch.io/coun
 
 ### Progression
 
-In-progress...
+- Environmental Manipulation
+    - Each unit has the ability to manipulate certain tiles into a secondary form of sorts, which is dependent upon the unit's elemental state. For example:
+        - Grass = Lake -> Ice
+        - Water = Mountain -> Mountain Pass
+        - Fire = Forest -> Ash
+    - The changes persist throughout the match and offer interesting strategic gameplay ideas for the players in the later parts of matches.
 
 ## Acknowledgements
 
-Thank you to the professor, Tyler Coleman, for teaching an informative and thought-provoking class, especially while having to juggle everything in midst of the COVID-19 pandemic.
+Thank you to our professor, Tyler Coleman, for teaching an informative and thought-provoking class, especially while having to juggle everything in midst of the COVID-19 pandemic.
