@@ -296,8 +296,17 @@ public class PlayerCombat : UnitCombat
 
                 if (deathText != null && !deathText.gameObject.activeInHierarchy)
                     deathText.gameObject.SetActive(true);
+
+                StartCoroutine(DeathRestart(0.5f));
             }
         }
+    }
+
+    IEnumerator DeathRestart(float timeDelay)
+    {
+        yield return new WaitForSeconds(timeDelay);
+        FindObjectOfType<MenuManager>().RestartMatch();
+
     }
 
     //==========================================================================

@@ -8,22 +8,10 @@ public class MenuManager : MonoBehaviour
 {
     int currentScene;
     public GameObject pauseObj;
-
-    GameObject[] destinations;
-    bool lerpFX;
     
-
-    void Start()
+    private void Start()
     {
         currentScene = SceneManager.GetActiveScene().buildIndex;
-    }
-
-    private void Update()
-    {
-        if (lerpFX)
-        {
-
-        }
     }
 
     public void PlayGame()
@@ -56,7 +44,6 @@ public class MenuManager : MonoBehaviour
     public void RestartMatch()
     {
         SceneManager.LoadScene(currentScene);
-        
     }
 
     public void CloseGame()

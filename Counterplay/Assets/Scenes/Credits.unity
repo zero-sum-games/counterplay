@@ -37955,7 +37955,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -38}
+  m_AnchoredPosition: {x: 0, y: -97}
   m_SizeDelta: {x: 163.81, y: 54.100006}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146776057
@@ -40588,7 +40588,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -58}
   m_SizeDelta: {x: 350.5, y: 418.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1217325837
@@ -40623,8 +40623,8 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "<b>Developers:</b>\n          Zero-Sum Games\n                 Matt Maxwell\n                
-    Dane \n                 Jeshua Johnson\n\n<b>Assets:</b>\n          Polygon Knights\n         
-    Polygon Vikings"
+    Dane Byrd\n                 Jeshua Johnson\n\n<b>Assets:</b>\n          Polygon
+    Knights\n          Polygon Vikings\n          Low-Poly Terrain Pack"
 --- !u!222 &1217325838
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -56350,7 +56350,7 @@ RectTransform:
   m_GameObject: {fileID: 1727158352}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 4.76, z: 1}
+  m_LocalScale: {x: 0.33, y: 0.9, z: 1}
   m_Children: []
   m_Father: {fileID: 1688210955}
   m_RootOrder: 4
@@ -59760,6 +59760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810b441e08d5aac47ac46f86bc0f4cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseObj: {fileID: 0}
 --- !u!1 &1833898247
 GameObject:
   m_ObjectHideFlags: 0
