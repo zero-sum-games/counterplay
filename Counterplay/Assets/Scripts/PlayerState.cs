@@ -81,6 +81,29 @@ public class PlayerState : UnitState
         }
     }
 
+    //==========================================================================
+    private void OnMouseEnter()
+    {
+        SetUnitUI(true);
+    }
+
+    private void OnMouseExit()
+    {
+        SetUnitUI(false);
+    }
+
+    private void SetUnitUI(bool shouldBeActive)
+    {
+        if (_teamID == GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().GetActiveTeamID()) return;
+
+        var unitCombat = GetComponent<PlayerCombat>();
+        unitCombat.SetDisplayForCombatSelection(shouldBeActive);
+        unitCombat.healthBar.gameObject.SetActive(shouldBeActive);
+
+        SetDisplayForCombatSelection(shouldBeActive);
+        elementalTriangle.gameObject.SetActive(shouldBeActive);
+    }
+
     private void CheckKeyboard()
     {
         if (_playerMove.state != UnitMove.MoveState.Idle || _playerCombat.state != UnitCombat.CombatState.Idle) return;
